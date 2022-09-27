@@ -1,2 +1,15 @@
-@import './common';
+@import './utils/reset';
+
+@import './utils/mixins';
+@import './utils/variables';
+
+@import './utils/common';
+@import './utils/hidden';
+
+
+
+@import './header';
+@import './my_library/header';
+@import './main';
+@import './footer';
 
