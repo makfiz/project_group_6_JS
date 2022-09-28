@@ -1,10 +1,14 @@
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, set } from "firebase/database";
+import { getAuth, signInWithPopup, signOut, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+
 const userDisplayName = document.querySelector(".display-name")
 const signIn = document.querySelector('[data-sign-in]')
 const logout = document.querySelector('[data-sign-out]')
 
 // -----------------------------------------------------------------------------
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,8 +21,7 @@ const firebaseConfig = {
   messagingSenderId: "472506073059",
   appId: "1:472506073059:web:2595b335e9952e9d2bead6"
 };
-import { getDatabase, ref, set } from "firebase/database";
-import { getAuth, signInWithPopup, signOut, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
