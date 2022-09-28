@@ -1,4 +1,63 @@
-<header class="hero-header">
-  <div class="container">
+<header class="header">
+  <div class="header__container header__container-non-active">
+    <nav class="nav">
+      <div class="logo__container">
+        <a href="#" class="logo logo__link">
+          <svg class="logo__img">
+            <use href="#"></use>
+          </svg>
+          <p class="site-name">Filmoteka</p>
+        </a>
+      </div>
+      <div class="menu__container">
+        <ul class="nav-list list">
+          <li class="nav-list__item-home nav-list__item-home-active">
+            <a href="#" class="nav-list__link-home nav-list__link-home-accent link"
+              >HOME</a
+            >
+          </li>
+          <li class="nav-list__item-library">
+            <a href="#" class="nav-list__link-library nav-list__link-library-accent link"
+              >MY LIBRARY</a
+            >
+          </li>
+          <li class="nav-list__item-sign-in">
+            <button
+              type="button"
+              class="sign-in__button nav-list__link-sign-in nav-list__link-sign-in-accent"
+              data-modal-open-sign-in
+            >
+              SIGN IN
+            </button>
+          </li>
+          <li class="nav-list__item-log-in is-hidden backdrop">
+            <a href="" class="nav-list__link-library nav-list__link-library-accent link">LOGOUT</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="search">
+      <form class="search__form">
+        <input
+          class="search__input"
+          type="text"
+          name="filmName"
+          minlength="3"
+          maxlength="20"
+          placeholder="Search movies"
+          required
+        />
+
+        <button class="search__btn" type="submit">
+          <svg class="search__img">
+            <use href="#"></use>
+          </svg>
+        </button>
+      </form>
+    </div>
+    <div class="library__btns is-hidden">
+      <button type="button" class="library__btn-watched library__btn-active">WATCHED</button>
+      <button type="button" class="library__btn-queue library__btn">QUEUE</button>
+    </div>
   </div>
 </header>
