@@ -1,5 +1,5 @@
 <header class="header">
-  <div class="header__container header__container-non-active">
+  <div class="container header__container header__container-non-active">
     <nav class="nav">
       <div class="logo__container">
         <a href="./index.html" class="logo logo__link">
@@ -12,12 +12,17 @@
       <div class="menu__container">
         <ul class="nav-list list">
           <li class="nav-list__item-home nav-list__item-home-active">
-            <a href="#" class="nav-list__link-home nav-list__link-home-accent link"
+            <a
+              href="#"
+              class="nav-list__link-home nav-list__link-home-accent link"
               >HOME</a
             >
           </li>
           <li class="nav-list__item-library">
-            <a href="#" class="nav-list__link-library nav-list__link-library-accent link"
+            <a
+              href="#"
+              class="nav-list__link-library nav-list__link-library-accent link"
+              data-library
               >MY LIBRARY</a
             >
           </li>
@@ -61,9 +66,13 @@
         </button>
       </form>
     </div>
-    <div class="library__btns is-hidden">
-      <button type="button" class="library__btn-watched library__btn-active">WATCHED</button>
-      <button type="button" class="library__btn-queue library__btn">QUEUE</button>
+    <div class="library-filter visually-hidden">
+      <button type="button" class="library-filter__btn" data-watched>
+        WATCHED
+      </button>
+      <button type="button" class="library-filter__btn" data-queue>
+        QUEUE
+      </button>
     </div>
   </div>
 </header>

@@ -6,10 +6,10 @@
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 230px;
-  width: 320px;
-  margin: 0 auto;
-  padding-top: 46px;
+  // height: 230px;
+  // width: 320px;
+  padding-top: 40px;
+  padding-bottom: 60px;
   font-weight: 500;
   line-height: 1.17;
 
@@ -155,45 +155,52 @@
   color: $lighter-text-color;
 }
 
-.library__btns {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  align-content: start;
-  width: 280px;
-  font-size: 12px;
-}
+// .library__btns {
+//   display: flex;
+//   justify-content: space-between;
+//   margin: 0 auto;
+//   align-content: start;
+//   width: 280px;
+//   font-size: 12px;
+// }
 
-.library__btn {
-  height: 44px;
-  border: 1px solid $lighter-text-color;
-  border-radius: 5px;
-  color: $lighter-text-color;
-  background-color: $transparent;
-  cursor: pointer;
+// .library__btn {
+//   height: 44px;
+//   border: 1px solid $lighter-text-color;
+//   border-radius: 5px;
+//   color: $lighter-text-color;
+//   background-color: $transparent;
+//   cursor: pointer;
 
-  &-active {
-    height: 44px;
-    border: 1px solid $transparent;
-    border-radius: 5px;
-    color: $lighter-text-color;
-    background-color: $accent-color;
-    cursor: pointer;
-  }
-  &-watched {
-    width: 130px;
-  }
-  &-queue {
-    width: 130px;
-  }
-}
+//   &-active {
+//     height: 44px;
+//     border: 1px solid $transparent;
+//     border-radius: 5px;
+//     color: $lighter-text-color;
+//     background-color: $accent-color;
+//     cursor: pointer;
+//   }
+//   &-watched {
+//     width: 130px;
+//   }
+//   &-queue {
+//     width: 130px;
+//   }
+// }
 @media screen and (max-width: 767px) {
   .header__container {
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.56),
+        rgba(0, 0, 0, 0.56)
+      ),
       url('#');
 
     &-library {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
         url('#');
     }
   }
@@ -206,7 +213,10 @@
       url('#');
 
     &-library {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
         url('#');
     }
   }
@@ -219,7 +229,10 @@
     width: 768px;
     padding-top: 46px;
     &-library {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
         url('#');
       width: 768px;
       padding-top: 46px;
@@ -246,15 +259,15 @@
       width: 336px;
     }
   }
-  .library__btns {
-    width: 287px;
-  }
-  .library__btn-watched {
-    width: 136px;
-  }
-  .library__btn-queue {
-    width: 136px;
-  }
+  // .library__btns {
+  //   width: 287px;
+  // }
+  // .library__btn-watched {
+  //   width: 136px;
+  // }
+  // .library__btn-queue {
+  //   width: 136px;
+  // }
 }
 @media screen and (min-device-pixel-ratio: 2) and (min-width: 768px),
   (min-resolution: 192dpi) and (min-width: 768px),
@@ -264,7 +277,10 @@
       url('#');
 
     &-library {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
         url('#');
     }
   }
@@ -281,7 +297,10 @@
       width: 882px;
     }
     &-library {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
         url('#');
       width: 1024px;
       .logo__container {
@@ -301,7 +320,10 @@
       url('#');
 
     &-library {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
         url('#');
     }
   }
