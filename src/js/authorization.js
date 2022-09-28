@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, push, ref, set } from "firebase/database";
 import { getAuth, signInWithPopup, signOut, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
-
+import axios from 'axios';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 const userDisplayName = document.querySelector(".display-name")
 const signIn = document.querySelector('[data-sign-in]')
 const logout = document.querySelector('[data-sign-out]')
@@ -29,16 +30,20 @@ const auth = getAuth();
 const db = getDatabase();
 
 
-function writeUserData(userId, name, email) {
-  const db = getDatabase();
-  set(ref(db, 'users/' + userId), {
-    username: name,
-    email: email,
-  });
+// function writeUserData(userId, name, email) {
+//   const db = getDatabase();
+//   set(ref(db, 'users/' + userId), {
+//     username: name,
+//     email: email,
+//   });
+// }
+
+function writeUserData(data = {}) {
+  push(ref(db, "data"), data)
 }
 
 
-export const userAuth = () => {
+const userAuth = () => {
     signInWithPopup(auth, provider)
   .then((result) => {
     // This gives you a Google Access Token. You can use it to access the Google API.
@@ -59,7 +64,7 @@ export const userAuth = () => {
   });
 }
 
-export const signOutUser = () => {
+const signOutUser = () => {
   signOut(auth).then(() => {
       signIn.classList.toggle("is-hidden")
       logout.parentNode.classList.toggle("is-hidden")
@@ -81,20 +86,53 @@ onAuthStateChanged(auth, (user) => {
 
 
 
+axios.defaults.baseURL = 'https://filmoteka-29879-default-rtdb.europe-west1.firebasedatabase.app/';
+
+
+ async  function GetUserLibrary () {
+    try {
+      Loading.circle({
+        svgColor: '#ff6b08',
+      });
+      const { data } = await axios(`library.json`);
+
+      Loading.remove();
+
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 
 
+GetUserLibrary()
 
+async  function postMovieToLibrary (id, original_title) {
+    try {
+      Loading.circle({
+        svgColor: '#ff6b08',
+      });
+      const { data } = await axios({
+                          method: 'post',
+                          url: 'library.json',
+                          data: {
+                            id: `${id}`,
+                            original_title: `${original_title}`,
+                            watched: false
+                              }
+                            });;
 
+      Loading.remove();
 
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-
-
-
-
-
-
-
+// pathMovieToLibrary(361743, "Top Gun: Maverick")
+// pathMovieToLibrary(616037, "hor: Love and Thunder")
 
 
 
