@@ -10,6 +10,7 @@ export class ApiServise {
     this.page = 1;
     this.language;
     this.id = null;
+    this.totalPages = null;
   }
 
   async fetchTrendingMovies() {
@@ -26,6 +27,8 @@ export class ApiServise {
       });
 
       Loading.remove();
+
+      this.totalPages = data.total_pages;
 
       return data.results;
     } catch (error) {
@@ -90,5 +93,11 @@ export class ApiServise {
 
   set movieId(newId) {
     this.id = newId;
+  }
+  get npage() {
+    return this.page;
+  }
+  set npage(newPage) {
+    this.page = newPage;
   }
 }
