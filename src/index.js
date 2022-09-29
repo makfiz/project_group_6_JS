@@ -6,7 +6,7 @@ import './js/templates/renderMovieGallary';
 
 import './js/myLibrary';
 
-
+import './js/firebaseservice'
 import './js/authorization.js';
 
 import './js/gengers.js';

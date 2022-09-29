@@ -85,17 +85,6 @@ onAuthStateChanged(auth, (user) => {
 
 })
 
-
-
-firebase.postMovieToLibrary(361743, "Top Gun: Maverick")
-firebase.postMovieToLibrary(111111, "Top Gun 2: dsgsdg")
-firebase.postMovieToLibrary(222222, "Top Gun 3: sdfsdfsd")
-
-
-
-// -----
-
-
 signIn.addEventListener('click', () => {
   userAuth()
 })
