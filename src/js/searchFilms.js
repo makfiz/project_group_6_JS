@@ -3,13 +3,17 @@ import { makeGallary } from './templates/renderMovieGallary';
 import { refs } from './refs';
 
 const apiServise = new ApiServise();
+
 const { movieList, searchForm } = refs;
 
 addEventListener('DOMContentLoaded', onTrendMovies);
 searchForm.addEventListener('submit', onSearchMovie);
 
-function onTrendMovies() {
-  apiServise.fetchTrendingMovies().then(data => makeGallary(data));
+async function onTrendMovies() {
+  const res = await apiServise.fetchTrendingMovies();
+
+  makeGallary(res.results);
+  apiServise.totalPage = res.total_pages;
 }
 
 function onSearchMovie(e) {
