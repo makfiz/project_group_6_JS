@@ -1,10 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, push, ref, set } from "firebase/database";
 import { getAuth, signInWithPopup, signOut, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
-
+import { FirebaseService } from "./firebaseservice";
 const userDisplayName = document.querySelector(".display-name")
 const signIn = document.querySelector('[data-sign-in]')
 const logout = document.querySelector('[data-sign-out]')
+
 
 // -----------------------------------------------------------------------------
 // Import the functions you need from the SDKs you need
@@ -27,18 +28,26 @@ const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 const db = getDatabase();
+const firebase = new FirebaseService
 
+// function writeUserData(userId, name, email) {
+//   const db = getDatabase();
+//   set(ref(db, 'users/' + userId), {
+//     username: name,
+//     email: email,
+//   });
+// }
 
-function writeUserData(userId, name, email) {
-  const db = getDatabase();
-  set(ref(db, 'users/' + userId), {
-    username: name,
-    email: email,
-  });
+function writeUserData(data = {}) {
+  push(ref(db, "data"), data)
 }
 
 
-export const userAuth = () => {
+
+
+
+
+const userAuth = () => {
     signInWithPopup(auth, provider)
   .then((result) => {
     // This gives you a Google Access Token. You can use it to access the Google API.
@@ -46,6 +55,11 @@ export const userAuth = () => {
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
+    
+    firebase.userReg(user)
+    firebase.user = user.displayName
+    
+    // console.log("user",result.user)
     // ...
   }).catch((error) => {
     // Handle Errors here.
@@ -59,7 +73,7 @@ export const userAuth = () => {
   });
 }
 
-export const signOutUser = () => {
+const signOutUser = () => {
   signOut(auth).then(() => {
       signIn.classList.toggle("is-hidden")
       logout.parentNode.classList.toggle("is-hidden")
@@ -71,8 +85,10 @@ export const signOutUser = () => {
 
 onAuthStateChanged(auth, (user) => {
   if (user !== null) {
-    console.log("user", user)
+    firebase.user = user.displayName
     userDisplayName.innerHTML = user.displayName
+    console.log("user", user)
+    console.log(firebase.user)
     signIn.classList.toggle("is-hidden")
     logout.parentNode.classList.toggle("is-hidden")
   }
@@ -81,27 +97,9 @@ onAuthStateChanged(auth, (user) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+firebase.postMovieToLibrary(361743, "Top Gun: Maverick")
+firebase.postMovieToLibrary(111111, "Top Gun 2: dsgsdg")
+firebase.postMovieToLibrary(222222, "Top Gun 3: sdfsdfsd")
 
 
 
@@ -116,3 +114,7 @@ logout.addEventListener('click', () => {
   signOutUser()
   userDisplayName.innerHTML = null
 })
+
+// signIn.addEventListener('click', () => {
+//   userAuth()
+// })
