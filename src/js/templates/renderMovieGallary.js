@@ -33,7 +33,7 @@ export function makeGallary(movies) {
       return (
         acc +
         `  <li class="gallery__item" data-id = ${id}>
-            <div class="gallery-card"></div>
+            <div class="gallery-card">
             <img
               src="${image}"
               alt="${title}"
@@ -46,7 +46,7 @@ export function makeGallary(movies) {
                 <span class="gallery-card__date">${releaseDate}</span></span
               >
               <span class="gallery-card__rating">${vote_average || '-'} </span>
-            </p>
+            </p></div>
           </li>`
       );
     },
