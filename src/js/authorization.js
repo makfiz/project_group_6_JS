@@ -4,6 +4,7 @@ import { FirebaseService } from "./firebaseservice";
 const userDisplayName = document.querySelector(".display-name")
 const signIn = document.querySelector('[data-sign-in]')
 const logout = document.querySelector('[data-sign-out]')
+const libraryBtn = document.querySelector('[data-library]')
 
 
 // -----------------------------------------------------------------------------
@@ -47,7 +48,7 @@ const userAuth = () => {
     const user = result.user;
     
     firebase.userReg(user)
-    firebase.user = user.displayName
+    firebase.user = emailCuter(user.email)
     
     // console.log("user",result.user)
     // ...
@@ -65,7 +66,7 @@ const userAuth = () => {
 
 const signOutUser = () => {
   signOut(auth).then(() => {
-      signIn.classList.toggle("is-hidden")
+      signIn.parentNode.classList.toggle("is-hidden")
       logout.parentNode.classList.toggle("is-hidden")
         //Sigh-out successfull.
     }).catch(() => {
@@ -75,11 +76,10 @@ const signOutUser = () => {
 
 onAuthStateChanged(auth, (user) => {
   if (user !== null) {
-    firebase.user = user.displayName
-    userDisplayName.innerHTML = user.displayName
+    firebase.user = emailCuter(user.email)
+    userDisplayName.innerHTML = emailCuter(user.email)
     console.log("user", user)
-    console.log(firebase.user)
-    signIn.classList.toggle("is-hidden")
+    signIn.parentNode.classList.toggle("is-hidden")
     logout.parentNode.classList.toggle("is-hidden")
   }
 
@@ -94,6 +94,11 @@ logout.addEventListener('click', () => {
   userDisplayName.innerHTML = null
 })
 
-// signIn.addEventListener('click', () => {
-//   userAuth()
-// })
+libraryBtn.addEventListener('click', () => {
+  firebase.GetUserLibrary()
+})
+
+
+ function emailCuter(email) {
+    return email.split('@')[0]
+    }

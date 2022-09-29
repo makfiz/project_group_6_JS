@@ -2,7 +2,8 @@ import axios from 'axios';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 export class FirebaseService {
     constructor() {
-        this.user = 'user'
+      this.user = 'user'
+      this.fbBaseUrl = 'https://filmoteka-29879-default-rtdb.europe-west1.firebasedatabase.app/'
     }
 
     get username() {
@@ -14,14 +15,15 @@ export class FirebaseService {
   }
 
 
- async userReg (user) {
+  
+  async userReg(user) {
+    const emailCut = user.email.split('@')[0]
    try {
-      axios.defaults.baseURL = 'https://filmoteka-29879-default-rtdb.europe-west1.firebasedatabase.app/';
       const { data } = await axios({
                           method: 'patch',
-                          url: `users/${user.displayName}.json`,
+                          url: `${this.fbBaseUrl}users/${emailCut}.json`,
                           data: {
-                            user: `${user.displayName}`,
+                            nickname: `${user.displayName}`,
                             email: `${user.email}`,
                             library: {}
                               }
@@ -37,7 +39,7 @@ export class FirebaseService {
       Loading.circle({
         svgColor: '#ff6b08',
       });
-      const { data } = await axios(`users/${this.user}/library.json`);
+      const { data } = await axios(`${this.fbBaseUrl}users/${this.user}/library.json`);
 
       Loading.remove();
 
@@ -54,7 +56,7 @@ export class FirebaseService {
       });
       const { data } = await axios({
                           method: 'post',
-                          url: `users/${this.user}/library.json`,
+                          url: `${this.fbBaseUrl}users/${this.user}/library.json`,
                           data: {
                             id: `${id}`,
                             original_title: `${original_title}`,
