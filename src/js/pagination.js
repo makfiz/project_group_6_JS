@@ -1,4 +1,13 @@
-// import { ApiServise } from './js/apiServise';
+
+import { ApiServise } from './apiServise';
+
+const newApi = new ApiServise();
+console.log(newApi.totalPage);
+
+export function pagination(ref) {
+  ref.addEventListener('click', somefunc);
+
+
 // import { pagination, preventDefaultForLinks } from './js/pagination';
 // export const instance = new ApiServise();
 // async function abc() {
@@ -118,4 +127,5 @@ function onPaginationBlockClick(e) {
         .classList.remove('visually-hidden');
     }
   }
+
 }
