@@ -1,0 +1,51 @@
+.filter-genre {
+    margin-left: 150px;
+    max-width: 250px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+
+}
+    @media screen and (max-width:768px) {
+    .filter-genre {
+            margin-left: 25px;
+           
+        }
+    }
+    
+  
+    .filter-label {
+        font-weight: 500;
+        margin: 20px 0px;
+        font-size: $secondary-font-size;
+        font-weight: 500;
+        line-height: 1.17;
+        color: $lighter-text-color;
+    
+        // &:first-child {
+        //     margin-top: 0;
+        // }
+    
+        // @media screen and (min-width:768px) {
+        //     margin: 0 20px;
+    
+        //     &:first-child {
+        //         margin-left: 0;
+        //     }
+        // }
+    }
+    
+    
+    select {
+        border: 1px solid $secondary-text-color;
+        border-radius: 5px;
+        background-color: transparent;
+        color: $lighter-text-color;
+}
+
+    
+    option {
+        padding: 20px;
+        background-color: $header-background-color;
+
+    }
+        

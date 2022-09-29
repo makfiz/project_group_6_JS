@@ -1,5 +1,5 @@
 <header class="header">
-  <div class="header__container header__container-non-active">
+  <div class="container header__container header__container-non-active">
     <nav class="nav">
       <div class="logo__container">
         <a href="./index.html" class="logo logo__link">
@@ -22,21 +22,28 @@
             <a
               href="#"
               class="nav-list__link-library nav-list__link-library-accent link"
+              data-library
               >MY LIBRARY</a
             >
           </li>
-          <!-- <li class="nav-list__item-sign-in">
+          <li class="nav-list__item-sign-in">
             <button
               type="button"
               class="sign-in__button nav-list__link-sign-in nav-list__link-sign-in-accent"
-              data-modal-open-sign-in
+              data-sign-in
             >
               SIGN IN
             </button>
           </li>
           <li class="nav-list__item-log-in is-hidden backdrop">
-            <a href="" class="nav-list__link-library nav-list__link-library-accent link">LOGOUT</a>
-          </li> -->
+            <button type="button" class="sign-in__button nav-list__link-sign-in nav-list__link-sign-in-accent"
+              data-sign-out>
+              LOGOUT
+            </button>
+          </li >
+          <li class="nav-list__item">
+            <span class="display-name"></span>
+          </li>
         </ul>
       </div>
     </nav>
@@ -54,18 +61,38 @@
 
         <button class="search__btn" type="submit">
           <svg class="search__img">
-            <use href="#"></use>
+            <use href="./images/sprite.svg#icon-search"></use>
           </svg>
         </button>
       </form>
+
+      <p class="hero__search-error is-hidden">Search result not successful. Enter the correct movie name and try again!
+      </p> 
+
     </div>
+
     <div class="library__btns is-hidden">
       <button type="button" class="library__btn-watched library__btn-active">
         WATCHED
       </button>
       <button type="button" class="library__btn-queue library__btn">
+<!--
+    <div class="library-filter visually-hidden">
+      <button type="button" class="library-filter__btn" data-watched>
+        WATCHED
+      </button>
+      <button type="button" class="library-filter__btn" data-queue>
+-->
         QUEUE
       </button>
     </div>
+    
   </div>
+  <!-- Filter -->
+  <div class="container">
+  <form class="filter-genre" id="filter-form">
+    <label class="filter-label">Choose genre:</label>
+    <select name="genres" id="genres">
+      <option value="genres">all genres</option>
+    </select></div>
 </header>

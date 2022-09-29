@@ -48,28 +48,28 @@
 }
 .gallery-card__title {
   margin-top: 8px;
-  @include font($primary-font-size, 14px, 500, none);
+  @include font($primary-font-size, 1.2, 500, none);
   font-style: normal;
   font-family: 'Roboto';
   @include tablet {
-    @include font(none, 16px, none, none);
+    @include font(none, 1.3, none, none);
   }
   @include desktop {
     margin-top: 12px;
-    @include font(20px, 24px, none, none);
+    @include font(20px, 1.16, none, none);
   }
 }
 .gallery-card__genre {
-  @include font($primary-font-size, 16px, none, none);
+  @include font($primary-font-size, 1.3, none, none);
   font-style: normal;
   font-family: 'Roboto';
   color: $accent-color;
   @include desktop {
-    @include font(20px, 24px, none, none);
+    @include font(20px, 1.2, none, none);
   }
 }
 .gallery-card__rating {
-  @include font($primary-font-size, 14px, 500, none);
+  @include font($primary-font-size, 1.16, 500, none);
   color: $lighter-text-color;
   background-color: $accent-color;
   border-radius: 5px;
