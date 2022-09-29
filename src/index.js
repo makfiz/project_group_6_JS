@@ -10,6 +10,7 @@ import './js/myLibrary';
 import './js/firebaseservice'
 import './js/authorization.js';
 
+import './js/genres.js';
 
 import './js/gengers.js';
 
