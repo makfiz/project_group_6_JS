@@ -28,7 +28,6 @@ export function makeGallary(movies) {
       if (poster_path === null) {
         image =
           'https://dummyimage.com/400x600/7d7d7d/fff.jpg&text=image+not+found';
-        console.log('empty');
       }
 
       return (
