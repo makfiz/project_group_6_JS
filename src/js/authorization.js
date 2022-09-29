@@ -1,8 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, push, ref, set } from "firebase/database";
 import { getAuth, signInWithPopup, signOut, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
-import axios from 'axios';
-import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { FirebaseService } from "./firebaseservice";
 const userDisplayName = document.querySelector(".display-name")
 const signIn = document.querySelector('[data-sign-in]')
 const logout = document.querySelector('[data-sign-out]')
@@ -28,7 +27,7 @@ const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 const db = getDatabase();
-
+const firebase = new FirebaseService
 
 // function writeUserData(userId, name, email) {
 //   const db = getDatabase();
@@ -43,6 +42,10 @@ function writeUserData(data = {}) {
 }
 
 
+
+
+
+
 const userAuth = () => {
     signInWithPopup(auth, provider)
   .then((result) => {
@@ -51,6 +54,10 @@ const userAuth = () => {
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
+    
+    firebase.userReg(user)
+    // firebase.user(user.displayName)
+    // console.log("user",result.user)
     // ...
   }).catch((error) => {
     // Handle Errors here.
@@ -85,57 +92,8 @@ onAuthStateChanged(auth, (user) => {
 })
 
 
-
-axios.defaults.baseURL = 'https://filmoteka-29879-default-rtdb.europe-west1.firebasedatabase.app/';
-
-
- async  function GetUserLibrary () {
-    try {
-      Loading.circle({
-        svgColor: '#ff6b08',
-      });
-      const { data } = await axios(`library.json`);
-
-      Loading.remove();
-
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-
-
-GetUserLibrary()
-
-async  function postMovieToLibrary (id, original_title) {
-    try {
-      Loading.circle({
-        svgColor: '#ff6b08',
-      });
-      const { data } = await axios({
-                          method: 'post',
-                          url: 'library.json',
-                          data: {
-                            id: `${id}`,
-                            original_title: `${original_title}`,
-                            watched: false
-                              }
-                            });;
-
-      Loading.remove();
-
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
 // pathMovieToLibrary(361743, "Top Gun: Maverick")
 // pathMovieToLibrary(616037, "hor: Love and Thunder")
-
-
-
 
 
 
