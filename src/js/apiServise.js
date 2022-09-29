@@ -27,8 +27,6 @@ export class ApiServise {
 
       Loading.remove();
 
-      this.totalPages = data.total_pages;
-
       return data.results;
     } catch (error) {
       console.log(error);
