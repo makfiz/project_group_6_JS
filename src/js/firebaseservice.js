@@ -3,15 +3,15 @@ import { Loading } from 'notiflix/build/notiflix-loading-aio';
 export class FirebaseService {
     constructor() {
         axios.defaults.baseURL = 'https://filmoteka-29879-default-rtdb.europe-west1.firebasedatabase.app/';
-        this.user = null
+        this.user = 'Makfiz'
     }
 
-    get user() {
+    get username() {
     return this.user;
   }
 
-    set user(newUser) {
-    this.user = newUser;
+    set username(newUser) {
+      this.user = newUser;
   }
 
 
@@ -37,7 +37,7 @@ export class FirebaseService {
       Loading.circle({
         svgColor: '#ff6b08',
       });
-      const { data } = await axios(`/${this.user}/library.json`);
+      const { data } = await axios(`users/${this.user}/library.json`);
 
       Loading.remove();
 
@@ -58,7 +58,7 @@ export class FirebaseService {
       });
       const { data } = await axios({
                           method: 'post',
-                          url: 'library.json',
+                          url: `users/${this.user}/library.json`,
                           data: {
                             id: `${id}`,
                             original_title: `${original_title}`,

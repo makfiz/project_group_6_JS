@@ -6,6 +6,7 @@ const userDisplayName = document.querySelector(".display-name")
 const signIn = document.querySelector('[data-sign-in]')
 const logout = document.querySelector('[data-sign-out]')
 
+
 // -----------------------------------------------------------------------------
 // Import the functions you need from the SDKs you need
 
@@ -56,7 +57,8 @@ const userAuth = () => {
     const user = result.user;
     
     firebase.userReg(user)
-    // firebase.user(user.displayName)
+    firebase.user = user.displayName
+    
     // console.log("user",result.user)
     // ...
   }).catch((error) => {
@@ -83,8 +85,10 @@ const signOutUser = () => {
 
 onAuthStateChanged(auth, (user) => {
   if (user !== null) {
-    console.log("user", user)
+    firebase.user = user.displayName
     userDisplayName.innerHTML = user.displayName
+    console.log("user", user)
+    console.log(firebase.user)
     signIn.classList.toggle("is-hidden")
     logout.parentNode.classList.toggle("is-hidden")
   }
@@ -92,12 +96,10 @@ onAuthStateChanged(auth, (user) => {
 })
 
 
-// pathMovieToLibrary(361743, "Top Gun: Maverick")
-// pathMovieToLibrary(616037, "hor: Love and Thunder")
 
-
-
-
+firebase.postMovieToLibrary(361743, "Top Gun: Maverick")
+firebase.postMovieToLibrary(111111, "Top Gun 2: dsgsdg")
+firebase.postMovieToLibrary(222222, "Top Gun 3: sdfsdfsd")
 
 
 
@@ -112,3 +114,7 @@ logout.addEventListener('click', () => {
   signOutUser()
   userDisplayName.innerHTML = null
 })
+
+// signIn.addEventListener('click', () => {
+//   userAuth()
+// })
