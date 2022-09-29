@@ -10,6 +10,7 @@ export class ApiServise {
     this.page = 1;
     this.language;
     this.id = null;
+    this.genreId = null;
   }
 
   async fetchTrendingMovies() {
@@ -76,6 +77,26 @@ export class ApiServise {
     }
   }
 
+  async fetchMovieByGenre() {
+    try {
+      Loading.pulse({
+        svgColor: '#ff6b08',
+      });
+      const { data } = await axios(`discover/movie`, {
+        params: {
+          api_key: API_KEY,
+          language: this.language,
+          with_genres: this.genreId,
+        },
+      });
+      Loading.remove();
+
+      return data.results;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   get query() {
     return this.searchQuery;
   }
@@ -90,5 +111,25 @@ export class ApiServise {
 
   set movieId(newId) {
     this.id = newId;
+  }
+
+  get pages() {
+    return this.page;
+  }
+
+  set pages(newPage) {
+    this.page = newPage;
+  }
+
+  incrementPage() {
+    this.page += 1;
+  }
+
+  decrementPage() {
+    this.page -= 1;
+  }
+
+  resetPage() {
+    this.page = 1;
   }
 }
