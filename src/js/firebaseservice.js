@@ -2,8 +2,7 @@ import axios from 'axios';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 export class FirebaseService {
     constructor() {
-        axios.defaults.baseURL = 'https://filmoteka-29879-default-rtdb.europe-west1.firebasedatabase.app/';
-        this.user = 'Makfiz'
+        this.user = 'user'
     }
 
     get username() {
@@ -16,7 +15,8 @@ export class FirebaseService {
 
 
  async userReg (user) {
-    try {
+   try {
+      axios.defaults.baseURL = 'https://filmoteka-29879-default-rtdb.europe-west1.firebasedatabase.app/';
       const { data } = await axios({
                           method: 'patch',
                           url: `users/${user.displayName}.json`,
@@ -47,10 +47,6 @@ export class FirebaseService {
     }
   }
 
-
-
-
-
    async postMovieToLibrary (id, original_title) {
     try {
       Loading.circle({
@@ -65,9 +61,8 @@ export class FirebaseService {
                             watched: false
                               }
                             });;
-
+                              
       Loading.remove();
-
       return data;
     } catch (error) {
       console.log(error);
