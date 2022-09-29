@@ -1,0 +1,48 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+.pagination__item {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.pagination__item-additional {
+  display: none;
+  @include tablet {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.pagination__item:first-child,
+.pagination__item:last-child {
+  background-color: $footer-background-color;
+}
+
+.pagination__link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transition: color 300ms ease, fill 300ms ease;
+  @include font(12px, 1.33, 500, null);
+  color: $primary-text-color;
+}
+.pagination__link:hover,
+.pagination__link:focus {
+  color: $accent-color;
+  fill: $accent-color;
+}
+
+.pagination__link-active {
+  background-color: $accent-color;
+  color: $lighter-text-color;
+
+  &:hover,
+  &:focus {
+    color: $lighter-text-color;
+  }
+}
