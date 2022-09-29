@@ -187,6 +187,8 @@
 //     width: 130px;
 //   }
 // }
+
+// todo ======= mobile img === start
 @media screen and (max-width: 767px) {
   .header__container {
     background-image: linear-gradient(
@@ -194,14 +196,14 @@
         rgba(0, 0, 0, 0.56),
         rgba(0, 0, 0, 0.56)
       ),
-      url('#');
+      url('../images/header-bg/header-bkg-mobile-1@1x.png');
 
     &-library {
       background-image: linear-gradient(
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
         ),
-        url('#');
+        url('../images/header-bg/header-bkg-mobile-1@1x.png');
     }
   }
 }
@@ -210,22 +212,23 @@
   (min-resolution: 2dppx) and (max-widtn: 767px) {
   .header__container {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url('#');
+      url('../images/header-bg/header-bkg-mobile-1@2x.png');
 
     &-library {
       background-image: linear-gradient(
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
         ),
-        url('#');
+        url('../images/header-bg/header-bkg-mobile-1@2x.png');
     }
   }
 }
 
+// todo ======= tablet img === start
 @media screen and (min-width: 768px) {
   .header__container {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url('#');
+      url('../images/header-bg/header-bkg-tablet-1@1x.png');
     width: 768px;
     padding-top: 46px;
     &-library {
@@ -233,7 +236,7 @@
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
         ),
-        url('#');
+        url('../images/header-bg/header-bkg-tablet-1@1x.png');
       width: 768px;
       padding-top: 46px;
       .logo__container {
@@ -274,21 +277,22 @@
   (min-resolution: 2dppx) and (min-width: 768px) {
   .header__container {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url('#');
+      url('../images/header-bg/header-bkg-tablet-1@2x.png');
 
     &-library {
       background-image: linear-gradient(
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
         ),
-        url('#');
+        url('../images/header-bg/header-bkg-tablet-1@2x.png');
     }
   }
 }
+// todo ======= tablet img === start
 @media screen and (min-width: 1024px) {
   .header__container {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url('#');
+      url('../images/header-bg/header-bkg-desktop-1@1x.png');
     width: 1024px;
     .logo__container {
       width: 175px;
@@ -301,7 +305,7 @@
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
         ),
-        url('#');
+        url('../images/header-bg/header-bkg-desktop-1@1x.png');
       width: 1024px;
       .logo__container {
         width: 175px;
@@ -317,14 +321,14 @@
   (min-resolution: 2dppx) and (min-width: 1024px) {
   .header__container {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url('#');
+      url('../images/header-bg/header-bkg-desktop-1@2x.png');
 
     &-library {
       background-image: linear-gradient(
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
         ),
-        url('#');
+        url('../images/header-bg/header-bkg-desktop-1@2x.png');
     }
   }
 }
