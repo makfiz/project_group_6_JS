@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, push, ref, set } from "firebase/database";
 import { getAuth, signInWithPopup, signOut, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
 import { FirebaseService } from "./firebaseservice";
 const userDisplayName = document.querySelector(".display-name")
@@ -27,7 +26,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
-const db = getDatabase();
 const firebase = new FirebaseService
 
 // function writeUserData(userId, name, email) {
@@ -37,14 +35,6 @@ const firebase = new FirebaseService
 //     email: email,
 //   });
 // }
-
-function writeUserData(data = {}) {
-  push(ref(db, "data"), data)
-}
-
-
-
-
 
 
 const userAuth = () => {
