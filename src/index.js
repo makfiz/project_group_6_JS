@@ -6,7 +6,10 @@ import './js/pagination';
 
 import './js/myLibrary';
 
-// import './js/authorization.js';
+
+import './js/firebaseservice'
+import './js/authorization.js';
+
 
 import './js/gengers.js';
 
