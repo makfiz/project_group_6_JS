@@ -32,9 +32,7 @@ function switchColorMaker(switchRefs) {
   switchRefs.footerBtn.classList.toggle('dark');
   switchRefs.paginationEl.classList.toggle('dark');
   for (const el of switchRefs.paginationEl.children) {
-    if (!el.firstElementChild.classList.contains('pagination__link-active')) {
-      el.firstElementChild.classList.toggle('dark');
-    }
+    el.firstElementChild.classList.toggle('dark');
     if (el.dataset.page === 'next') {
       el.classList.toggle('dark');
     }
@@ -55,3 +53,4 @@ export function switchColorGalleryTitle(refs) {
     });
   }
 }
+export function switchColorPagination(refs) {}
