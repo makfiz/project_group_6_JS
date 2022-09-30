@@ -87,8 +87,8 @@ async function onPaginationBlockClick(e) {
   if (itemValue === 'previous') {
     if (apiServise.pages === 1) return;
     apiServise.decrementPage();
-    console.log('instance.page', apiServise.pages);
-    console.log('mode =>>', apiServise.mode);
+    // console.log('instance.page', apiServise.pages);
+    // console.log('mode =>>', apiServise.mode);
     buttonsPagination(activeEl);
     await contentLoader();
     return;
@@ -98,8 +98,8 @@ async function onPaginationBlockClick(e) {
   if (itemValue === 'next') {
     if (apiServise.pages === apiServise.totalPage) return;
     apiServise.incrementPage();
-    console.log('instance.page', apiServise.pages);
-    console.log('mode =>>', apiServise.mode);
+    // console.log('instance.page', apiServise.pages);
+    // console.log('mode =>>', apiServise.mode);
     buttonsPagination(activeEl);
     await contentLoader();
     return;
@@ -108,8 +108,8 @@ async function onPaginationBlockClick(e) {
   //Кнопки із цифрами
   if (itemValue !== 'previous' && itemValue !== 'next') {
     apiServise.pages = Number(itemValue);
-    console.log('instance.page', apiServise.pages);
-    console.log('mode =>>', apiServise.mode);
+    // console.log('instance.page', apiServise.pages);
+    // console.log('mode =>>', apiServise.mode);
     buttonsPagination(activeEl);
     contentLoader();
   }
@@ -123,19 +123,13 @@ export function setSearchMode(apiServise) {
     .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
     .querySelector('.pagination__link')
     .classList.add('pagination__link-active');
-  console.log('apiServise', apiServise);
+  // console.log('apiServise', apiServise);
 }
 
 function removePages() {
   document.querySelectorAll('.js-render').forEach(el => el.remove());
 }
 
-//===================================================================
-//===================================================================
-//
-//===================================================================
-//===================================================================
-//
 //===================================================================
 //===================================================================
 
