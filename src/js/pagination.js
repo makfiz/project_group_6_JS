@@ -1,5 +1,6 @@
 import { apiServise, onTrendMovies, onSearchMovie } from './searchFilms';
 import { refs } from './refs';
+import { refs as libRefs } from './myLibrary';
 import { makeGallary } from './templates/renderMovieGallary';
 
 // Заборона перезавантаження сторінки по кліку на посилання
@@ -20,6 +21,12 @@ export async function pagination(instance) {
 
 export function createAndRenderPagination(instance) {
   const rootEl = document.querySelector('.pagination');
+  if (instance.totalPage === 0) {
+    rootEl.classList.add('is-hidden');
+    return;
+  }
+  rootEl.classList.remove('is-hidden');
+
   const totalPages = instance.totalPage;
   const currentPage = instance.pages;
 
@@ -242,3 +249,8 @@ function buttonsPagination(activeEl) {
       .classList.remove('visually-hidden');
   }
 }
+
+//Приховування пагінації при переході на бібліотеку
+libRefs.library.addEventListener('click', e =>
+  document.querySelector('.pagination').classList.add('is-hidden')
+);

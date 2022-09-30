@@ -1,4 +1,4 @@
-const refs = {
+export const refs = {
   libraryFilter: document.querySelector('.library-filter'),
   watchedBtn: document.querySelector('[data-watched]'),
   queueBtn: document.querySelector('[data-queue]'),
