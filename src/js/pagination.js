@@ -2,6 +2,7 @@ import { apiServise, onTrendMovies, onSearchMovie } from './searchFilms';
 import { refs } from './refs';
 import { makeGallary } from './templates/renderMovieGallary';
 
+
 // Заборона перезавантаження сторінки по кліку на посилання
 export function preventDefaultForLinks() {
   document
@@ -242,3 +243,6 @@ function buttonsPagination(activeEl) {
       .classList.remove('visually-hidden');
   }
 }
+
+
+

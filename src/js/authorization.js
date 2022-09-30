@@ -4,6 +4,9 @@ import { FirebaseService } from "./firebaseservice";
 const userDisplayName = document.querySelector(".display-name")
 const signIn = document.querySelector('[data-sign-in]')
 const logout = document.querySelector('[data-sign-out]')
+const signInBaner = document.querySelector('.sign-in-wrapper')
+const galleryLibrary = document.querySelector('.gallery__list--library')
+const pagination = document.querySelector('.pagination')
 const libraryBtn = document.querySelector('[data-library]')
 
 
@@ -50,7 +53,6 @@ const userAuth = () => {
     firebase.userReg(user)
     firebase.user = emailCuter(user.email)
     
-    // console.log("user",result.user)
     // ...
   }).catch((error) => {
     // Handle Errors here.
@@ -75,10 +77,24 @@ const signOutUser = () => {
 };
 
 onAuthStateChanged(auth, (user) => {
+  console.log("user", user)
+  
+  libraryBtn.addEventListener('click', () => {
+      if (user !== null) return
+      signInBaner.classList.remove('visually-hidden')
+      pagination.classList.add('visually-hidden')
+      galleryLibrary.classList.add('visually-hidden');
+  })
+    // if (user == null && document.querySelector(".gallery__list--library").classList.contains("library")) {
+   
+    // }
+  
   if (user !== null) {
+    signInBaner.classList.add('visually-hidden')
+    galleryLibrary.classList.remove('visually-hidden')
+    pagination.classList.remove('visually-hidden')
     firebase.user = emailCuter(user.email)
     userDisplayName.innerHTML = emailCuter(user.email)
-    console.log("user", user)
     signIn.parentNode.classList.toggle("is-hidden")
     logout.parentNode.classList.toggle("is-hidden")
   }
@@ -92,11 +108,12 @@ signIn.addEventListener('click', () => {
 logout.addEventListener('click', () => {
   signOutUser()
   userDisplayName.innerHTML = null
+  // e.preventDefault()
 })
 
-libraryBtn.addEventListener('click', () => {
-  firebase.GetUserLibrary()
-})
+
+
+
 
 
  function emailCuter(email) {
