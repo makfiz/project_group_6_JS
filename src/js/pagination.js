@@ -6,7 +6,7 @@ import { makeGallary } from './templates/renderMovieGallary';
 // Заборона перезавантаження сторінки по кліку на посилання
 export function preventDefaultForLinks() {
   document
-    .querySelectorAll('a')
+    .querySelectorAll('.pagination__link')
     .forEach(link => link.addEventListener('click', e => e.preventDefault()));
 }
 
