@@ -22,7 +22,7 @@
   }
 }
 .gallery__item {
-  background-color: $footer-background-color;
+  background-color: transparent;
   border-radius: 5px;
 
   &:hover,
@@ -38,8 +38,7 @@
   }
 }
 .gallery-card__img {
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-radius: 5px;
 }
 .gallery-card {
   width: 280px;
