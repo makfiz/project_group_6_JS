@@ -1,6 +1,8 @@
-import { apiServise, onTrendMovies } from './searchFilms';
+import { apiServise, onTrendMovies, onSearchMovie } from './searchFilms';
+import { refs } from './refs';
 
 let mode = 'trending';
+refs.searchForm.addEventListener('submit', setModeOnSearchFormClick);
 
 // Заборона перезавантаження сторінки по кліку на посилання
 export function preventDefaultForLinks() {
@@ -29,11 +31,11 @@ export function createAndRenderPagination(instance) {
   if (totalPages > 9) {
     let markup = '';
     for (let i = 2; i <= amount; i += 1) {
-      markup += `<li class="pagination__item js-pages" data-page="${i}">
+      markup += `<li class="pagination__item js-pages js-render" data-page="${i}">
       <a href="" class="pagination__link">${i}</a>
     </li>`;
     }
-    const lastItem = ` <li class="pagination__item pagination__item-additional" data-page=${totalPages}>
+    const lastItem = ` <li class="pagination__item pagination__item-additional js-render" data-page=${totalPages}>
       <a href="" class="pagination__link">${totalPages}</a>
     </li>`;
 
@@ -139,13 +141,27 @@ async function onPaginationBlockClick(e) {
         .classList.add('visually-hidden');
     }
 
+    console.log('mode', mode);
     switch (mode) {
       case 'trending':
         console.log(apiServise);
         await onTrendMovies();
         return;
       case 'search':
+        await onSearchMovie();
         return;
     }
   }
+}
+
+function setModeOnSearchFormClick(e) {
+  mode = 'search';
+  removePages();
+  console.log('apiServise', apiServise);
+  createAndRenderPagination(apiServise);
+  console.log(mode);
+}
+
+function removePages() {
+  document.querySelectorAll('.js-render').forEach(el => el.remove());
 }
