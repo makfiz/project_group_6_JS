@@ -1,5 +1,7 @@
 import { apiServise, onTrendMovies } from './searchFilms';
 
+let mode = 'trending';
+
 // Заборона перезавантаження сторінки по кліку на посилання
 export function preventDefaultForLinks() {
   document
@@ -136,7 +138,14 @@ async function onPaginationBlockClick(e) {
         .querySelector('.pagination__item[data-page="dots-second"]')
         .classList.add('visually-hidden');
     }
-    console.log(apiServise);
-    await onTrendMovies();
+
+    switch (mode) {
+      case 'trending':
+        console.log(apiServise);
+        await onTrendMovies();
+        return;
+      case 'search':
+        return;
+    }
   }
 }
