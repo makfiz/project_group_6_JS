@@ -11,6 +11,8 @@ export class ApiServise {
     this.language;
     this.id = null;
     this.genreId = null;
+    this.total_pages = 1000;
+    this.currentMode = 'trending';
   }
 
   async fetchTrendingMovies() {
@@ -28,7 +30,7 @@ export class ApiServise {
 
       Loading.remove();
 
-      return data.results;
+      return data;
     } catch (error) {
       console.log(error);
     }
@@ -44,6 +46,7 @@ export class ApiServise {
           api_key: API_KEY,
           query: this.searchQuery,
           language: this.language,
+          page: this.page,
         },
       });
       Loading.remove();
@@ -51,6 +54,7 @@ export class ApiServise {
       if (this.searchQuery === '') {
         return;
       }
+      this.total_pages = data.total_pages;
 
       return data.results;
     } catch (error) {
@@ -121,6 +125,14 @@ export class ApiServise {
     this.page = newPage;
   }
 
+  get totalPage() {
+    return this.total_pages;
+  }
+
+  set totalPage(pages) {
+    this.total_pages = pages;
+  }
+
   incrementPage() {
     this.page += 1;
   }
@@ -131,5 +143,12 @@ export class ApiServise {
 
   resetPage() {
     this.page = 1;
+  }
+
+  get mode() {
+    return this.currentMode;
+  }
+  set mode(newMode) {
+    this.currentMode = newMode;
   }
 }
