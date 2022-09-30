@@ -22,11 +22,35 @@ export function createAndRenderPagination(instance) {
   const rootEl = document.querySelector('.pagination');
   const totalPages = instance.totalPage;
   const currentPage = instance.pages;
-  const amount = currentPage + 5;
+
   // console.log(totalPages);
 
   //Створення і рендер розмітки по умові
+  //Якщо прийшло 9 сторінок і менше
+  if (totalPages <= 9) {
+    const amount = totalPages - 1;
+    let markup = '';
+    for (let i = 2; i <= amount; i += 1) {
+      markup += `<li class="pagination__item js-pages js-render" data-page="${i}">
+      <a href="" class="pagination__link">${i}</a>
+    </li>`;
+    }
+    const lastItem = ` <li class="pagination__item pagination__item-additional js-render" data-page=${totalPages}>
+      <a href="" class="pagination__link">${totalPages}</a>
+    </li>`;
+    rootEl
+      .querySelector('.pagination__item[data-page="dots-first"]')
+      .insertAdjacentHTML('afterend', markup);
+    rootEl
+      .querySelector('.pagination__item[data-page="next"]')
+      .insertAdjacentHTML('beforebegin', lastItem);
+    rootEl
+      .querySelector('.pagination__item[data-page="dots-second"]')
+      .classList.add('visually-hidden');
+  }
+  //Якщо прийшло більше ніж 9 сторінок
   if (totalPages > 9) {
+    const amount = currentPage + 5;
     let markup = '';
     for (let i = 2; i <= amount; i += 1) {
       markup += `<li class="pagination__item js-pages js-render" data-page="${i}">
@@ -65,7 +89,16 @@ async function onPaginationBlockClick(e) {
     // console.log('instance.page', apiServise.pages);
 
     //Додавання активного фону для кнопок
-    if (activeEl && apiServise.pages < 5) {
+
+    if (activeEl && apiServise.totalPage <= 9) {
+      activeEl.classList.remove('pagination__link-active');
+      document
+        .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
+        .querySelector('.pagination__link')
+        .classList.add('pagination__link-active');
+    }
+
+    if (activeEl && apiServise.pages < 5 && apiServise.totalPage > 9) {
       activeEl.classList.remove('pagination__link-active');
 
       const pages = document.querySelectorAll('.js-pages');
@@ -89,7 +122,8 @@ async function onPaginationBlockClick(e) {
     if (
       activeEl &&
       apiServise.pages >= 5 &&
-      apiServise.pages <= apiServise.totalPage - 5
+      apiServise.pages <= apiServise.totalPage - 5 &&
+      apiServise.totalPage > 9
     ) {
       activeEl.classList.remove('pagination__link-active');
 
@@ -117,7 +151,11 @@ async function onPaginationBlockClick(e) {
         .classList.remove('visually-hidden');
     }
 
-    if (activeEl && apiServise.pages > apiServise.totalPage - 5) {
+    if (
+      activeEl &&
+      apiServise.pages > apiServise.totalPage - 5 &&
+      apiServise.totalPage > 9
+    ) {
       activeEl.classList.remove('pagination__link-active');
 
       const pages = document.querySelectorAll('.js-pages');
