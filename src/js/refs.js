@@ -6,6 +6,6 @@ export const refs = {
 
   listOfGenres: document.querySelector('#genres'),
 
+  genreSelector: document.querySelector('.filter-genre'),
+  textSearchError: document.querySelector('.hero__search-error'),
 };
-
-// export { searchForm, movieList };
