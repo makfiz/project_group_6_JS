@@ -53,8 +53,7 @@ export class ApiServise {
         return;
       }
       this.total_pages = data.total_pages;
-      console.log(data);
-      console.log('this', this);
+
       return data.results;
     } catch (error) {
       console.log(error);

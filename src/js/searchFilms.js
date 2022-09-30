@@ -1,7 +1,7 @@
 import { ApiServise } from './apiServise';
 import { makeGallary } from './templates/renderMovieGallary';
 import { refs } from './refs';
-import { pagination } from './pagination';
+import { pagination, setSearchMode } from './pagination';
 
 export const apiServise = new ApiServise();
 
@@ -18,11 +18,13 @@ export async function onTrendMovies() {
   pagination(apiServise);
 }
 
-function onSearchMovie(e) {
+async function onSearchMovie(e) {
   e.preventDefault();
   apiServise.query = e.currentTarget.elements.filmName.value.trim();
-
-  movieList.innerHTML = '';
-  apiServise.fetchSearchMovie().then(data => makeGallary(data));
   e.currentTarget.reset();
+  movieList.innerHTML = '';
+  apiServise.resetPage();
+  const data = await apiServise.fetchSearchMovie();
+  makeGallary(data);
+  setSearchMode(refs.mode, apiServise);
 }
