@@ -83,116 +83,39 @@ async function onPaginationBlockClick(e) {
   const activeEl = document.querySelector('.pagination__link-active');
   const itemValue = e.target.closest('.pagination__item').dataset.page;
 
+  //Кнопка попередня сторінка
+  if (itemValue === 'previous') {
+    if (apiServise.pages === 1) return;
+    apiServise.decrementPage();
+    console.log('instance.page', apiServise.pages);
+    console.log('mode =>>', apiServise.mode);
+    buttonsPagination(activeEl);
+    await contentLoader();
+    return;
+  }
+
+  //Кнопка наступна сторінка
+  if (itemValue === 'next') {
+    if (apiServise.pages === apiServise.totalPage) return;
+    apiServise.incrementPage();
+    console.log('instance.page', apiServise.pages);
+    console.log('mode =>>', apiServise.mode);
+    buttonsPagination(activeEl);
+    await contentLoader();
+    return;
+  }
+
+  //Кнопки із цифрами
   if (itemValue !== 'previous' && itemValue !== 'next') {
-    //Поставити сторінку в екземплярі класу
     apiServise.pages = Number(itemValue);
-    // console.log('instance.page', apiServise.pages);
-
-    //Додавання активного фону для кнопок
-
-    if (activeEl && apiServise.totalPage <= 9) {
-      activeEl.classList.remove('pagination__link-active');
-      document
-        .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
-        .querySelector('.pagination__link')
-        .classList.add('pagination__link-active');
-    }
-
-    if (activeEl && apiServise.pages < 5 && apiServise.totalPage > 9) {
-      activeEl.classList.remove('pagination__link-active');
-
-      const pages = document.querySelectorAll('.js-pages');
-      let counter = 2;
-      pages.forEach(page => {
-        page.dataset.page = counter;
-        page.querySelector('.pagination__link').textContent = counter;
-        counter += 1;
-      });
-
-      document
-        .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
-        .querySelector('.pagination__link')
-        .classList.add('pagination__link-active');
-
-      document
-        .querySelector('.pagination__item[data-page="dots-first"]')
-        .classList.add('visually-hidden');
-    }
-
-    if (
-      activeEl &&
-      apiServise.pages >= 5 &&
-      apiServise.pages <= apiServise.totalPage - 5 &&
-      apiServise.totalPage > 9
-    ) {
-      activeEl.classList.remove('pagination__link-active');
-
-      const pages = document.querySelectorAll('.js-pages');
-      const currentPage = apiServise.pages;
-      let counter = currentPage - 2;
-
-      pages.forEach(page => {
-        page.dataset.page = counter;
-        page.querySelector('.pagination__link').textContent = counter;
-
-        if (counter === currentPage) {
-          page
-            .querySelector('.pagination__link')
-            .classList.add('pagination__link-active');
-        }
-        counter += 1;
-      });
-
-      document
-        .querySelector('.pagination__item[data-page="dots-first"]')
-        .classList.remove('visually-hidden');
-      document
-        .querySelector('.pagination__item[data-page="dots-second"]')
-        .classList.remove('visually-hidden');
-    }
-
-    if (
-      activeEl &&
-      apiServise.pages > apiServise.totalPage - 5 &&
-      apiServise.totalPage > 9
-    ) {
-      activeEl.classList.remove('pagination__link-active');
-
-      const pages = document.querySelectorAll('.js-pages');
-      let counter = apiServise.totalPage - 5;
-      pages.forEach(page => {
-        if (counter === apiServise.totalPage) return;
-        page.dataset.page = counter;
-        page.querySelector('.pagination__link').textContent = counter;
-        counter += 1;
-      });
-
-      document
-        .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
-        .querySelector('.pagination__link')
-        .classList.add('pagination__link-active');
-
-      document
-        .querySelector('.pagination__item[data-page="dots-second"]')
-        .classList.add('visually-hidden');
-    }
-
-    // console.log('mode =>>', apiServise.mode);
-    switch (apiServise.mode) {
-      case 'trending':
-        await onTrendMovies();
-        return;
-      case 'search':
-        const data = await apiServise.fetchSearchMovie();
-        refs.movieList.innerHTML = '';
-        makeGallary(data);
-        return;
-    }
+    console.log('instance.page', apiServise.pages);
+    console.log('mode =>>', apiServise.mode);
+    buttonsPagination(activeEl);
+    contentLoader();
   }
 }
 
 export function setSearchMode(apiServise) {
-  mode = 'search';
   removePages();
   apiServise.mode = 'search';
   pagination(apiServise);
@@ -205,4 +128,123 @@ export function setSearchMode(apiServise) {
 
 function removePages() {
   document.querySelectorAll('.js-render').forEach(el => el.remove());
+}
+
+//===================================================================
+//===================================================================
+//
+//===================================================================
+//===================================================================
+//
+//===================================================================
+//===================================================================
+
+// Завантаження контенту по умові
+async function contentLoader() {
+  switch (apiServise.mode) {
+    case 'trending':
+      await onTrendMovies();
+      return;
+    case 'search':
+      const data = await apiServise.fetchSearchMovie();
+      refs.movieList.innerHTML = '';
+      makeGallary(data);
+      return;
+  }
+}
+
+//Додавання активного фону для кнопок
+function buttonsPagination(activeEl) {
+  if (activeEl && apiServise.totalPage <= 9) {
+    activeEl.classList.remove('pagination__link-active');
+    document
+      .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
+      .querySelector('.pagination__link')
+      .classList.add('pagination__link-active');
+  }
+
+  if (activeEl && apiServise.pages < 5 && apiServise.totalPage > 9) {
+    activeEl.classList.remove('pagination__link-active');
+
+    const pages = document.querySelectorAll('.js-pages');
+    let counter = 2;
+    pages.forEach(page => {
+      page.dataset.page = counter;
+      page.querySelector('.pagination__link').textContent = counter;
+      counter += 1;
+    });
+
+    document
+      .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
+      .querySelector('.pagination__link')
+      .classList.add('pagination__link-active');
+
+    document
+      .querySelector('.pagination__item[data-page="dots-first"]')
+      .classList.add('visually-hidden');
+    document
+      .querySelector('.pagination__item[data-page="dots-second"]')
+      .classList.remove('visually-hidden');
+  }
+
+  if (
+    activeEl &&
+    apiServise.pages >= 5 &&
+    apiServise.pages <= apiServise.totalPage - 5 &&
+    apiServise.totalPage > 9
+  ) {
+    activeEl.classList.remove('pagination__link-active');
+
+    const pages = document.querySelectorAll('.js-pages');
+    const currentPage = apiServise.pages;
+    let counter = currentPage - 2;
+
+    pages.forEach(page => {
+      page.dataset.page = counter;
+      page.querySelector('.pagination__link').textContent = counter;
+
+      if (counter === currentPage) {
+        page
+          .querySelector('.pagination__link')
+          .classList.add('pagination__link-active');
+      }
+      counter += 1;
+    });
+
+    document
+      .querySelector('.pagination__item[data-page="dots-first"]')
+      .classList.remove('visually-hidden');
+    document
+      .querySelector('.pagination__item[data-page="dots-second"]')
+      .classList.remove('visually-hidden');
+  }
+
+  if (
+    activeEl &&
+    apiServise.pages > apiServise.totalPage - 5 &&
+    apiServise.totalPage > 9
+  ) {
+    activeEl.classList.remove('pagination__link-active');
+
+    const pages = document.querySelectorAll('.js-pages');
+    let counter = apiServise.totalPage - 5;
+    pages.forEach(page => {
+      if (counter === apiServise.totalPage) return;
+      page.dataset.page = counter;
+      page.querySelector('.pagination__link').textContent = counter;
+      counter += 1;
+    });
+
+    document
+      .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
+      .querySelector('.pagination__link')
+      .classList.add('pagination__link-active');
+
+    document
+      .querySelector('.pagination__item[data-page="dots-second"]')
+      .classList.add('visually-hidden');
+    document
+      .querySelector('.pagination__item[data-page="dots-first"]')
+      .classList.remove('visually-hidden');
+  }
 }
