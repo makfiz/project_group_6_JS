@@ -45,7 +45,8 @@ export function makeGallary(movies) {
                 >${filmsGenres || 'Action'}  |
                 <span class="gallery-card__date">${releaseDate}</span></span
               >
-              <span class="gallery-card__rating">${vote_average || '-'} </span>
+           <span class="gallery-card__rating">${vote_average || '-'} </span>
+             
             </p></div>
           </li>`
       );
