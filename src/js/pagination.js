@@ -1,24 +1,6 @@
+import { apiServise, onTrendMovies } from './searchFilms';
 
-import { ApiServise } from './apiServise';
-
-const newApi = new ApiServise();
-console.log(newApi.totalPage);
-
-export function pagination(ref) {
-  ref.addEventListener('click', somefunc);
-
-
-// import { pagination, preventDefaultForLinks } from './js/pagination';
-// export const instance = new ApiServise();
-// async function abc() {
-//   await instance.fetchTrendingMovies();
-//   await pagination(instance);
-//   preventDefaultForLinks();
-// }
-// abc();
-
-import { instance } from '../index';
-
+// Заборона перезавантаження сторінки по кліку на посилання
 export function preventDefaultForLinks() {
   document
     .querySelectorAll('a')
@@ -26,15 +8,19 @@ export function preventDefaultForLinks() {
 }
 
 export async function pagination(instance) {
+  console.log(document.querySelectorAll('.js-pages'));
   const rootEl = document.querySelector('.pagination');
   createAndRenderPagination(instance, rootEl);
   rootEl.addEventListener('click', onPaginationBlockClick);
+  preventDefaultForLinks();
 }
 
-function createAndRenderPagination(instance, rootEl) {
-  const totalPages = instance.totalPages;
-  const currentPage = instance.page;
+export function createAndRenderPagination(instance) {
+  const rootEl = document.querySelector('.pagination');
+  const totalPages = instance.totalPage;
+  const currentPage = instance.pages;
   const amount = currentPage + 5;
+  console.log(totalPages);
 
   //Створення і рендер розмітки по умові
   if (totalPages > 9) {
@@ -60,7 +46,7 @@ function createAndRenderPagination(instance, rootEl) {
   }
 }
 
-function onPaginationBlockClick(e) {
+async function onPaginationBlockClick(e) {
   if (
     !e.target.classList.contains('pagination__link') &&
     !e.target.closest('.pagination__link')
@@ -72,42 +58,40 @@ function onPaginationBlockClick(e) {
 
   if (itemValue !== 'previous' && itemValue !== 'next') {
     //Поставити сторінку в екземплярі класу
-    instance.npage = Number(itemValue);
-    console.log('instance.page', instance.page);
+    apiServise.pages = Number(itemValue);
+    console.log('instance.page', apiServise.pages);
 
     //Додавання активного фону для кнопок
-    if (activeEl && instance.npage < 5) {
+    if (activeEl && apiServise.pages < 5) {
       activeEl.classList.remove('pagination__link-active');
 
       const pages = document.querySelectorAll('.js-pages');
       let counter = 2;
       pages.forEach(page => {
-        // console.log(counter);
-        // console.log(page);
         page.dataset.page = counter;
         page.querySelector('.pagination__link').textContent = counter;
         counter += 1;
       });
 
       document
-        .querySelector(`.pagination__item[data-page="${instance.npage}"]`)
+        .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
         .querySelector('.pagination__link')
         .classList.add('pagination__link-active');
-
-      // e.target
-      //   .closest('.pagination__link')
-      //   .classList.add('pagination__link-active');
 
       document
         .querySelector('.pagination__item[data-page="dots-first"]')
         .classList.add('visually-hidden');
     }
 
-    if (activeEl && instance.npage >= 5) {
+    if (
+      activeEl &&
+      apiServise.pages >= 5 &&
+      apiServise.pages <= apiServise.totalPage - 5
+    ) {
       activeEl.classList.remove('pagination__link-active');
 
       const pages = document.querySelectorAll('.js-pages');
-      const currentPage = instance.npage;
+      const currentPage = apiServise.pages;
       let counter = currentPage - 2;
 
       pages.forEach(page => {
@@ -125,7 +109,33 @@ function onPaginationBlockClick(e) {
       document
         .querySelector('.pagination__item[data-page="dots-first"]')
         .classList.remove('visually-hidden');
+      document
+        .querySelector('.pagination__item[data-page="dots-second"]')
+        .classList.remove('visually-hidden');
     }
-  }
 
+    if (activeEl && apiServise.pages > apiServise.totalPage - 5) {
+      activeEl.classList.remove('pagination__link-active');
+
+      const pages = document.querySelectorAll('.js-pages');
+      let counter = apiServise.totalPage - 5;
+      pages.forEach(page => {
+        if (counter === apiServise.totalPage) return;
+        page.dataset.page = counter;
+        page.querySelector('.pagination__link').textContent = counter;
+        counter += 1;
+      });
+
+      document
+        .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
+        .querySelector('.pagination__link')
+        .classList.add('pagination__link-active');
+
+      document
+        .querySelector('.pagination__item[data-page="dots-second"]')
+        .classList.add('visually-hidden');
+    }
+    console.log(apiServise);
+    // await onTrendMovies();
+  }
 }

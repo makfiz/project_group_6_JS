@@ -1,19 +1,21 @@
 import { ApiServise } from './apiServise';
 import { makeGallary } from './templates/renderMovieGallary';
 import { refs } from './refs';
+import { pagination } from './pagination';
 
-const apiServise = new ApiServise();
+export const apiServise = new ApiServise();
 
 const { movieList, searchForm } = refs;
 
 addEventListener('DOMContentLoaded', onTrendMovies);
 searchForm.addEventListener('submit', onSearchMovie);
 
-async function onTrendMovies() {
+export async function onTrendMovies() {
   const res = await apiServise.fetchTrendingMovies();
 
   makeGallary(res.results);
   apiServise.totalPage = res.total_pages;
+  pagination(apiServise);
 }
 
 function onSearchMovie(e) {
