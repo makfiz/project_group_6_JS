@@ -86,7 +86,22 @@
         QUEUE
       </button>
     </div>
-    
+    <div class="color-switcher">
+  <form class="menu-switch">
+    <label class="menu-switch__label"
+      ><input
+        type="checkbox"
+        name="menu-switch"
+        value="core"
+        class="menu-switch__check visually-hidden" /><span
+        class="menu-switch__thumb"
+        ><svg class="menu-switch__icon" width="15" height="15">
+          <use
+            href="./images/sprite.svg#icon-brightness"
+          ></use></svg></span
+    ></label>
+  </form>
+</div>
   </div>
   <!-- Filter -->
   <div class="container">
@@ -95,4 +110,5 @@
     <select name="genres" id="genres">
       <option value="genres">all genres</option>
     </select></div>
+    
 </header>

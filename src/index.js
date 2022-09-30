@@ -10,3 +10,5 @@ import './js/authorization.js';
 import './js/gengers.js';
 
 import './js/btn-to-top';
+
+import './js/colorSwitcher';
