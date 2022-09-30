@@ -82,23 +82,34 @@
   color: #e8e8e8;
 }
 .pagination.dark {
-  background-color: #0f0f0f;
+  background-color: #232323;
 }
+
 .pagination__item.dark {
   background-color: #707070;
 }
+.pagination__item-additional.dark {
+  background-color: transparent;
+}
+
 .pagination__link.dark {
   color: #e8e8e8;
+}
+.pagination__link:hover,
+.pagination__link:focus {
+  color: $accent-color;
+  fill: $accent-color;
+}
+
+.pagination__link-active {
+  background-color: $accent-color;
+  color: $lighter-text-color;
+
   &:hover,
   &:focus {
-    color: #ff6b08;
+    color: $lighter-text-color;
   }
 }
-// .pagination__link-active {
-//   background-color: $accent-color;
-//   color: $lighter-text-color;
-//   &:hover,
-//   &:focus {
-//     color: $lighter-text-color;
-//   }
-// }
+.dark {
+  fill: #ffffff;
+}
