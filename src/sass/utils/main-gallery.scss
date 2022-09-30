@@ -63,22 +63,11 @@
   }
 }
 .gallery-card__img {
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
   background-color: $footer-background-color;
 
-  // border-radius: 5px;
+  border-radius: 5px;
 }
-// .gallery-card {
-//   width: 280px;
-//   @include tablet {
-//     width: 336px;
-//   }
-//   @include desktop {
-//     max-width: 395px;
-//   }
-// >>>>>>> main
-// }
+
 .gallery-card__title {
   @include font($primary-font-size, 1.2, 500, none);
   font-style: normal;
