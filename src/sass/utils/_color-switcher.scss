@@ -1,0 +1,115 @@
+.color-switcher {
+  position: absolute;
+  bottom: 34px;
+  right: 60px;
+}
+
+.menu-switch {
+  position: relative;
+  margin-top: 10px;
+}
+.menu-switch__label {
+  position: relative;
+}
+.menu-switch__thumb::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 24px;
+  border-radius: 12px;
+  background-color: rgba(128, 128, 128, 0.6);
+}
+.menu-switch__thumb::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: inset 0px 0px 10px rgba(255, 255, 0, 0.8);
+  transform: translateX(0px);
+  transition: 250ms ease-in-out;
+}
+.menu-switch__icon {
+  fill: currentColor;
+  position: absolute;
+  display: block;
+  top: 3px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  color: rgb(80, 80, 0);
+  z-index: 5;
+  font-size: 24px;
+  transform: translateX(0px);
+  transition: 250ms ease-in-out;
+}
+.menu-switch__check:checked ~ .menu-switch__thumb::after {
+  transform: translateX(18px);
+  background-color: #000000;
+  box-shadow: inset 0px 0px 25px rgba(255, 0, 0, 0.2);
+}
+.menu-switch__check:checked ~ .menu-switch__thumb .menu-switch__icon {
+  color: rgba(255, 255, 255);
+
+  transform: translateX(18px);
+}
+
+.gallery-section.dark {
+  background-color: #0f0f0f;
+}
+.gallery-card__title.dark {
+  color: #e8e8e8;
+}
+.btn-to-top__link.dark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e8e8e8;
+}
+.footer.dark {
+  background-color: #232323;
+}
+.footer__container.dark {
+  color: #e8e8e8;
+}
+.footer__button.dark {
+  background-color: #232323;
+  color: #e8e8e8;
+}
+.pagination.dark {
+  background-color: #232323;
+}
+
+.pagination__item.dark {
+  background-color: #707070;
+}
+.pagination__item-additional.dark {
+  background-color: transparent;
+}
+
+.pagination__link.dark {
+  color: #e8e8e8;
+}
+.pagination__link:hover,
+.pagination__link:focus {
+  color: $accent-color;
+  fill: $accent-color;
+}
+
+.pagination__link-active {
+  background-color: $accent-color;
+  color: $lighter-text-color;
+
+  &:hover,
+  &:focus {
+    color: $lighter-text-color;
+  }
+}
+.dark {
+  fill: #ffffff;
+}

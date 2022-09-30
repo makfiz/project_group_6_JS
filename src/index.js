@@ -6,13 +6,16 @@ import './js/pagination';
 
 import './js/myLibrary';
 
-
-import './js/firebaseservice'
+import './js/firebaseservice';
 import './js/authorization.js';
 
 import './js/genres.js';
 
 import './js/btn-to-top';
 
+
+import './js/colorSwitcher';
+
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
+
 import './js/footerTeamModal.js'

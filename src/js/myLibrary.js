@@ -8,6 +8,7 @@ export const apiServise = new ApiServise();
 const firebase = new FirebaseService
 
 const refs = {
+
   libraryFilter: document.querySelector('.library-filter'),
   watchedBtn: document.querySelector('[data-watched]'),
   queueBtn: document.querySelector('[data-queue]'),
