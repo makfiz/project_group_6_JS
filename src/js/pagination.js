@@ -8,10 +8,11 @@ export function preventDefaultForLinks() {
 }
 
 export async function pagination(instance) {
-  console.log(document.querySelectorAll('.js-pages'));
-  const rootEl = document.querySelector('.pagination');
-  createAndRenderPagination(instance, rootEl);
-  rootEl.addEventListener('click', onPaginationBlockClick);
+  if (document.querySelectorAll('.js-pages').length === 0) {
+    const rootEl = document.querySelector('.pagination');
+    createAndRenderPagination(instance, rootEl);
+    rootEl.addEventListener('click', onPaginationBlockClick);
+  }
   preventDefaultForLinks();
 }
 
@@ -136,6 +137,6 @@ async function onPaginationBlockClick(e) {
         .classList.add('visually-hidden');
     }
     console.log(apiServise);
-    // await onTrendMovies();
+    await onTrendMovies();
   }
 }
