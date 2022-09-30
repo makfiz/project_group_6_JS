@@ -15,4 +15,5 @@ export const refs = {
   logo: document.querySelector('.logo__container'),
   gallery: document.querySelector('.gallery-section'),
   pagEl: document.querySelector('.pagination-wrap'),
+  filterContainer: document.querySelector('.filter-container'),
 };

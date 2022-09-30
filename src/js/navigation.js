@@ -1,14 +1,24 @@
 import { refs } from './refs';
 
-const { search, libraryBtn, homeBtn, gallery, libraryFilter, logo, pagEl } =
-  refs;
+const {
+  search,
+  libraryBtn,
+  homeBtn,
+  gallery,
+  libraryFilter,
+  logo,
+  pagEl,
+  filterContainer,
+} = refs;
 
 function openLibrary() {
   gallery.innerHTML = '';
   search.classList.add('visually-hidden');
   libraryFilter.classList.remove('visually-hidden');
   homeBtn.addEventListener('click', openHome);
+
   pagEl.classList.add('visually-hidden');
+  filterContainer.classList.add('visually-hidden');
 }
 
 function openHome() {
