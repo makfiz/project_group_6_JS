@@ -13,3 +13,6 @@ import './js/authorization.js';
 import './js/genres.js';
 
 import './js/btn-to-top';
+
+import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
+import './js/footerTeamModal.js'
