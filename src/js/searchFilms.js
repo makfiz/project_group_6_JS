@@ -26,5 +26,5 @@ async function onSearchMovie(e) {
   apiServise.resetPage();
   const data = await apiServise.fetchSearchMovie();
   makeGallary(data);
-  setSearchMode(refs.mode, apiServise);
+  setSearchMode(apiServise);
 }

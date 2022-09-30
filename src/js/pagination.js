@@ -1,5 +1,6 @@
 import { apiServise, onTrendMovies, onSearchMovie } from './searchFilms';
 import { refs } from './refs';
+import { makeGallary } from './templates/renderMovieGallary';
 
 // Заборона перезавантаження сторінки по кліку на посилання
 export function preventDefaultForLinks() {
@@ -61,7 +62,7 @@ async function onPaginationBlockClick(e) {
   if (itemValue !== 'previous' && itemValue !== 'next') {
     //Поставити сторінку в екземплярі класу
     apiServise.pages = Number(itemValue);
-    console.log('instance.page', apiServise.pages);
+    // console.log('instance.page', apiServise.pages);
 
     //Додавання активного фону для кнопок
     if (activeEl && apiServise.pages < 5) {
@@ -138,29 +139,30 @@ async function onPaginationBlockClick(e) {
         .classList.add('visually-hidden');
     }
 
-    console.log(refs.mode);
-    switch (refs.mode) {
+    // console.log('mode =>>', apiServise.mode);
+    switch (apiServise.mode) {
       case 'trending':
         await onTrendMovies();
         return;
       case 'search':
-        await onSearchMovie();
-        refs.mode = 'search';
+        const data = await apiServise.fetchSearchMovie();
+        refs.movieList.innerHTML = '';
+        makeGallary(data);
         return;
     }
   }
 }
 
-export function setSearchMode(mode, apiServise) {
+export function setSearchMode(apiServise) {
   mode = 'search';
   removePages();
+  apiServise.mode = 'search';
   pagination(apiServise);
   document
     .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
     .querySelector('.pagination__link')
     .classList.add('pagination__link-active');
   console.log('apiServise', apiServise);
-  console.log(mode);
 }
 
 function removePages() {
