@@ -3,6 +3,7 @@ import { refs } from './refs';
 import { refs as libRefs } from './myLibrary';
 import { makeGallary } from './templates/renderMovieGallary';
 
+
 // Заборона перезавантаження сторінки по кліку на посилання
 export function preventDefaultForLinks() {
   document
@@ -249,8 +250,3 @@ function buttonsPagination(activeEl) {
       .classList.remove('visually-hidden');
   }
 }
-
-//Приховування пагінації при переході на бібліотеку
-libRefs.library.addEventListener('click', e =>
-  document.querySelector('.pagination').classList.add('is-hidden')
-);
