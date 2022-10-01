@@ -1,5 +1,6 @@
-import { refs} from './refs';
-
+import { refs } from './refs';
+import { FirebaseService } from "./firebaseservice";
+const firebase = new FirebaseService();
 const details = {
     filmTitle: document.querySelector('.film_title'),
     largePoster: document.querySelector('source.large'),
@@ -14,6 +15,7 @@ const details = {
     description: document.querySelector('.description'),
     toHide: document.querySelector("[data-modal]"),
     toCloseModal: document.querySelector(".close-btn"),
+    titleId: document.querySelector(".title_item_id"),
   };
   details.toCloseModal.addEventListener('click', toggleModal);
 refs.movieList.addEventListener('click', clickOnFilm);
@@ -36,7 +38,8 @@ let movieID = e.path[3].getAttribute("data-id");
             for (const genre of info.genres) {
                 i.push(genre.name);
               }
-            console.log(info);
+          console.log(info);
+            details.titleId.innerHTML = movieID
             details.filmTitle.textContent = info.title;
             details.voteAverage.textContent = info.vote_average;
             details.voteCount.textContent = info.vote_count;

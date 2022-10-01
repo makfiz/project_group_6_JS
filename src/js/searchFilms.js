@@ -4,7 +4,7 @@ import { refs } from './refs';
 
 import { switchColorGalleryTitle } from './colorSwitcher';
 
-import { pagination, setSearchMode } from './pagination';
+import { pagination, setSearchMode, setGenresMode } from './pagination';
 import genres from './genresData.json';
 
 export const apiServise = new ApiServise();
@@ -26,6 +26,12 @@ async function onSearchMovie(e) {
   e.preventDefault();
 
   apiServise.query = e.currentTarget.elements.filmName.value.trim();
+
+  movieList.innerHTML = '';
+  apiServise
+    .fetchSearchMovie()
+    .then(data => makeGallary(data))
+    .then(() => switchColorGalleryTitle(refs));
 
   e.currentTarget.reset();
   apiServise.resetPage();
@@ -63,4 +69,6 @@ async function onCreateGalleryByGenre(e) {
 
   const res = await apiServise.fetchMovieByGenre();
   makeGallary(res);
+  apiServise.resetPage();
+  setGenresMode(apiServise);
 }
