@@ -1,5 +1,5 @@
 import { refs } from './refs';
-
+import { FirebaseService } from './firebaseservice';
 const {
   search,
   libraryBtn,
@@ -9,9 +9,28 @@ const {
   logo,
   pagEl,
   filterContainer,
+  galleryMain,
+  galleryLibrary,
 } = refs;
+// import { makeGallaryLibrary } from './templates/renderMoviesLibrary';
+// import { pagination } from './pagination';
+
+import { ApiServise } from './apiServise';
+export const apiServise = new ApiServise();
+
+const firebase = new FirebaseService();
+
+// function openLibrary() {
+//   // if
+
+//   search.classList.add('visually-hidden');
+//   libraryFilter.classList.remove('visually-hidden');
+// }
 
 function openLibrary() {
+  // if (gallery.childNodes[3].nodeName == 'UL') {
+  //   gallery.removeChild(galleryMain);
+  // }
   gallery.innerHTML = '';
   homeBtn.addEventListener('click', openHome);
   search.classList.add('visually-hidden');
@@ -20,6 +39,9 @@ function openLibrary() {
   libraryBtn.classList.add('nav-list__link--selected');
   pagEl.classList.add('visually-hidden');
   filterContainer.classList.add('visually-hidden');
+
+  // galleryLibrary.classList.remove('visually-hidden');
+  // galleryLibrary.classList.add('library');
 }
 
 function openHome() {

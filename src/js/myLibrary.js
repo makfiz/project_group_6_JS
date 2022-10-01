@@ -1,14 +1,13 @@
 import { refs } from './refs';
 const { watchedBtn, queueBtn, gallery } = refs;
 
-import { FirebaseService } from './firebaseservice';
-import { makeGallaryLibrary } from './templates/renderMoviesLibrary';
-import { pagination } from './pagination';
+// import { makeGallaryLibrary } from './templates/renderMoviesLibrary';
+// import { pagination } from './pagination';
 
-import { ApiServise } from './apiServise';
-export const apiServise = new ApiServise();
+// import { ApiServise } from './apiServise';
+// export const apiServise = new ApiServise();
 
-// const firebase = new FirebaseService
+// const firebase = new FirebaseService();
 
 // function openLibrary() {
 //   // if
@@ -17,9 +16,9 @@ export const apiServise = new ApiServise();
 //   }
 
 //   search.classList.add('visually-hidden');
-//   libraryFilter.classList.remove('visually-hidden')
+//   libraryFilter.classList.remove('visually-hidden');
 //   galleryLibrary.classList.remove('visually-hidden');
-//   galleryLibrary.classList.add('library')
+//   galleryLibrary.classList.add('library');
 // }
 
 function loadWatced() {
@@ -39,14 +38,12 @@ watchedBtn.addEventListener('click', loadWatced);
 queueBtn.addEventListener('click', loadQueue);
 
 // library.addEventListener('click', openLibrary);
-// watchedBtn.addEventListener('click', loadWatced);
-// queueBtn.addEventListener('click', loadQueue);
 
-export async function onTrendMovies() {
-  const res = await apiServise.fetchTrendingMovies();
+// export async function onTrendMovies() {
+//   const res = await apiServise.fetchTrendingMovies();
 
-  makeGallaryLibrary(res.results);
-  apiServise.totalPage = res.total_pages;
-  pagination(apiServise);
-}
-library.addEventListener('click', onTrendMovies);
+//   makeGallaryLibrary(res.results);
+//   apiServise.totalPage = res.total_pages;
+//   pagination(apiServise);
+// }
+// library.addEventListener('click', onTrendMovies);

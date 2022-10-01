@@ -4,7 +4,7 @@ import './js/searchFilms';
 import './js/templates/renderMovieGallary';
 
 import './js/pagination';
-
+import './js/navigation';
 import './js/myLibrary';
 import './js/templates/renderMoviesLibrary';
 
