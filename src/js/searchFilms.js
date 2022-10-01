@@ -20,6 +20,7 @@ export async function onTrendMovies() {
   makeGallary(res.results);
   apiServise.totalPage = res.total_pages;
   pagination(apiServise);
+  switchColorGalleryTitle(refs);
 }
 
 async function onSearchMovie(e) {
@@ -69,6 +70,7 @@ async function onCreateGalleryByGenre(e) {
 
   const res = await apiServise.fetchMovieByGenre();
   makeGallary(res);
+  switchColorGalleryTitle(refs);
   apiServise.resetPage();
   setGenresMode(apiServise);
 }

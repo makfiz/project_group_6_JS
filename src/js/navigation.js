@@ -1,5 +1,6 @@
 import { refs } from './refs';
 import { FirebaseService } from './firebaseservice';
+import { switchColorGalleryTitle } from './colorSwitcher';
 import { onTrendMovies } from './myLibrary';
 const {
   search,
@@ -12,7 +13,7 @@ const {
   filterContainer,
   galleryMain,
   galleryLibrary,
-  gallerySection__gallery
+  gallerySection__gallery,
 } = refs;
 // import { makeGallaryLibrary } from './templates/renderMoviesLibrary';
 // import { pagination } from './pagination';
@@ -41,9 +42,6 @@ function openLibrary() {
   libraryBtn.classList.add('nav-list__link--selected');
   pagEl.classList.add('visually-hidden');
   filterContainer.classList.add('visually-hidden');
-
-
-
 
   galleryLibrary.classList.remove('visually-hidden');
   galleryLibrary.classList.add('library');
