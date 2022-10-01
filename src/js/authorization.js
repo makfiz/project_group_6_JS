@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, signOut, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
 import { FirebaseService } from "./firebaseservice";
+import { refs } from './refs';
+import { clickOnFilm } from "./modal";
 const userDisplayName = document.querySelector(".display-name")
 const signIn = document.querySelector('[data-sign-in]')
 const logout = document.querySelector('[data-sign-out]')
@@ -92,9 +94,18 @@ onAuthStateChanged(auth, (user) => {
     galleryLibrary.classList.remove('visually-hidden')
     pagination.classList.remove('visually-hidden')
     firebase.user = emailCuter(user.email)
+    
     userDisplayName.innerHTML = emailCuter(user.email)
     signIn.parentNode.classList.toggle("is-hidden")
     logout.parentNode.classList.toggle("is-hidden")
+    refs.wached.addEventListener('click', (e) => {
+        const id = document.querySelector(".title_item_id").innerHTML
+        firebase.postMovieToLibraryWached(id, emailCuter(user.email))
+    });
+    refs.queue.addEventListener('click', (e) => {
+        const id = document.querySelector(".title_item_id").innerHTML
+        firebase.postMovieToLibraryQueue(id, emailCuter(user.email))
+    });
   }
 
 })
@@ -112,7 +123,10 @@ logout.addEventListener('click', () => {
 
 
 
-
+// async function checkUser(user) {
+//  firebase.user = await emailCuter(user.email)
+//  return const qwe = firebase.user
+//     }
 
  function emailCuter(email) {
     return email.split('@')[0]
