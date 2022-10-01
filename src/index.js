@@ -16,7 +16,7 @@ import './js/btn-to-top';
 
 
 import './js/colorSwitcher';
-
+import './js/modal';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 
 import './js/footerTeamModal.js'

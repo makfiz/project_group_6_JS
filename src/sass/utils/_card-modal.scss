@@ -5,8 +5,8 @@
 // $warning-text-color: #ff001b;
 // $modal-font-weight: 500;
 
-.modal {
-  display: none;
+.backdrop {
+  // display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -16,7 +16,7 @@
   background-color: rgba(0, 0, 0, 0.25);
 }
 
-.modal_wrapper {
+.modal {
   position: absolute;
   background-color: $primary-background-color;
   top: 50%;
@@ -28,7 +28,7 @@
 
   @media screen and (min-width: 1024px) {
     width: 882px;
-    min-height: 568px;
+    height: 568px;
     padding: 50px 30px 40px 30px;
   }
 
@@ -42,6 +42,7 @@
 
 .modal_content {
   word-wrap: break-word;
+  
 
   @media screen and (min-width: 768px) {
     display: flex;
@@ -80,11 +81,11 @@
     fill: $warning-text-color;
   }
 }
-
 .poster {
   max-width: 100%;
   margin-right: 30px;
 
+  
   @media screen and (max-width: 768px) {
     width: 240px;
     height: 356px;
