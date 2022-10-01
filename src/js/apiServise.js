@@ -91,10 +91,12 @@ export class ApiServise {
           api_key: API_KEY,
           language: this.language,
           with_genres: this.genreId,
+          page: this.page,
         },
       });
       Loading.remove();
 
+      this.total_pages = data.total_pages > 500 ? 500 : data.total_pages;
       return data.results;
     } catch (error) {
       console.log(error);
