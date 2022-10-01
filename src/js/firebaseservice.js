@@ -55,8 +55,8 @@ export class FirebaseService {
         svgColor: '#ff6b08',
       });
       const { data } = await axios({
-                          method: 'post',
-                          url: `${this.fbBaseUrl}users/${user}/library/wached.json`,
+                          method: 'patch',
+                          url: `${this.fbBaseUrl}users/${user}/library/wached/${id}.json`,
                           data: {
                             id: `${id}`,
                               }
@@ -76,8 +76,8 @@ export class FirebaseService {
         svgColor: '#ff6b08',
       });
       const { data } = await axios({
-                          method: 'post',
-                          url: `${this.fbBaseUrl}users/${user}/library/queue.json`,
+                          method: 'patch',
+                          url: `${this.fbBaseUrl}users/${user}/library/queue/${id}.json`,
                           data: {
                             id: `${id}`,
                               }
