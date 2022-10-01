@@ -250,3 +250,4 @@ function buttonsPagination(activeEl) {
       .classList.remove('visually-hidden');
   }
 }
+window.onload = () => refs.pagEl.classList.remove('visually-hidden');

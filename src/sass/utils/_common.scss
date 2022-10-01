@@ -36,7 +36,8 @@ p {
   margin-top: 0;
 }
 // Without dots
-ul {
+ul,
+nav {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -53,7 +54,7 @@ img {
 }
 .container {
   margin: 0 auto;
-
+  min-width: 320px;
   padding: 0 15px;
 
   @include mobile {

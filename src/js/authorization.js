@@ -30,7 +30,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
-const firebase = new FirebaseService
+const firebase = new FirebaseService;
 
 // function writeUserData(userId, name, email) {
 //   const db = getDatabase();
@@ -85,9 +85,7 @@ onAuthStateChanged(auth, (user) => {
       pagination.classList.add('visually-hidden')
       galleryLibrary.classList.add('visually-hidden');
   })
-    // if (user == null && document.querySelector(".gallery__list--library").classList.contains("library")) {
-   
-    // }
+  
   
   if (user !== null) {
     signInBaner.classList.add('visually-hidden')

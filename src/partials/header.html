@@ -1,6 +1,6 @@
 <header class="header">
-  <div class="container header__container header__container-non-active">
-    <nav class="nav">
+  <div class="container header-container">
+    <div class="header-panel">
       <div class="logo__container">
         <a href="./index.html" class="logo logo__link">
           <svg class="logo__img">
@@ -9,47 +9,48 @@
           <p class="site-name">Filmoteka</p>
         </a>
       </div>
-      <div class="menu__container">
-        <ul class="nav-list list">
-          <li class="nav-list__item-home nav-list__item-home-active">
+      <div class="header-control">
+        <nav class="nav-list">
+          <li class="nav-list__item-home">
             <a
-              href="./index.html"
-              class="nav-list__link-home nav-list__link-home-accent link"
+              href="#"
+              class="nav-list__link-home header-control__btn--focus link nav-list__link--selected"
+              data-home
               >HOME</a
             >
           </li>
           <li class="nav-list__item-library">
             <a
               href="#"
-              class="nav-list__link-library nav-list__link-library-accent link"
+              class="nav-list__link-library header-control__btn--focus link"
               data-library
               >MY LIBRARY</a
             >
           </li>
-          <li class="nav-list__item-sign-in">
+        </nav>
+        <div class="autorization">
+          <div class="autorization-sign-in">
             <button
               type="button"
-              class="sign-in__button nav-list__link-sign-in nav-list__link-sign-in-accent"
+              class="sign-in__button header-control__btn--focus"
               data-sign-in
             >
               <span>SIGN IN</span><span class="google__sign-in"></span>
             </button>
-            
-          </li>
-          <li class="nav-list__item-log-in is-hidden backdrop">
+          </div>
+          <div class="autorization__log-in is-hidden">
             <span class="display-name"></span>
             <button
               type="button"
-              onClick="window.location.reload();"
-              class="sign-in__button nav-list__link-sign-in nav-list__link-sign-in-accent"
+              class="sign-in__button header-control__btn--focus"
               data-sign-out
             >
               LOGOUT
             </button>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
-    </nav>
+    </div>
     <div class="search">
       <form class="search__form">
         <input
@@ -69,12 +70,11 @@
         </button>
       </form>
 
-      <p class="hero__search-error is-hidden">
+      <p class="hero__search-error visually-hidden">
         Search result not successful. Enter the correct movie name and try
         again!
       </p>
     </div>
-
     <div class="library-filter visually-hidden">
       <button type="button" class="library-filter__btn" data-watched>
         WATCHED
@@ -83,31 +83,29 @@
         QUEUE
       </button>
     </div>
-
     <div class="color-switcher">
-  <form class="menu-switch">
-    <label class="menu-switch__label"
-      ><input
-        type="checkbox"
-        name="menu-switch"
-        value="core"
-        class="menu-switch__check visually-hidden" /><span
-        class="menu-switch__thumb"
-        ><svg class="menu-switch__icon" width="15" height="15">
-          <use
-            href="./images/sprite.svg#icon-brightness"
-          ></use></svg></span
-    ></label>
-  </form>
-</div>
-  </div>
-  <!-- Filter -->
-  <div class="container">
-  <form class="filter-genre" id="filter-form">
-    <label class="filter-label">Choose genre:</label>
-    <select name="genres" id="genres">
-      <option value="genres">all genres</option>
-    </select>
-  
+      <form class="menu-switch">
+        <label class="menu-switch__label"
+          ><input
+            type="checkbox"
+            name="menu-switch"
+            value="core"
+            class="menu-switch__check visually-hidden" /><span
+            class="menu-switch__thumb"
+            ><svg class="menu-switch__icon" width="15" height="15">
+              <use href="./images/sprite.svg#icon-brightness"></use></svg></span
+        ></label>
+      </form>
+    </div>
 
+    <!-- Filter -->
+    <div class="filter-container">
+      <form class="filter-genre" id="filter-form">
+        <label class="filter-label">Choose genre:</label>
+        <select name="genres" id="genres">
+          <option value="genres">all genres</option>
+        </select>
+      </form>
+    </div>
+  </div>
 </header>
