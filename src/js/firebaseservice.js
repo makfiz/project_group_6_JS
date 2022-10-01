@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
+
 export class FirebaseService {
     constructor() {
       this.user = 'user'
@@ -17,7 +18,7 @@ export class FirebaseService {
 
   
   async userReg(user) {
-    const emailCut = user.email.split('@')[0]
+    const emailCut = user.email.split('@')[0].replace(/[^a-zа-яё\s]/gi, '');
    try {
       const { data } = await axios({
                           method: 'patch',

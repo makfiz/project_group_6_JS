@@ -149,6 +149,7 @@ function libraryBtnUserWatcher(user) {
 }
 
  export function emailCuter(email) {
-    return email.split('@')[0]
-  }
+    return email.split('@')[0].replace(/[^a-zа-яё\s]/gi, '');
+}
+
     
