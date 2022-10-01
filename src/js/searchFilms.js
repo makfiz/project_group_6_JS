@@ -9,7 +9,7 @@ import genres from './genresData.json';
 
 export const apiServise = new ApiServise();
 
-const { movieList, searchForm, genreSelector, textSearchError } = refs;
+const { movieList, searchForm, genreSelector, textSearchError, pagEl } = refs;
 
 addEventListener('DOMContentLoaded', onTrendMovies);
 searchForm.addEventListener('submit', onSearchMovie);
@@ -24,6 +24,7 @@ export async function onTrendMovies() {
 
 async function onSearchMovie(e) {
   e.preventDefault();
+
   apiServise.query = e.currentTarget.elements.filmName.value.trim();
 
   movieList.innerHTML = '';
@@ -33,16 +34,22 @@ async function onSearchMovie(e) {
     .then(() => switchColorGalleryTitle(refs));
 
   e.currentTarget.reset();
-  movieList.innerHTML = '';
   apiServise.resetPage();
+  movieList.innerHTML = '';
 
   const data = await apiServise.fetchSearchMovie();
 
-  data.length === 0
-    ? textSearchError.classList.remove('is-hidden')
-    : textSearchError.classList.add('is-hidden');
+  if (data.length === 0) {
+    textSearchError.classList.remove('is-hidden');
+    pagEl.classList.add('visually-hidden');
+    return;
+  } else {
+    textSearchError.classList.add('is-hidden');
+    pagEl.classList.remove('visually-hidden');
+  }
 
   makeGallary(data);
+  switchColorGalleryTitle(refs);
   setSearchMode(apiServise);
 
   genreSelector.children[1].value = 'genres';
