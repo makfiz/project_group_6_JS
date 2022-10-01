@@ -1,5 +1,6 @@
 import { refs } from './refs';
 import { FirebaseService } from './firebaseservice';
+import { onTrendMovies } from './myLibrary';
 const {
   search,
   libraryBtn,
@@ -11,6 +12,7 @@ const {
   filterContainer,
   galleryMain,
   galleryLibrary,
+  gallerySection__gallery
 } = refs;
 // import { makeGallaryLibrary } from './templates/renderMoviesLibrary';
 // import { pagination } from './pagination';
@@ -28,10 +30,10 @@ const firebase = new FirebaseService();
 // }
 
 function openLibrary() {
-  // if (gallery.childNodes[3].nodeName == 'UL') {
-  //   gallery.removeChild(galleryMain);
-  // }
-  gallery.innerHTML = '';
+  if (gallerySection__gallery.childNodes[3].nodeName == 'UL') {
+    gallerySection__gallery.removeChild(galleryMain);
+  }
+  // gallery.innerHTML = '';
   homeBtn.addEventListener('click', openHome);
   search.classList.add('visually-hidden');
   libraryFilter.classList.remove('visually-hidden');
@@ -40,8 +42,13 @@ function openLibrary() {
   pagEl.classList.add('visually-hidden');
   filterContainer.classList.add('visually-hidden');
 
-  // galleryLibrary.classList.remove('visually-hidden');
-  // galleryLibrary.classList.add('library');
+
+
+
+  galleryLibrary.classList.remove('visually-hidden');
+  galleryLibrary.classList.add('library');
+
+  onTrendMovies()
 }
 
 function openHome() {

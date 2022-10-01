@@ -21,4 +21,5 @@ export const refs = {
 
   genreSelector: document.querySelector('.filter-genre'),
   textSearchError: document.querySelector('.hero__search-error'),
+  gallerySection__gallery :document.querySelector('.gallery')
 };

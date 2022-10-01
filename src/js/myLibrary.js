@@ -1,19 +1,17 @@
 import { refs } from './refs';
-const { watchedBtn, queueBtn, gallery } = refs;
+const { watchedBtn, queueBtn, gallerySection__gallery, search,libraryFilter, galleryLibrary, libraryBtn, galleryMain } = refs;
 
-// import { makeGallaryLibrary } from './templates/renderMoviesLibrary';
-// import { pagination } from './pagination';
+import { makeGallaryLibrary } from './templates/renderMoviesLibrary';
+import { pagination } from './pagination';
+import { FirebaseService } from "./firebaseservice";
+import { ApiServise } from './apiServise';
+export const apiServise = new ApiServise();
 
-// import { ApiServise } from './apiServise';
-// export const apiServise = new ApiServise();
-
-// const firebase = new FirebaseService();
+const firebase = new FirebaseService();
 
 // function openLibrary() {
 //   // if
-//   if (gallery.childNodes[3].nodeName == 'UL') {
-//     gallery.removeChild(galleryMain);
-//   }
+ 
 
 //   search.classList.add('visually-hidden');
 //   libraryFilter.classList.remove('visually-hidden');
@@ -37,13 +35,16 @@ function loadQueue() {
 watchedBtn.addEventListener('click', loadWatced);
 queueBtn.addEventListener('click', loadQueue);
 
-// library.addEventListener('click', openLibrary);
+// libraryBtn.addEventListener('click', () => {
+//   openLibrary()
+//   onTrendMovies()
+// });
 
-// export async function onTrendMovies() {
-//   const res = await apiServise.fetchTrendingMovies();
+export async function onTrendMovies() {
+  const res = await apiServise.fetchTrendingMovies();
 
-//   makeGallaryLibrary(res.results);
-//   apiServise.totalPage = res.total_pages;
-//   pagination(apiServise);
-// }
-// library.addEventListener('click', onTrendMovies);
+  makeGallaryLibrary(res.results);
+  apiServise.totalPage = res.total_pages;
+  pagination(apiServise);
+}
+// libraryBtn.addEventListener('click', onTrendMovies);
