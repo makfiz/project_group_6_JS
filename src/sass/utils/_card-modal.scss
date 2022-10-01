@@ -42,7 +42,6 @@
 
 .modal_content {
   word-wrap: break-word;
-  
 
   @media screen and (min-width: 768px) {
     display: flex;
@@ -85,7 +84,6 @@
   max-width: 100%;
   margin-right: 30px;
 
-  
   @media screen and (max-width: 768px) {
     width: 240px;
     height: 356px;
@@ -132,16 +130,15 @@
   color: #8c8c8c;
 }
 
-.title_item{
-display: grid;
-grid-template-areas: "a a";
-grid-auto-columns: 100px auto;
-justify-content: start;
+.title_item {
+  display: grid;
+  grid-template-areas: 'a a';
+  grid-auto-columns: 100px auto;
+  justify-content: start;
 }
 
 .title_item:not(:last-child) {
   margin-bottom: 10px;
-
 }
 
 .contents_value {
@@ -172,6 +169,7 @@ justify-content: start;
   font-weight: $modal-font-weight;
   font-size: 12px;
   line-height: 1.33;
+  text-transform: uppercase;
   margin-top: 20px;
   border-radius: 5px;
   cursor: pointer;
@@ -179,7 +177,7 @@ justify-content: start;
   padding: 0;
   outline: 1px solid $primary-text-color;
   background-color: $primary-background-color;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color, color, scale 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   @media screen and (min-width: 768px) and (max-width: 1024px) {
     width: 116px;
@@ -195,6 +193,7 @@ justify-content: start;
   color: $primary-background-color;
   background-color: $warning-text-color;
   outline: none;
+  scale: 1.09;
 }
 
 .modal_card_btn:not(:last-child) {
@@ -206,6 +205,31 @@ justify-content: start;
 
   @media screen and (max-width: 767px) {
     margin-right: 11px;
+  }
+}
+
+.videoBtnClose {
+  width: 112px;
+  height: 44px;
+  font-weight: $modal-font-weight;
+  font-size: 12px;
+  line-height: 1.33;
+  margin-top: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  outline: 1px solid $primary-text-color;
+  background-color: $primary-background-color;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.open__video_bnt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: 1279px) {
+    padding-left: 8px;
   }
 }
 
@@ -227,3 +251,21 @@ ul {
   padding: 1px 7px;
 }
 
+.videoBtnClose {
+  text-transform: uppercase;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  &:hover,
+  &:focus {
+    color: $primary-background-color;
+    background-color: $warning-text-color;
+    outline: none;
+    scale: 1.09;
+  }
+}
+
+.watch-icon {
+  margin-right: 4px;
+}

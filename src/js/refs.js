@@ -23,5 +23,6 @@ export const refs = {
   textSearchError: document.querySelector('.hero__search-error'),
   gallerySection__gallery: document.querySelector('.gallery'),
   wached: document.querySelector('.modal_card_btn.wached'),
-  queue :document.querySelector('.modal_card_btn.queue'),
+  queue: document.querySelector('.modal_card_btn.queue'),
+  openVideoBtn: document.querySelector('.open__video_bnt'),
 };
