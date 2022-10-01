@@ -21,6 +21,8 @@ export async function pagination(instance) {
 
 export function createAndRenderPagination(instance) {
   const rootEl = document.querySelector('.pagination');
+  const wideScreen = window.innerWidth > 767;
+
   if (instance.totalPage === 0) {
     rootEl.classList.add('is-hidden');
     return;
@@ -30,11 +32,9 @@ export function createAndRenderPagination(instance) {
   const totalPages = instance.totalPage;
   const currentPage = instance.pages;
 
-  // console.log(totalPages);
-
   //Створення і рендер розмітки по умові
-  //Якщо прийшло 9 сторінок і менше
-  if (totalPages <= 9) {
+  //Якщо прийшло 9 сторінок і менше і екран більше 767px
+  if (totalPages <= 9 && wideScreen) {
     const amount = totalPages - 1;
     let markup = '';
     for (let i = 2; i <= amount; i += 1) {
@@ -55,8 +55,9 @@ export function createAndRenderPagination(instance) {
       .querySelector('.pagination__item[data-page="dots-second"]')
       .classList.add('visually-hidden');
   }
-  //Якщо прийшло більше ніж 9 сторінок
-  if (totalPages > 9) {
+
+  //Якщо прийшло більше ніж 9 сторінок і екран більше 767px
+  if (totalPages > 9 && wideScreen) {
     const amount = currentPage + 5;
     let markup = '';
     for (let i = 2; i <= amount; i += 1) {
@@ -78,6 +79,34 @@ export function createAndRenderPagination(instance) {
       .querySelector('.pagination__item[data-page="next"]')
       .insertAdjacentHTML('beforebegin', lastItem);
   }
+
+  //Якщо екран менше 767px
+  //=======================================================
+  if (!wideScreen) {
+    const amount = currentPage + 4;
+    let markup = '';
+
+    for (let i = 1; i <= amount; i += 1) {
+      markup += `<li class="pagination__item js-pages js-render" data-mobpage="${i}">
+      <a href="" class="pagination__link">${i}</a>
+    </li>`;
+    }
+
+    rootEl
+      .querySelector('.pagination__item[data-page="dots-first"]')
+      .insertAdjacentHTML('afterend', markup);
+
+    const activeLinks = document.querySelectorAll('.pagination__link-active');
+    if (activeLinks) {
+      activeLinks.forEach(link =>
+        link.classList.remove('pagination__link-active')
+      );
+    }
+    document
+      .querySelector(`.pagination__item[data-mobpage="1"]`)
+      .querySelector('.pagination__link')
+      .classList.add('pagination__link-active');
+  }
 }
 
 async function onPaginationBlockClick(e) {
@@ -88,7 +117,9 @@ async function onPaginationBlockClick(e) {
     return;
 
   const activeEl = document.querySelector('.pagination__link-active');
-  const itemValue = e.target.closest('.pagination__item').dataset.page;
+  const itemValue =
+    e.target.closest('.pagination__item').dataset.page ??
+    e.target.closest('.pagination__item').dataset.mobpage;
 
   //Кнопка попередня сторінка
   if (itemValue === 'previous') {
@@ -171,7 +202,9 @@ async function contentLoader() {
 
 //Додавання активного фону для кнопок
 function buttonsPagination(activeEl) {
-  if (activeEl && apiServise.totalPage <= 9) {
+  const wideScreen = window.innerWidth > 767;
+
+  if (activeEl && apiServise.totalPage <= 9 && wideScreen) {
     activeEl.classList.remove('pagination__link-active');
     document
       .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
@@ -179,7 +212,12 @@ function buttonsPagination(activeEl) {
       .classList.add('pagination__link-active');
   }
 
-  if (activeEl && apiServise.pages < 5 && apiServise.totalPage > 9) {
+  if (
+    activeEl &&
+    apiServise.pages < 5 &&
+    apiServise.totalPage > 9 &&
+    wideScreen
+  ) {
     activeEl.classList.remove('pagination__link-active');
 
     const pages = document.querySelectorAll('.js-pages');
@@ -207,7 +245,8 @@ function buttonsPagination(activeEl) {
     activeEl &&
     apiServise.pages >= 5 &&
     apiServise.pages <= apiServise.totalPage - 5 &&
-    apiServise.totalPage > 9
+    apiServise.totalPage > 9 &&
+    wideScreen
   ) {
     activeEl.classList.remove('pagination__link-active');
 
@@ -238,7 +277,8 @@ function buttonsPagination(activeEl) {
   if (
     activeEl &&
     apiServise.pages > apiServise.totalPage - 5 &&
-    apiServise.totalPage > 9
+    apiServise.totalPage > 9 &&
+    wideScreen
   ) {
     activeEl.classList.remove('pagination__link-active');
 
@@ -263,5 +303,104 @@ function buttonsPagination(activeEl) {
       .querySelector('.pagination__item[data-page="dots-first"]')
       .classList.remove('visually-hidden');
   }
+  //==============================================================
+  //==============================================================
+  //==============================================================
+
+  //Умови для маленької ширини екрана
+
+  if (activeEl && apiServise.totalPage <= 5 && !wideScreen) {
+    activeEl.classList.remove('pagination__link-active');
+    document
+      .querySelector(`.pagination__item[data-mobpage="${apiServise.pages}"]`)
+      .querySelector('.pagination__link')
+      .classList.add('pagination__link-active');
+    console.log('1 -- condition');
+  }
+
+  if (
+    activeEl &&
+    apiServise.pages < 3 &&
+    apiServise.totalPage > 5 &&
+    !wideScreen
+  ) {
+    activeEl.classList.remove('pagination__link-active');
+
+    const pages = document.querySelectorAll('.js-pages');
+    let counter = 1;
+    pages.forEach(page => {
+      page.dataset.page = counter;
+      page.querySelector('.pagination__link').textContent = counter;
+      counter += 1;
+    });
+
+    document
+      .querySelector(`.pagination__item[data-mobpage="${apiServise.pages}"]`)
+      .querySelector('.pagination__link')
+      .classList.add('pagination__link-active');
+
+    console.log('2 -- condition');
+  }
+
+  if (
+    activeEl &&
+    apiServise.pages >= 3 &&
+    apiServise.pages <= apiServise.totalPage - 3 &&
+    apiServise.totalPage > 5 &&
+    !wideScreen
+  ) {
+    activeEl.classList.remove('pagination__link-active');
+
+    const pages = document.querySelectorAll('.js-pages');
+    const currentPage = apiServise.pages;
+    let counter = currentPage - 2;
+
+    pages.forEach(page => {
+      page.dataset.page = counter;
+      page.querySelector('.pagination__link').textContent = counter;
+
+      if (counter === currentPage) {
+        page
+          .querySelector('.pagination__link')
+          .classList.add('pagination__link-active');
+      }
+      counter += 1;
+    });
+
+    console.log('3 -- condition');
+  }
+
+  if (
+    activeEl &&
+    apiServise.pages > apiServise.totalPage - 3 &&
+    apiServise.totalPage > 5 &&
+    !wideScreen
+  ) {
+    activeEl.classList.remove('pagination__link-active');
+
+    const pages = document.querySelectorAll('.js-pages');
+    let counter = apiServise.totalPage - 5;
+    pages.forEach(page => {
+      if (counter === apiServise.totalPage) return;
+      page.dataset.page = counter;
+      page.querySelector('.pagination__link').textContent = counter;
+      counter += 1;
+    });
+
+    document
+      .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
+      .querySelector('.pagination__link')
+      .classList.add('pagination__link-active');
+    console.log('4 -- condition');
+  }
 }
 window.onload = () => refs.pagEl.classList.remove('visually-hidden');
+
+function deleteActiveLinks() {
+  const activeLinks = document.querySelectorAll('.pagination__link-active');
+  if (activeLinks) {
+    activeLinks.forEach(link =>
+      link.classList.remove('pagination__link-active')
+    );
+  }
+}
