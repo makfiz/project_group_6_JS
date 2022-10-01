@@ -48,7 +48,7 @@ function openLibrary() {
   galleryLibrary.classList.remove('visually-hidden');
   galleryLibrary.classList.add('library');
 
-  onTrendMovies()
+  // onTrendMovies()
 }
 
 function openHome() {

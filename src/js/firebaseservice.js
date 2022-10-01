@@ -34,20 +34,38 @@ export class FirebaseService {
   }
 
 
-   async GetUserLibrary () {
+   async GetUserQueue (user) {
     try {
       Loading.circle({
         svgColor: '#ff6b08',
       });
-      const { data } = await axios(`${this.fbBaseUrl}users/${this.user}/library.json`);
+      const { data } = await axios(`${this.fbBaseUrl}users/${user}/library/queue.json`);
 
       Loading.remove();
+      console.log(data)
 
       return data;
     } catch (error) {
       console.log(error);
     }
   }
+
+     async GetUserWached (user) {
+    try {
+      Loading.circle({
+        svgColor: '#ff6b08',
+      });
+      const { data } = await axios(`${this.fbBaseUrl}users/${user}/library/wached.json`);
+
+      Loading.remove();
+      console.log(data)
+
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
    async postMovieToLibraryWached (id, user) {
     try {
