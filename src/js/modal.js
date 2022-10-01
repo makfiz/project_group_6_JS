@@ -24,10 +24,10 @@ function toggleModal() {
   }
 
 function clickOnFilm(e) {
-    
-    console.log(e.path[2].getAttribute("data-id"));
+    // console.log(e.path)
+    console.log(e.path[3].getAttribute("data-id"));
     toggleModal(e)
-let movieID = e.path[2].getAttribute("data-id");
+let movieID = e.path[3].getAttribute("data-id");
 
     fetch(`https://api.themoviedb.org/3/movie/${movieID}$?api_key=${API_KEY}&$&language=en-US`).then(response =>{
         return response.json();})
