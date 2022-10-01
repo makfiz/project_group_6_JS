@@ -64,5 +64,3 @@ async function onCreateGalleryByGenre(e) {
   const res = await apiServise.fetchMovieByGenre();
   makeGallary(res);
 }
-
-// pagination-wrap visually-hidden
