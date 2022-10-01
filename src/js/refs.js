@@ -16,4 +16,7 @@ export const refs = {
   gallery: document.querySelector('.gallery-section'),
   pagEl: document.querySelector('.pagination-wrap'),
   filterContainer: document.querySelector('.filter-container'),
+
+  genreSelector: document.querySelector('.filter-genre'),
+  textSearchError: document.querySelector('.hero__search-error'),
 };

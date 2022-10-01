@@ -72,6 +72,10 @@
     font-size: 30px;
   }
 }
+
+.hero__search-error {
+  color: $warning-text-color;
+}
 .is-hidden {
   visibility: hidden;
   pointer-events: none;
@@ -115,6 +119,7 @@
     margin-top: 10px;
   }
 }
+
 .google__sign-in {
   display: block;
   margin-left: 5px;
