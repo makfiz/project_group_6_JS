@@ -2,7 +2,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, signOut, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
 import { FirebaseService } from "./firebaseservice";
 import { refs } from './refs';
-import { clickOnFilm } from "./modal";
+import { loadQueue, loadWatced } from "./myLibrary";
+
 const userDisplayName = document.querySelector(".display-name")
 const signIn = document.querySelector('[data-sign-in]')
 const logout = document.querySelector('[data-sign-out]')
@@ -95,17 +96,19 @@ onAuthStateChanged(auth, (user) => {
     pagination.classList.remove('visually-hidden')
     firebase.user = emailCuter(user.email)
     
+    document.querySelector('.sign_notific').classList.add('visually-hidden')
+    refs.wached.classList.remove('visually-hidden')
+    refs.queue.classList.remove('visually-hidden')
+
     userDisplayName.innerHTML = emailCuter(user.email)
     signIn.parentNode.classList.toggle("is-hidden")
     logout.parentNode.classList.toggle("is-hidden")
-    refs.wached.addEventListener('click', (e) => {
-        const id = document.querySelector(".title_item_id").innerHTML
-        firebase.postMovieToLibraryWached(id, emailCuter(user.email))
-    });
-    refs.queue.addEventListener('click', (e) => {
-        const id = document.querySelector(".title_item_id").innerHTML
-        firebase.postMovieToLibraryQueue(id, emailCuter(user.email))
-    });
+    
+    modalBtnUserWatcher(user)
+    libraryBtnUserWatcher(user)
+
+
+
   }
 
 })
@@ -122,12 +125,31 @@ logout.addEventListener('click', () => {
 
 
 
+function modalBtnUserWatcher(user) {
+    refs.wached.addEventListener('click', (e) => {
+        if (user == null) return
+        const id = document.querySelector(".title_item_id").innerHTML
+        firebase.postMovieToLibraryWached(id, emailCuter(user.email))
+    });
+  
+    refs.queue.addEventListener('click', (e) => {
+        if (user == null) return
+        const id = document.querySelector(".title_item_id").innerHTML
+        firebase.postMovieToLibraryQueue(id, emailCuter(user.email))
+    });
+}
 
-// async function checkUser(user) {
-//  firebase.user = await emailCuter(user.email)
-//  return const qwe = firebase.user
-//     }
+function libraryBtnUserWatcher(user) {
+  refs.watchedBtn.addEventListener('click', (e) => { 
+    loadWatced(user)
+  });
+  refs.queueBtn.addEventListener('click', (e) => {
+    loadQueue(user)
+});
+}
 
- function emailCuter(email) {
-    return email.split('@')[0]
-    }
+ export function emailCuter(email) {
+    return email.split('@')[0].replace(/[^a-zа-яё\s]/gi, '');
+}
+
+    
