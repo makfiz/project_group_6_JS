@@ -25,7 +25,6 @@ export class FirebaseService {
                           data: {
                             nickname: `${user.displayName}`,
                             email: `${user.email}`,
-                            library: {}
                               }
                             });;
     } catch (error) {
