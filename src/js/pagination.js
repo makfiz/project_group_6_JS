@@ -212,6 +212,7 @@ async function contentLoader() {
   switch (apiServise.mode) {
     case 'trending':
       await onTrendMovies();
+      smoothScroll();
       return;
     case 'search':
       const data = await apiServise.fetchSearchMovie();
@@ -416,3 +417,30 @@ window.addEventListener('resize', function () {
     this.location.reload();
   }
 });
+
+function smoothScroll() {
+  const { height: cardHeight } = document
+    .querySelector('.gallery__list')
+    .firstElementChild.getBoundingClientRect();
+
+  const screenSize = window.innerWidth;
+
+  if (screenSize <= 767) {
+    window.scrollBy({
+      top: -cardHeight * 20,
+      behavior: 'smooth',
+    });
+  }
+  if (screenSize > 767 && screenSize < 1280) {
+    window.scrollBy({
+      top: -cardHeight * 10,
+      behavior: 'smooth',
+    });
+  }
+  if (screenSize >= 1280) {
+    window.scrollBy({
+      top: -cardHeight * 3,
+      behavior: 'smooth',
+    });
+  }
+}
