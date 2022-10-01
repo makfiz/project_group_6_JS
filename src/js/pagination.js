@@ -396,7 +396,6 @@ function buttonsPagination() {
       .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
       .querySelector('.pagination__link')
       .classList.add('pagination__link-active');
-    console.log('4 -- condition');
   }
 }
 window.onload = () => refs.pagEl.classList.remove('visually-hidden');
