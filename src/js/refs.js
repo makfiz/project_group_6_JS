@@ -21,5 +21,7 @@ export const refs = {
 
   genreSelector: document.querySelector('.filter-genre'),
   textSearchError: document.querySelector('.hero__search-error'),
-  gallerySection__gallery :document.querySelector('.gallery')
+  gallerySection__gallery: document.querySelector('.gallery'),
+  wached: document.querySelector('.modal_card_btn.wached'),
+  queue :document.querySelector('.modal_card_btn.queue'),
 };

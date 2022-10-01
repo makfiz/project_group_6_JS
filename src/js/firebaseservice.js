@@ -49,18 +49,37 @@ export class FirebaseService {
     }
   }
 
-   async postMovieToLibrary (id, original_title) {
+   async postMovieToLibraryWached (id, user) {
     try {
       Loading.circle({
         svgColor: '#ff6b08',
       });
       const { data } = await axios({
                           method: 'post',
-                          url: `${this.fbBaseUrl}users/${this.user}/library.json`,
+                          url: `${this.fbBaseUrl}users/${user}/library/wached.json`,
                           data: {
                             id: `${id}`,
-                            original_title: `${original_title}`,
-                            watched: false
+                              }
+                            });;
+                              
+      Loading.remove();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+ async postMovieToLibraryQueue (id, user) {
+    try {
+      Loading.circle({
+        svgColor: '#ff6b08',
+      });
+      const { data } = await axios({
+                          method: 'post',
+                          url: `${this.fbBaseUrl}users/${user}/library/queue.json`,
+                          data: {
+                            id: `${id}`,
                               }
                             });;
                               
