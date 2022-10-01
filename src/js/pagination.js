@@ -3,7 +3,6 @@ import { refs } from './refs';
 import { refs as libRefs } from './myLibrary';
 import { makeGallary } from './templates/renderMovieGallary';
 
-
 // Заборона перезавантаження сторінки по кліку на посилання
 export function preventDefaultForLinks() {
   document
@@ -134,6 +133,16 @@ export function setSearchMode(apiServise) {
   // console.log('apiServise', apiServise);
 }
 
+export function setGenresMode(apiServise) {
+  removePages();
+  apiServise.mode = 'genres';
+  pagination(apiServise);
+  document
+    .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
+    .querySelector('.pagination__link')
+    .classList.add('pagination__link-active');
+}
+
 function removePages() {
   document.querySelectorAll('.js-render').forEach(el => el.remove());
 }
@@ -151,6 +160,11 @@ async function contentLoader() {
       const data = await apiServise.fetchSearchMovie();
       refs.movieList.innerHTML = '';
       makeGallary(data);
+      return;
+    case 'genres':
+      const info = await apiServise.fetchMovieByGenre();
+      refs.movieList.innerHTML = '';
+      makeGallary(info);
       return;
   }
 }
