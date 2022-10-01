@@ -41,15 +41,21 @@ export function createAndRenderPagination(instance) {
       <a href="" class="pagination__link">${i}</a>
     </li>`;
     }
-    const lastItem = ` <li class="pagination__item pagination__item-additional js-render" data-page=${totalPages}>
+
+    if (totalPages !== 1) {
+      const lastItem = ` <li class="pagination__item pagination__item-additional js-render" data-page=${totalPages}>
       <a href="" class="pagination__link">${totalPages}</a>
     </li>`;
+
+      rootEl
+        .querySelector('.pagination__item[data-page="next"]')
+        .insertAdjacentHTML('beforebegin', lastItem);
+    }
+
     rootEl
       .querySelector('.pagination__item[data-page="dots-first"]')
       .insertAdjacentHTML('afterend', markup);
-    rootEl
-      .querySelector('.pagination__item[data-page="next"]')
-      .insertAdjacentHTML('beforebegin', lastItem);
+
     rootEl
       .querySelector('.pagination__item[data-page="dots-second"]')
       .classList.add('visually-hidden');
