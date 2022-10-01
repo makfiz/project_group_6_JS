@@ -88,9 +88,9 @@ export function createAndRenderPagination(instance) {
       .classList.remove('visually-hidden');
   }
 
-  //Якщо екран менше 767px
+  //Якщо прийшло більше ніж 5 сторінок і екран менше 767px
   //=======================================================
-  if (!wideScreen) {
+  if (totalPages >= 5 && !wideScreen) {
     const amount = currentPage + 4;
     let markup = '';
 
@@ -105,11 +105,30 @@ export function createAndRenderPagination(instance) {
       .insertAdjacentHTML('afterend', markup);
 
     const activeLinks = document.querySelectorAll('.pagination__link-active');
-    if (activeLinks) {
-      activeLinks.forEach(link =>
-        link.classList.remove('pagination__link-active')
-      );
+    deleteActiveLinks();
+    document
+      .querySelector(`.pagination__item[data-mobpage="1"]`)
+      .querySelector('.pagination__link')
+      .classList.add('pagination__link-active');
+  }
+
+  //Якщо прийшло менше ніж 5 сторінок і екран менше 767px
+
+  if (totalPages < 5 && !wideScreen) {
+    const amount = totalPages;
+    let markup = '';
+
+    for (let i = 1; i <= amount; i += 1) {
+      markup += `<li class="pagination__item js-pages js-render" data-mobpage="${i}">
+      <a href="" class="pagination__link">${i}</a>
+    </li>`;
     }
+
+    rootEl
+      .querySelector('.pagination__item[data-page="dots-first"]')
+      .insertAdjacentHTML('afterend', markup);
+
+    deleteActiveLinks();
     document
       .querySelector(`.pagination__item[data-mobpage="1"]`)
       .querySelector('.pagination__link')
