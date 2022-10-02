@@ -4,6 +4,7 @@ import { makeGallaryLibrary } from './templates/renderMoviesLibrary';
 import { changeHeaderBg } from './load-header-bg-img';
 import { emailCuter } from './authorization';
 import { onTrendMovies } from './myLibrary';
+
 const {
   search,
   libraryBtn,

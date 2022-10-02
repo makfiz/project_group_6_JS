@@ -10,6 +10,8 @@ import { FirebaseService } from './firebaseservice';
 import { refs } from './refs';
 import { loadQueue, loadWatced } from './myLibrary';
 import { openLibrary } from './navigation';
+import { compareID } from './modal';
+import { clickOnFilm } from './modal';
 
 const userDisplayName = document.querySelector('.display-name');
 const signIn = document.querySelector('[data-sign-in]');
@@ -114,6 +116,14 @@ onAuthStateChanged(auth, user => {
 
     modalBtnUserWatcher(user);
     libraryBtnUserWatcher(user);
+    refs.movieList.addEventListener('click', (e) => {
+      if (user == null) return;
+      const cardID = e.path[3].getAttribute('data-id')
+      console.log()
+      clickOnFilm(e)
+      compareID(cardID, user)
+    });
+    
   }
 });
 

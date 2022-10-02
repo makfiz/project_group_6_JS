@@ -3,7 +3,7 @@ import 'basiclightbox/dist/basicLightbox.min.css';
 import { ApiServise } from './apiServise';
 import { refs } from './refs';
 import { FirebaseService } from './firebaseservice';
-import { async } from '@firebase/util';
+import { emailCuter } from './authorization';
 
 const firebase = new FirebaseService();
 
@@ -29,7 +29,7 @@ const body = document.querySelector('body');
 
 
 details.toCloseModal.addEventListener('click', toggleModal);
-refs.movieList.addEventListener('click', clickOnFilm);
+// refs.movieList.addEventListener('click', clickOnFilm); 
 refs.galleryLibrary.addEventListener('click', clickOnFilm);
 const API_KEY = 'e4c439da3c1d90110fb4595b6236c9fe';
 closeModalBtn.addEventListener('click', noScrollBody)
@@ -41,11 +41,11 @@ function toggleModal() {
 
 const apiId = new ApiServise();
 let cardID
-function clickOnFilm(e) {
+export function clickOnFilm(e) {
   // console.log(e.path)
   cardID = e.path[3].getAttribute('data-id')
   noScrollBody();
-  console.log(e.path[3].getAttribute('data-id'));
+  // console.log(e.path[3].getAttribute('data-id'));
   toggleModal(e);
   let movieID = e.path[3].getAttribute('data-id');
 
@@ -142,8 +142,25 @@ function noScrollBody() {
   body.classList.toggle('no-scroll')
 }
 
-export function qwe(user) {
-  const data = firebase.getMovieToLibraryById(emailCuter(user.email))
-  console.log(data)
-  console.log(cardID)
+export async function compareID(movieId, user) {
+  const wachedData = await firebase.getMovieToWachedById(movieId, emailCuter(user.email))
+  const queueyData = await firebase.getMovieToQueueyById(movieId, emailCuter(user.email))
+
+  if (wachedData == null) {
+     console.log("В wached БД нет такого фильма:(")
+  }
+  if (wachedData !== null) {
+  console.log("Есть фильм в БД? ДА в wached его id:",wachedData.id)
+  console.log("cardID",movieId)
+  }
+
+
+    if (queueyData == null) {
+     console.log("В queuey БД нет такого фильма:(")
+    }
+  if (queueyData !== null) {
+  console.log("Есть фильм в БД? ДА в queuey его id:",queueyData.id)
+  console.log("cardID",movieId)
+  }
+
 }
