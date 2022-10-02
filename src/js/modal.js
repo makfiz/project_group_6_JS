@@ -47,12 +47,7 @@ function clickOnFilm(e) {
   console.log(e.path);
   const { addWatched, removeWatched, addQueue, removeQueue } = modalBtnRefs;
 
-  addModalBtn(
-    addWatched.action,
-    addWatched.text,
-    addQueue.action,
-    addQueue.text
-  );
+  addModalBtn();
 
   // console.log(e.path)
   cardID = e.path[3].getAttribute('data-id');
