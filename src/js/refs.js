@@ -1,7 +1,7 @@
 export const refs = {
   searchForm: document.querySelector('.search__form'),
   movieList: document.querySelector('.gallery__list'),
- 
+  modalBtns: document.querySelector('.btn_wraper'),
 
   switchColorCheckbox: document.querySelector('.menu-switch__check'),
 
@@ -27,5 +27,4 @@ export const refs = {
   queue: document.querySelector('.modal_card_btn.queue'),
   pagination: document.querySelector('.pagination'),
   openVideoBtn: document.querySelector('.open__video_bnt'),
-
 };

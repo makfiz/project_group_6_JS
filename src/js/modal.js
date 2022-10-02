@@ -3,9 +3,9 @@ import 'basiclightbox/dist/basicLightbox.min.css';
 import { ApiServise } from './apiServise';
 import { refs } from './refs';
 import { FirebaseService } from './firebaseservice';
-
+import { addModalBtn } from './modal-btn';
 const firebase = new FirebaseService();
-
+import { modalBtnRefs } from './modal-btn';
 const details = {
   filmTitle: document.querySelector('.film_title'),
   largePoster: document.querySelector('source.large'),
@@ -22,26 +22,34 @@ const details = {
   toCloseModal: document.querySelector('.close-btn'),
   titleInfo: document.querySelector('.title_item_info'),
   modalWindow: document.querySelector('.backdrop'),
+  modalBtns: document.querySelector('.btn_wraper'),
 };
 const closeModalBtn = document.querySelector('.close-btn');
 const body = document.querySelector('body');
-
 
 details.toCloseModal.addEventListener('click', toggleModal);
 refs.movieList.addEventListener('click', clickOnFilm);
 refs.galleryLibrary.addEventListener('click', clickOnFilm);
 const API_KEY = 'e4c439da3c1d90110fb4595b6236c9fe';
-closeModalBtn.addEventListener('click', noScrollBody)
+closeModalBtn.addEventListener('click', noScrollBody);
 
 function toggleModal() {
   details.toHide.classList.toggle('is-hidden');
-  
 }
 
 const apiId = new ApiServise();
 
 function clickOnFilm(e) {
   // console.log(e.path)
+  // const { addWatched, removeWatched, addQueue, removeQueue } = modalBtnRefs;
+  // addModalBtn(
+  //   addWatched.action,
+  //   addWatched.text,
+  //   addQueue.action,
+  //   addQueue.text
+  // );
+  // addModalBtn();
+
   noScrollBody();
   console.log(e.path[3].getAttribute('data-id'));
   toggleModal(e);
@@ -59,13 +67,31 @@ function clickOnFilm(e) {
         i.push(genre.name);
       }
       apiId.movieId = movieID;
-      const ganreString =i.join()
-      const {title, vote_average, vote_count, popularity, original_title, overview, poster_path} = info
-      const toLibrary = {movieID, title, vote_average, vote_count, popularity, original_title, overview, poster_path, ganreString}
-      
+      const ganreString = i.join();
+      const {
+        title,
+        vote_average,
+        vote_count,
+        popularity,
+        original_title,
+        overview,
+        poster_path,
+      } = info;
+      const toLibrary = {
+        movieID,
+        title,
+        vote_average,
+        vote_count,
+        popularity,
+        original_title,
+        overview,
+        poster_path,
+        ganreString,
+      };
+
       // console.log(apiId.movieId);
       // console.log(info);
-      details.titleInfo.innerHTML = JSON.stringify(toLibrary)
+      details.titleInfo.innerHTML = JSON.stringify(toLibrary);
       details.filmTitle.textContent = title;
       details.voteAverage.textContent = vote_average;
       details.voteCount.textContent = vote_count;
@@ -130,12 +156,13 @@ async function createVideo() {
 
 document.addEventListener('keydown', e => {
   if (
-    // e.key === 'Escape' && 
-    !details.modalWindow.classList.contains("is-hidden")) {
-    details.modalWindow.classList.add("is-hidden");
+    // e.key === 'Escape' &&
+    !details.modalWindow.classList.contains('is-hidden')
+  ) {
+    details.modalWindow.classList.add('is-hidden');
   }
-})
+});
 
 function noScrollBody() {
-  body.classList.toggle('no-scroll')
+  body.classList.toggle('no-scroll');
 }

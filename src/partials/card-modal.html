@@ -1,23 +1,21 @@
 <div class="backdrop is-hidden" data-modal>
-
-    <div class="modal">
-           <button type="button" class="close-btn">
-              <svg class="close-btn__icon">
-                  <use href="/src/images/sprite.svg#icon-close"></use>
-              </svg>
-           </button>
-        <div class="modal_content">
-             <div class="poster">
-                <picture>
-
-                    <img class="fff" src="#" alt="moviesPoster"/>
+  <div class="modal">
+    <button type="button" class="close-btn">
+      <svg class="close-btn__icon">
+        <use href="/src/images/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="modal_content">
+      <div class="poster">
+        <picture>
+          <img class="fff" src="#" alt="moviesPoster" />
         </picture>
       </div>
       <div class="content">
         <h2 class="film_title"></h2>
         <div class="title-position">
           <ul class="title_list_position">
-            <li class="title_item_info is-hidden" style="width: 250px;"></li>
+            <li class="title_item_info is-hidden" style="width: 250px"></li>
             <li class="title_item">
               <span class="title_list_value a">Vote / Votes</span
               ><span class="contents_value"
@@ -64,10 +62,12 @@
         <h3 class="description_title">About</h3>
         <p class="description"></p>
         <div class="btn_wraper">
-          <button class="modal_card_btn is-active wached">
+          <!-- <button class="modal_card_btn is-active wached" data-watched="add">
             ADD TO WATCHED
           </button>
-          <button class="modal_card_btn queue">ADD TO QUEUE</button>
+          <button class="modal_card_btn queue" data-qeue="remove">
+            ADD TO QUEUE
+          </button> -->
         </div>
         <button class="open__video_bnt modal_card_btn" type="button">
           <svg class="watch-icon" width="28" , height="28">
