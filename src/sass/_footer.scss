@@ -76,21 +76,21 @@
 .team-list {
   display: flex;
   flex-wrap: wrap;
-
+  padding: 5px;
   margin: 185px -15px 15px -15px;
-  width: 200px;
+  max-width: 200px;
 
   background-color: $white;
   border-radius: 15px;
 
   @media screen and (min-width: $tablet) {
     margin: -15px;
-    width: 600px;
+    max-width: 600px;
   }
 
   @media screen and (min-width: $desktop) {
     margin: -30px;
-    width: 600px;
+    max-width: 600px;
   }
 }
 
