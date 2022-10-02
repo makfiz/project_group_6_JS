@@ -4,178 +4,138 @@ import { apiServise } from './searchFilms';
 export function buttonsPagination() {
   const wideScreen = window.innerWidth > 767;
 
-  if (apiServise.totalPage <= 9 && wideScreen) {
-    deleteActiveLinks();
-    // addActiveLinkToWideScreen();
-    document
-      .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
-      .querySelector('.pagination__link')
-      .classList.add('pagination__link-active');
-  }
+  //Умови для екранів 767px і більше
+  if (wideScreen) {
+    if (apiServise.totalPage <= 9) {
+      deleteActiveLinks();
+      addActiveLinkToWideScreen();
+    }
 
-  if (apiServise.pages < 5 && apiServise.totalPage > 9 && wideScreen) {
-    deleteActiveLinks();
+    if (apiServise.pages < 5 && apiServise.totalPage > 9) {
+      deleteActiveLinks();
 
-    const pages = document.querySelectorAll('.js-pages');
-    let counter = 2;
-    pages.forEach(page => {
-      page.dataset.page = counter;
-      page.querySelector('.pagination__link').textContent = counter;
-      counter += 1;
-    });
+      const pages = document.querySelectorAll('.js-pages');
+      let counter = 2;
+      pages.forEach(page => {
+        page.dataset.page = counter;
+        page.querySelector('.pagination__link').textContent = counter;
+        counter += 1;
+      });
+      addActiveLinkToWideScreen();
+      hideFirstDotsInPagination();
+      showSecondDotsInPagination();
+    }
 
-    document
-      .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
-      .querySelector('.pagination__link')
-      .classList.add('pagination__link-active');
-    // addActiveLinkToWideScreen();
+    if (
+      apiServise.pages >= 5 &&
+      apiServise.pages <= apiServise.totalPage - 5 &&
+      apiServise.totalPage > 9
+    ) {
+      deleteActiveLinks();
 
-    document
-      .querySelector('.pagination__item[data-page="dots-first"]')
-      .classList.add('visually-hidden');
-    document
-      .querySelector('.pagination__item[data-page="dots-second"]')
-      .classList.remove('visually-hidden');
-  }
+      const pages = document.querySelectorAll('.js-pages');
+      const currentPage = apiServise.pages;
+      let counter = currentPage - 2;
 
-  if (
-    apiServise.pages >= 5 &&
-    apiServise.pages <= apiServise.totalPage - 5 &&
-    apiServise.totalPage > 9 &&
-    wideScreen
-  ) {
-    deleteActiveLinks();
+      pages.forEach(page => {
+        page.dataset.page = counter;
+        page.querySelector('.pagination__link').textContent = counter;
 
-    const pages = document.querySelectorAll('.js-pages');
-    const currentPage = apiServise.pages;
-    let counter = currentPage - 2;
+        if (counter === currentPage) {
+          page
+            .querySelector('.pagination__link')
+            .classList.add('pagination__link-active');
+        }
+        counter += 1;
+      });
+      showFirstDotsInPagination();
+      showSecondDotsInPagination();
+    }
 
-    pages.forEach(page => {
-      page.dataset.page = counter;
-      page.querySelector('.pagination__link').textContent = counter;
+    if (
+      apiServise.pages > apiServise.totalPage - 5 &&
+      apiServise.totalPage > 9
+    ) {
+      deleteActiveLinks();
 
-      if (counter === currentPage) {
-        page
-          .querySelector('.pagination__link')
-          .classList.add('pagination__link-active');
-      }
-      counter += 1;
-    });
+      const pages = document.querySelectorAll('.js-pages');
+      let counter = apiServise.totalPage - 5;
+      pages.forEach(page => {
+        if (counter === apiServise.totalPage) return;
+        page.dataset.page = counter;
+        page.querySelector('.pagination__link').textContent = counter;
+        counter += 1;
+      });
 
-    document
-      .querySelector('.pagination__item[data-page="dots-first"]')
-      .classList.remove('visually-hidden');
-    document
-      .querySelector('.pagination__item[data-page="dots-second"]')
-      .classList.remove('visually-hidden');
-  }
-
-  if (
-    apiServise.pages > apiServise.totalPage - 5 &&
-    apiServise.totalPage > 9 &&
-    wideScreen
-  ) {
-    deleteActiveLinks();
-
-    const pages = document.querySelectorAll('.js-pages');
-    let counter = apiServise.totalPage - 5;
-    pages.forEach(page => {
-      if (counter === apiServise.totalPage) return;
-      page.dataset.page = counter;
-      page.querySelector('.pagination__link').textContent = counter;
-      counter += 1;
-    });
-
-    document
-      .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
-      .querySelector('.pagination__link')
-      .classList.add('pagination__link-active');
-    // addActiveLinkToWideScreen();
-
-    document
-      .querySelector('.pagination__item[data-page="dots-second"]')
-      .classList.add('visually-hidden');
-    document
-      .querySelector('.pagination__item[data-page="dots-first"]')
-      .classList.remove('visually-hidden');
+      addActiveLinkToWideScreen();
+      hideSecondDotsInPagination();
+      showFirstDotsInPagination();
+    }
   }
 
   //Умови для маленької ширини екрана
-  if (apiServise.totalPage <= 5 && !wideScreen) {
-    deleteActiveLinks();
-    // addActiveLinkToNarrowScreen();
-    document
-      .querySelector(`.pagination__item[data-mobpage="${apiServise.pages}"]`)
-      .querySelector('.pagination__link')
-      .classList.add('pagination__link-active');
-  }
+  else {
+    if (apiServise.totalPage <= 5) {
+      deleteActiveLinks();
+      addActiveLinkToNarrowScreen();
+    }
 
-  if (apiServise.pages < 3 && apiServise.totalPage > 5 && !wideScreen) {
-    deleteActiveLinks();
+    if (apiServise.pages < 3 && apiServise.totalPage > 5) {
+      deleteActiveLinks();
 
-    const pages = document.querySelectorAll('.js-pages');
-    let counter = 1;
-    pages.forEach(page => {
-      page.dataset.page = counter;
-      page.querySelector('.pagination__link').textContent = counter;
-      counter += 1;
-    });
+      const pages = document.querySelectorAll('.js-pages');
+      let counter = 1;
+      pages.forEach(page => {
+        page.dataset.mobpage = counter;
+        page.querySelector('.pagination__link').textContent = counter;
+        counter += 1;
+      });
 
-    document
-      .querySelector(`.pagination__item[data-mobpage="${apiServise.pages}"]`)
-      .querySelector('.pagination__link')
-      .classList.add('pagination__link-active');
-    // addActiveLinkToNarrowScreen();
-  }
+      addActiveLinkToNarrowScreen();
+    }
 
-  if (
-    apiServise.pages >= 3 &&
-    apiServise.pages <= apiServise.totalPage - 3 &&
-    apiServise.totalPage > 5 &&
-    !wideScreen
-  ) {
-    deleteActiveLinks();
+    if (
+      apiServise.pages >= 3 &&
+      apiServise.pages <= apiServise.totalPage - 3 &&
+      apiServise.totalPage > 5
+    ) {
+      deleteActiveLinks();
 
-    const pages = document.querySelectorAll('.js-pages');
-    const currentPage = apiServise.pages;
-    let counter = currentPage - 2;
+      const pages = document.querySelectorAll('.js-pages');
+      const currentPage = apiServise.pages;
+      let counter = currentPage - 2;
 
-    pages.forEach(page => {
-      page.dataset.page = counter;
-      page.querySelector('.pagination__link').textContent = counter;
+      pages.forEach(page => {
+        page.dataset.mobpage = counter;
+        page.querySelector('.pagination__link').textContent = counter;
 
-      if (counter === currentPage) {
-        page
-          .querySelector('.pagination__link')
-          .classList.add('pagination__link-active');
-      }
-      counter += 1;
-    });
-  }
+        if (counter === currentPage) {
+          page
+            .querySelector('.pagination__link')
+            .classList.add('pagination__link-active');
+        }
+        counter += 1;
+      });
+    }
 
-  if (
-    apiServise.pages > apiServise.totalPage - 3 &&
-    apiServise.totalPage > 5 &&
-    !wideScreen
-  ) {
-    deleteActiveLinks();
+    if (
+      apiServise.pages > apiServise.totalPage - 3 &&
+      apiServise.totalPage > 5
+    ) {
+      deleteActiveLinks();
 
-    const pages = document.querySelectorAll('.js-pages');
-    let counter = apiServise.totalPage - 4;
-    pages.forEach(page => {
-      page.dataset.page = counter;
-      page.querySelector('.pagination__link').textContent = counter;
-      if (counter === apiServise.totalPage) {
-        return;
-      }
-      counter += 1;
-    });
-
-    document
-      .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
-      .querySelector('.pagination__link')
-      .classList.add('pagination__link-active');
-    // addActiveLinkToNarrowScreen();
+      const pages = document.querySelectorAll('.js-pages');
+      let counter = apiServise.totalPage - 4;
+      pages.forEach(page => {
+        page.dataset.mobpage = counter;
+        page.querySelector('.pagination__link').textContent = counter;
+        if (counter === apiServise.totalPage) {
+          return;
+        }
+        counter += 1;
+      });
+      addActiveLinkToNarrowScreen();
+    }
   }
 }
 
@@ -224,7 +184,28 @@ export function deleteActiveLinks() {
   }
 }
 
-//Додати активне посилання (кнопку)
+export function showFirstDotsInPagination() {
+  document
+    .querySelector('.pagination__item[data-page="dots-first"]')
+    .classList.remove('visually-hidden');
+}
+export function hideFirstDotsInPagination() {
+  document
+    .querySelector('.pagination__item[data-page="dots-first"]')
+    .classList.add('visually-hidden');
+}
+export function showSecondDotsInPagination() {
+  document
+    .querySelector('.pagination__item[data-page="dots-second"]')
+    .classList.remove('visually-hidden');
+}
+export function hideSecondDotsInPagination() {
+  document
+    .querySelector('.pagination__item[data-page="dots-second"]')
+    .classList.add('visually-hidden');
+}
+
+//Додати активне посилання (кнопку) для широкого екрана
 function addActiveLinkToWideScreen() {
   document
     .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
@@ -232,7 +213,8 @@ function addActiveLinkToWideScreen() {
     .classList.add('pagination__link-active');
 }
 
-function addActiveLinkToNarrowScreen() {
+//Додати активне посилання (кнопку) для вузького екрана
+export function addActiveLinkToNarrowScreen() {
   document
     .querySelector(`.pagination__item[data-mobpage="${apiServise.pages}"]`)
     .querySelector('.pagination__link')
