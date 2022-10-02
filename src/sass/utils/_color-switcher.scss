@@ -1,11 +1,9 @@
 .color-switcher {
   position: absolute;
-
   bottom: 24px;
   right: 60px;
   @include tablet {
     right: 75px;
-
   }
 }
 
@@ -68,6 +66,10 @@
   align-items: center;
   justify-content: center;
   color: #e8e8e8;
+  &:hover,
+  &:focus {
+    color: $accent-color;
+  }
 }
 .footer.dark {
   background-color: #232323;
