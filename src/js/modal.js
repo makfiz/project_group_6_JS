@@ -21,20 +21,27 @@ const details = {
   toHide: document.querySelector('[data-modal]'),
   toCloseModal: document.querySelector('.close-btn'),
   titleId: document.querySelector('.title_item_id'),
+  modalWindow: document.querySelector('.backdrop'),
 };
+const closeModalBtn = document.querySelector('.close-btn');
+const body = document.querySelector('body');
+
+
 details.toCloseModal.addEventListener('click', toggleModal);
 refs.movieList.addEventListener('click', clickOnFilm);
 const API_KEY = 'e4c439da3c1d90110fb4595b6236c9fe';
+closeModalBtn.addEventListener('click', noScrollBody)
 
 function toggleModal() {
   details.toHide.classList.toggle('is-hidden');
+  
 }
 
 const apiId = new ApiServise();
 
 function clickOnFilm(e) {
   // console.log(e.path)
-
+  noScrollBody();
   console.log(e.path[3].getAttribute('data-id'));
   toggleModal(e);
   let movieID = e.path[3].getAttribute('data-id');
@@ -52,8 +59,8 @@ function clickOnFilm(e) {
       }
 
       apiId.movieId = movieID;
-      console.log(apiId.movieId);
-      console.log(info);
+      // console.log(apiId.movieId);
+      // console.log(info);
       details.titleId.innerHTML = movieID;
       details.filmTitle.textContent = info.title;
       details.voteAverage.textContent = info.vote_average;
@@ -115,4 +122,16 @@ async function createVideo() {
       window.addEventListener('keydown', closeTrailer);
     }
   }
+}
+
+document.addEventListener('keydown', e => {
+  if (
+    // e.key === 'Escape' && 
+    !details.modalWindow.classList.contains("is-hidden")) {
+    details.modalWindow.classList.add("is-hidden");
+  }
+})
+
+function noScrollBody() {
+  body.classList.toggle('no-scroll')
 }
