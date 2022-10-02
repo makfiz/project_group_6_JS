@@ -130,6 +130,10 @@
   color: #8c8c8c;
 }
 
+  .no-scroll {
+    overflow: hidden;
+  }
+  
 .title_item {
   display: grid;
   grid-template-areas: 'a a';
