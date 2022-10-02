@@ -44,10 +44,8 @@ function toggleModal() {
 const apiId = new ApiServise();
 let cardID;
 export function clickOnFilm(e) {
- // console.log(e.path);
+  // console.log(e.path);
   const { addWatched, removeWatched, addQueue, removeQueue } = modalBtnRefs;
-
-  addModalBtn();
 
   // console.log(e.path)
   cardID = e.path[3].getAttribute('data-id');
@@ -170,24 +168,35 @@ function noScrollBody() {
 }
 
 export async function compareID(movieId, user) {
-  const wachedData = await firebase.getMovieToWachedById(movieId, emailCuter(user.email))
-  const queueyData = await firebase.getMovieToQueueyById(movieId, emailCuter(user.email))
+  const wachedData = await firebase.getMovieToWachedById(
+    movieId,
+    emailCuter(user.email)
+  );
+  const queueyData = await firebase.getMovieToQueueyById(
+    movieId,
+    emailCuter(user.email)
+  );
+  const { addWatched, removeWatched, addQueue, removeQueue } = modalBtnRefs;
 
   if (wachedData == null) {
-     console.log("В wached БД нет такого фильма:(")
+    console.log('В wached БД нет такого фильма:(');
+    refs.wached.textContent = addWatched.text;
+    refs.wached.dataset.action = addWatched.act;
   }
   if (wachedData !== null) {
-  console.log("Есть фильм в БД? ДА в wached его id:",wachedData.id)
-  console.log("cardID",movieId)
+    refs.wached.textContent = removeQueue.text;
+    refs.wached.dataset.action = removeQueue.act;
   }
 
-
-    if (queueyData == null) {
-     console.log("В queuey БД нет такого фильма:(")
-    }
+  if (queueyData == null) {
+    console.log('В queuey БД нет такого фильма:(');
+    refs.queue.textContent = addQueue.text;
+    refs.queue.dataset.action = addQueue.act;
+  }
   if (queueyData !== null) {
-  console.log("Есть фильм в БД? ДА в queuey его id:",queueyData.id)
-  console.log("cardID",movieId)
+    console.log('Есть фильм в БД? ДА в queuey его id:', queueyData.id);
+    console.log('cardID', movieId);
+    refs.queue.textContent = removeQueue.text;
+    refs.queue.dataset.action = removeQueue.act;
   }
-
 }
