@@ -62,7 +62,7 @@ function clickOnFilm(e) {
       details.originalTitle.textContent = info.original_title;
       details.genres.textContent = i;
       details.description.textContent = info.overview;
-      details.poster.src = `https://image.tmdb.org/t/p/w400${info.poster_path}`;
+      details.poster.src = `https://image.tmdb.org/t/p/w300${info.poster_path}`;
       // details.largePoster.srcset = `https://image.tmdb.org/t/p/w1024${info.poster_path}`;
       // details.mediumPoster.srcset = `https://image.tmdb.org/t/p/w500${info.poster_path}`;
       // details.smallPoster.srcset = `https://image.tmdb.org/t/p/w320${info.poster_path}`;

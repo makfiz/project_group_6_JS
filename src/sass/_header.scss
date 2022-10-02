@@ -38,6 +38,10 @@
 
 .hero__search-error {
   color: $warning-text-color;
+  text-align: start;
+  @media screen and (min-width: 768px) {
+    text-align: center;
+  }
 }
 .is-hidden {
   visibility: hidden;
@@ -137,6 +141,7 @@
   max-width: 340px;
   height: 20px;
   margin: 0 auto;
+  margin-bottom: 20px;
   border-bottom: 0.2px solid #f7f7f7bd;
 }
 .search__form:hover,
@@ -164,6 +169,11 @@
   border: none;
   width: 20px;
   outline: none;
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: block;
+  }
 }
 
 ::-webkit-input-placeholder {
