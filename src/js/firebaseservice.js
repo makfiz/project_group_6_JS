@@ -155,12 +155,32 @@ export class FirebaseService {
       }
     }
 
- async getMovieToLibraryById (user) {
+  async getMovieToWachedById(movieId, user) {
+
     try {
       Loading.circle({
         svgColor: '#ff6b08',
       });
-      const { data } = await axios(`${this.fbBaseUrl}users/${user}/library/wached/${info.movieID}.json`);
+      const { data } = await axios(`${this.fbBaseUrl}users/${user}/library/wached/${movieId}.json`);
+
+      Loading.remove();
+      // console.log(data)
+
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+
+  async getMovieToQueueyById(movieId, user) {
+
+    try {
+      Loading.circle({
+        svgColor: '#ff6b08',
+      });
+      const { data } = await axios(`${this.fbBaseUrl}users/${user}/library/queue/${movieId}.json`);
 
       Loading.remove();
       // console.log(data)
@@ -171,3 +191,4 @@ export class FirebaseService {
     }
   }
 }
+
