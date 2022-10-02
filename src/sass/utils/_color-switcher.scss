@@ -6,7 +6,12 @@
     right: 75px;
   }
 }
-
+.color-switcher.is-library-open {
+  bottom: 90px;
+  @include tablet {
+    bottom: 24px;
+  }
+}
 .menu-switch__thumb::before {
   content: '';
   position: absolute;
