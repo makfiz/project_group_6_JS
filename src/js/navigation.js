@@ -50,10 +50,10 @@ export async function openLibrary(user) {
   refs.switchColorCheckbox.parentNode.parentNode.parentNode.classList.add(
     'is-library-open'
   );
-
+  if (user !== null) {
     const data = await firebase.GetUserQueue(emailCuter(user.email))
     makeGallaryLibrary(data)
-  
+      }
 }
 
 function openHome() {

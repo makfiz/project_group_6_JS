@@ -114,8 +114,7 @@ onAuthStateChanged(auth, user => {
     signIn.parentNode.classList.toggle('is-hidden');
     logout.parentNode.classList.toggle('is-hidden');
 
-    modalBtnUserWatcher(user);
-    libraryBtnUserWatcher(user);
+  
     
         refs.movieList.addEventListener('click', (e) => {
       if (user == null) return;
@@ -125,6 +124,8 @@ onAuthStateChanged(auth, user => {
       compareID(cardID, user)
     });
   }
+    modalBtnUserWatcher(user);
+    libraryBtnUserWatcher(user);
 });
 
 signIn.addEventListener('click', () => {
