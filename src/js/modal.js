@@ -43,7 +43,7 @@ function toggleModal() {
 
 const apiId = new ApiServise();
 let cardID;
-function clickOnFilm(e) {
+export function clickOnFilm(e) {
  // console.log(e.path);
   const { addWatched, removeWatched, addQueue, removeQueue } = modalBtnRefs;
 
