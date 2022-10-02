@@ -3,7 +3,7 @@ import 'basiclightbox/dist/basicLightbox.min.css';
 import { ApiServise } from './apiServise';
 import { refs } from './refs';
 import { FirebaseService } from './firebaseservice';
-
+import { emailCuter } from './authorization';
 import { addModalBtn } from './modal-btn';
 
 import { async } from '@firebase/util';
