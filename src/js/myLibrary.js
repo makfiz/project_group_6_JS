@@ -33,6 +33,7 @@ export  async function loadQueue(user) {
     galleryLibrary.innerHTML = '';
     const data = await firebase.GetUserQueue(emailCuter(user.email))
     makeGallaryLibrary(data)
+   
     //TODO: додати рендер карток при натискані на кнопку
   }
 //  -------------------------------> addEventListener loadWatced AND loadQueue Merget to authorization
