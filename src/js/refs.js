@@ -25,4 +25,6 @@ export const refs = {
   wached: document.querySelector('.modal_card_btn.wached'),
   queue: document.querySelector('.modal_card_btn.queue'),
   pagination: document.querySelector('.pagination'),
+  openVideoBtn: document.querySelector('.open__video_bnt'),
+
 };
