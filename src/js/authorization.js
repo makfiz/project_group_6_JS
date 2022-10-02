@@ -96,7 +96,7 @@ onAuthStateChanged(auth, (user) => {
     pagination.classList.remove('visually-hidden')
     firebase.user = emailCuter(user.email)
     
-    document.querySelector('.sign_notific').classList.add('visually-hidden')
+    // document.querySelector('.sign_notific').classList.add('visually-hidden')
     refs.wached.classList.remove('visually-hidden')
     refs.queue.classList.remove('visually-hidden')
 
