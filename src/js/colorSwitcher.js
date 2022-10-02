@@ -14,7 +14,7 @@ function onColorSwitcherEl(e) {
   }
 
   const switchRefs = getRefs();
-  switchColorMaker(switchRefs);
+  switchThemeMaker(switchRefs);
 }
 
 function getRefs() {
@@ -28,7 +28,29 @@ function getRefs() {
   };
 }
 
-function switchColorMaker(switchRefs) {
+function switchThemeMaker(switchRefs) {
+  switchRefs.galleryContainer.classList.toggle('dark');
+  switchRefs.btnToTop.classList.toggle('dark');
+  switchRefs.footerContainer.classList.toggle('dark');
+  switchRefs.footerContainer.firstElementChild.classList.toggle('dark');
+  switchRefs.footerBtn.classList.toggle('dark');
+  switchRefs.paginationEl.classList.toggle('dark');
+  for (const el of switchRefs.paginationEl.children) {
+    el.firstElementChild.classList.toggle('dark');
+
+    if (el.dataset.page === 'next') {
+      el.classList.toggle('dark');
+    }
+    if (el.dataset.page === 'previous') {
+      el.classList.toggle('dark');
+    }
+  }
+  switchRefs.galleryTitle.forEach(el => {
+    return el.classList.toggle('dark');
+  });
+}
+
+function switchThemeRenderMaker(switchRefs) {
   switchRefs.galleryContainer.classList.toggle('dark');
   switchRefs.btnToTop.classList.toggle('dark');
   switchRefs.footerContainer.classList.toggle('dark');
@@ -69,14 +91,14 @@ export function switchColorGalleryTitle(refs) {
     }
   }
 }
-// export function switchColorPagination(refs) {}
-function onStartCheckDarkModeStatus() {
+
+function onStartCheckDarkThemeStatus() {
   if (load('dark') === 'on') {
     refs.switchColorCheckbox.checked = true;
     refs.switchColorCheckbox.ariaChecked = 'true';
     const switchRefs = getRefs();
-    switchColorMaker(switchRefs);
+    switchThemeRenderMaker(switchRefs);
   }
 }
 
-onStartCheckDarkModeStatus();
+onStartCheckDarkThemeStatus();
