@@ -2,44 +2,44 @@ import axios from 'axios';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
 export class FirebaseService {
-    constructor() {
-      this.user = 'user'
-      this.fbBaseUrl = 'https://filmoteka-29879-default-rtdb.europe-west1.firebasedatabase.app/'
-    }
+  constructor() {
+    this.user = 'user';
+    this.fbBaseUrl =
+      'https://filmoteka-29879-default-rtdb.europe-west1.firebasedatabase.app/';
+  }
 
-    get username() {
+  get username() {
     return this.user;
   }
 
-    set username(newUser) {
-      this.user = newUser;
+  set username(newUser) {
+    this.user = newUser;
   }
 
-
-  
   async userReg(user) {
     const emailCut = user.email.split('@')[0].replace(/[^a-zа-яё\s]/gi, '');
-   try {
+    try {
       const { data } = await axios({
-                          method: 'patch',
-                          url: `${this.fbBaseUrl}users/${emailCut}.json`,
-                          data: {
-                            nickname: `${user.displayName}`,
-                            email: `${user.email}`,
-                              }
-                            });;
+        method: 'patch',
+        url: `${this.fbBaseUrl}users/${emailCut}.json`,
+        data: {
+          nickname: `${user.displayName}`,
+          email: `${user.email}`,
+        },
+      });
     } catch (error) {
       console.log(error);
     }
   }
 
-
-   async GetUserQueue (user) {
+  async GetUserQueue(user) {
     try {
       Loading.circle({
         svgColor: '#ff6b08',
       });
-      const { data } = await axios(`${this.fbBaseUrl}users/${user}/library/queue.json`);
+      const { data } = await axios(
+        `${this.fbBaseUrl}users/${user}/library/queue.json`
+      );
 
       Loading.remove();
       // console.log(data)
@@ -50,12 +50,14 @@ export class FirebaseService {
     }
   }
 
-     async GetUserWached (user) {
+  async GetUserWached(user) {
     try {
       Loading.circle({
         svgColor: '#ff6b08',
       });
-      const { data } = await axios(`${this.fbBaseUrl}users/${user}/library/wached.json`);
+      const { data } = await axios(
+        `${this.fbBaseUrl}users/${user}/library/wached.json`
+      );
 
       Loading.remove();
       // console.log(data)
@@ -66,29 +68,27 @@ export class FirebaseService {
     }
   }
 
-
-   async postMovieToLibraryWached (info, user) {
+  async postMovieToLibraryWached(info, user) {
     try {
       Loading.circle({
         svgColor: '#ff6b08',
       });
       const { data } = await axios({
-                          method: 'patch',
-                          url: `${this.fbBaseUrl}users/${user}/library/wached/${info.movieID}.json`,
-                          data: {
-                            id: `${info.movieID}`,
-                            title: `${info.title}`,
-                            vote_average: `${info.vote_average}`,
-                            vote_count: `${info.vote_count}`,
-                            original_title: `${info.original_title}`,
-                            popularity: `${info.popularity}`,
-                            overview: `${info.overview}`,
-                            ganre: `${info.ganreString}`,
-                            poster_path: `${info.poster_path}`,
-                            
-                              }
-                            });;
-                              
+        method: 'patch',
+        url: `${this.fbBaseUrl}users/${user}/library/wached/${info.movieID}.json`,
+        data: {
+          id: `${info.movieID}`,
+          title: `${info.title}`,
+          vote_average: `${info.vote_average}`,
+          vote_count: `${info.vote_count}`,
+          original_title: `${info.original_title}`,
+          popularity: `${info.popularity}`,
+          overview: `${info.overview}`,
+          ganre: `${info.ganreString}`,
+          poster_path: `${info.poster_path}`,
+        },
+      });
+
       Loading.remove();
       return data;
     } catch (error) {
@@ -96,29 +96,27 @@ export class FirebaseService {
     }
   }
 
-
- async postMovieToLibraryQueue (info, user) {
+  async postMovieToLibraryQueue(info, user) {
     try {
       Loading.circle({
         svgColor: '#ff6b08',
       });
       const { data } = await axios({
-                          method: 'patch',
-                          url: `${this.fbBaseUrl}users/${user}/library/queue/${info.movieID}.json`,
-                          data: {
-                            id: `${info.movieID}`,
-                            title: `${info.title}`,
-                            vote_average: `${info.vote_average}`,
-                            vote_count: `${info.vote_count}`,
-                            original_title: `${info.original_title}`,
-                            popularity: `${info.popularity}`,
-                            overview: `${info.overview}`,
-                            ganre: `${info.ganreString}`,
-                            poster_path: `${info.poster_path}`,
-                            
-                              }
-                            });;
-                              
+        method: 'patch',
+        url: `${this.fbBaseUrl}users/${user}/library/queue/${info.movieID}.json`,
+        data: {
+          id: `${info.movieID}`,
+          title: `${info.title}`,
+          vote_average: `${info.vote_average}`,
+          vote_count: `${info.vote_count}`,
+          original_title: `${info.original_title}`,
+          popularity: `${info.popularity}`,
+          overview: `${info.overview}`,
+          ganre: `${info.ganreString}`,
+          poster_path: `${info.poster_path}`,
+        },
+      });
+
       Loading.remove();
       return data;
     } catch (error) {
@@ -126,42 +124,69 @@ export class FirebaseService {
     }
   }
 
-  async removeMovieToLibrary (info, user) {
-      try {
-        Loading.circle({
-          svgColor: '#ff6b08',
-        });
-        const { data } = await axios({
-                            method: 'delete',
-                            url: `${this.fbBaseUrl}users/${user}/library/wached/${info.movieID}.json`,
-                            data: {
-                              id: `${info.movieID}`,
-                              title: `${info.title}`,
-                              vote_average: `${info.vote_average}`,
-                              vote_count: `${info.vote_count}`,
-                              original_title: `${info.original_title}`,
-                              popularity: `${info.popularity}`,
-                              overview: `${info.overview}`,
-                              ganre: `${info.ganreString}`,
-                              poster_path: `${info.poster_path}`,
-                              
-                                }
-                              });;
-                                
-        Loading.remove();
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
+  async removeMovieFromLibraryWached(info, user) {
+    try {
+      Loading.circle({
+        svgColor: '#ff6b08',
+      });
+      const { data } = await axios({
+        method: 'delete',
+        url: `${this.fbBaseUrl}users/${user}/library/wached/${info.movieID}.json`,
+        data: {
+          id: `${info.movieID}`,
+          title: `${info.title}`,
+          vote_average: `${info.vote_average}`,
+          vote_count: `${info.vote_count}`,
+          original_title: `${info.original_title}`,
+          popularity: `${info.popularity}`,
+          overview: `${info.overview}`,
+          ganre: `${info.ganreString}`,
+          poster_path: `${info.poster_path}`,
+        },
+      });
+
+      Loading.remove();
+      return data;
+    } catch (error) {
+      console.log(error);
     }
+  }
+  async removeMovieFromLibraryQueue(info, user) {
+    try {
+      Loading.circle({
+        svgColor: '#ff6b08',
+      });
+      const { data } = await axios({
+        method: 'delete',
+        url: `${this.fbBaseUrl}users/${user}/library/queue/${info.movieID}.json`,
+        data: {
+          id: `${info.movieID}`,
+          title: `${info.title}`,
+          vote_average: `${info.vote_average}`,
+          vote_count: `${info.vote_count}`,
+          original_title: `${info.original_title}`,
+          popularity: `${info.popularity}`,
+          overview: `${info.overview}`,
+          ganre: `${info.ganreString}`,
+          poster_path: `${info.poster_path}`,
+        },
+      });
+
+      Loading.remove();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async getMovieToWachedById(movieId, user) {
-
     try {
       Loading.circle({
         svgColor: '#ff6b08',
       });
-      const { data } = await axios(`${this.fbBaseUrl}users/${user}/library/wached/${movieId}.json`);
+      const { data } = await axios(
+        `${this.fbBaseUrl}users/${user}/library/wached/${movieId}.json`
+      );
 
       Loading.remove();
       // console.log(data)
@@ -172,15 +197,14 @@ export class FirebaseService {
     }
   }
 
-
-
   async getMovieToQueueyById(movieId, user) {
-
     try {
       Loading.circle({
         svgColor: '#ff6b08',
       });
-      const { data } = await axios(`${this.fbBaseUrl}users/${user}/library/queue/${movieId}.json`);
+      const { data } = await axios(
+        `${this.fbBaseUrl}users/${user}/library/queue/${movieId}.json`
+      );
 
       Loading.remove();
       // console.log(data)
@@ -191,4 +215,3 @@ export class FirebaseService {
     }
   }
 }
-
