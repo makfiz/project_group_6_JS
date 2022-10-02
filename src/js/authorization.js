@@ -9,6 +9,7 @@ import {
 import { FirebaseService } from './firebaseservice';
 import { refs } from './refs';
 import { loadQueue, loadWatced } from './myLibrary';
+import { openLibrary } from './navigation';
 
 const userDisplayName = document.querySelector('.display-name');
 const signIn = document.querySelector('[data-sign-in]');
@@ -146,6 +147,10 @@ function libraryBtnUserWatcher(user) {
   });
   refs.queueBtn.addEventListener('click', e => {
     loadQueue(user);
+  });
+
+  refs.libraryBtn.addEventListener('click', () => {
+    openLibrary(user)
   });
 }
 
