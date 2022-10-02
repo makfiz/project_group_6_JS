@@ -206,7 +206,7 @@ export function hideSecondDotsInPagination() {
 }
 
 //Додати активне посилання (кнопку) для широкого екрана
-function addActiveLinkToWideScreen() {
+export function addActiveLinkToWideScreen() {
   document
     .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
     .querySelector('.pagination__link')

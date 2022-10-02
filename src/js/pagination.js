@@ -58,10 +58,10 @@ export function setSearchMode(apiServise) {
   removePages();
   apiServise.mode = 'search';
   pagination(apiServise);
-  document
-    .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
-    .querySelector('.pagination__link')
-    .classList.add('pagination__link-active');
+  // document
+  //   .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
+  //   .querySelector('.pagination__link')
+  //   .classList.add('pagination__link-active');
 }
 
 //Перемикання сторінок за жанрами
@@ -69,10 +69,10 @@ export function setGenresMode(apiServise) {
   removePages();
   apiServise.mode = 'genres';
   pagination(apiServise);
-  document
-    .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
-    .querySelector('.pagination__link')
-    .classList.add('pagination__link-active');
+  // document
+  //   .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
+  //   .querySelector('.pagination__link')
+  //   .classList.add('pagination__link-active');
 }
 
 // Завантаження контенту по умові

@@ -5,6 +5,7 @@ import {
   showSecondDotsInPagination,
   hideSecondDotsInPagination,
   addActiveLinkToNarrowScreen,
+  addActiveLinkToWideScreen,
 } from '../paginationAPI';
 
 export function createAndRenderPagination(instance) {
@@ -45,6 +46,7 @@ export function createAndRenderPagination(instance) {
       insertContentAfterFirstDotsInPagination(rootEl, markup);
       hideFirstDotsInPagination();
       hideSecondDotsInPagination();
+      addActiveLinkToWideScreen();
     }
 
     //Якщо прийшло більше ніж 9 сторінок і екран більше 767px
@@ -65,6 +67,7 @@ export function createAndRenderPagination(instance) {
 
       hideFirstDotsInPagination();
       showSecondDotsInPagination();
+      addActiveLinkToWideScreen();
     }
   }
 
