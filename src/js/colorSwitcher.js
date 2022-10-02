@@ -101,4 +101,15 @@ function onStartCheckDarkThemeStatus() {
   }
 }
 
+export function switchGalleryTitleLibraryDarkTheme(refs) {
+  const galleryTitle = document.querySelectorAll('.gallery-card__title');
+  if (refs.switchColorCheckbox.checked) {
+    galleryTitle.forEach(el => {
+      if (!el.classList.contains('dark')) {
+        return el.classList.toggle('dark');
+      }
+    });
+  }
+}
+
 onStartCheckDarkThemeStatus();
