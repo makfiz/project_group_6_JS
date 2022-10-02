@@ -1,8 +1,12 @@
 import { apiServise, onTrendMovies, onSearchMovie } from './searchFilms';
 import { refs } from './refs';
 import { makeGallary } from './templates/renderMovieGallary';
+
+import { switchColorGalleryTitle } from './colorSwitcher';
+
 import * as pagRender from './templates/renderPaginationPages';
 import * as pagAPI from './paginationAPI';
+
 
 const { createAndRenderPagination, removePages } = pagRender;
 const { smoothScroll, preventDefaultForLinks, buttonsPagination } = pagAPI;
@@ -80,19 +84,31 @@ async function contentLoader() {
   switch (apiServise.mode) {
     case 'trending':
       await onTrendMovies();
+
+      switchColorGalleryTitle(refs);
+
       smoothScroll();
+
       return;
     case 'search':
       const data = await apiServise.fetchSearchMovie();
       refs.movieList.innerHTML = '';
       makeGallary(data);
+
+      switchColorGalleryTitle(refs);
+
       smoothScroll();
+
       return;
     case 'genres':
       const info = await apiServise.fetchMovieByGenre();
       refs.movieList.innerHTML = '';
       makeGallary(info);
+
+      switchColorGalleryTitle(refs);
+
       smoothScroll();
+
       return;
   }
 }

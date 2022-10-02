@@ -1,12 +1,16 @@
 import { refs } from './refs';
+import { load, save, remove } from './localStorage';
 refs.switchColorCheckbox.addEventListener('change', onColorSwitcherEl);
 
 function onColorSwitcherEl(e) {
   e.preventDefault();
-  if (e.target.checked) {
+
+  if (refs.switchColorCheckbox.checked) {
     refs.switchColorCheckbox.ariaChecked = 'true';
+    save('dark', 'on');
   } else {
     refs.switchColorCheckbox.ariaChecked = 'false';
+    remove('dark');
   }
 
   const switchRefs = getRefs();
@@ -32,7 +36,9 @@ function switchColorMaker(switchRefs) {
   switchRefs.footerBtn.classList.toggle('dark');
   switchRefs.paginationEl.classList.toggle('dark');
   for (const el of switchRefs.paginationEl.children) {
-    el.firstElementChild.classList.toggle('dark');
+    if (!el.firstElementChild.classList.contains('dark')) {
+      el.firstElementChild.classList.toggle('dark');
+    }
     if (el.dataset.page === 'next') {
       el.classList.toggle('dark');
     }
@@ -41,16 +47,36 @@ function switchColorMaker(switchRefs) {
     }
   }
   switchRefs.galleryTitle.forEach(el => {
-    return el.classList.toggle('dark');
+    if (!el.classList.contains('dark')) {
+      return el.classList.toggle('dark');
+    }
   });
 }
 
 export function switchColorGalleryTitle(refs) {
   const galleryTitle = document.querySelectorAll('.gallery-card__title');
-  if (refs.switchColorCheckbox.ariaChecked === 'true') {
+  const paginationEl = document.querySelector('.pagination');
+  if (refs.switchColorCheckbox.checked) {
     galleryTitle.forEach(el => {
-      return el.classList.toggle('dark');
+      if (!el.classList.contains('dark')) {
+        return el.classList.toggle('dark');
+      }
     });
+    for (const el of paginationEl.children) {
+      if (!el.firstElementChild.classList.contains('dark')) {
+        el.firstElementChild.classList.toggle('dark');
+      }
+    }
   }
 }
-export function switchColorPagination(refs) {}
+// export function switchColorPagination(refs) {}
+function onStartCheckDarkModeStatus() {
+  if (load('dark') === 'on') {
+    refs.switchColorCheckbox.checked = true;
+    refs.switchColorCheckbox.ariaChecked = 'true';
+    const switchRefs = getRefs();
+    switchColorMaker(switchRefs);
+  }
+}
+
+onStartCheckDarkModeStatus();

@@ -1,20 +1,14 @@
 .color-switcher {
   position: absolute;
-  bottom: 23px;
-  right: 55px;
+
+  bottom: 24px;
+  right: 60px;
   @include tablet {
-    bottom: 25px;
-    right: 73px;
+    right: 75px;
+
   }
 }
 
-.menu-switch {
-  position: relative;
-  margin-top: 10px;
-}
-.menu-switch__label {
-  position: relative;
-}
 .menu-switch__thumb::before {
   content: '';
   position: absolute;

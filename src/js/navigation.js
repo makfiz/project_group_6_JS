@@ -1,6 +1,10 @@
 import { refs } from './refs';
 import { FirebaseService } from './firebaseservice';
+
+import { switchColorGalleryTitle } from './colorSwitcher';
+
 import { changeHeaderBg } from './load-header-bg-img';
+
 import { onTrendMovies } from './myLibrary';
 const {
   search,
