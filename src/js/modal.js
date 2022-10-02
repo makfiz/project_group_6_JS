@@ -3,6 +3,7 @@ import 'basiclightbox/dist/basicLightbox.min.css';
 import { ApiServise } from './apiServise';
 import { refs } from './refs';
 import { FirebaseService } from './firebaseservice';
+import { async } from '@firebase/util';
 
 const firebase = new FirebaseService();
 
@@ -39,9 +40,10 @@ function toggleModal() {
 }
 
 const apiId = new ApiServise();
-
+let cardID
 function clickOnFilm(e) {
   // console.log(e.path)
+  cardID = e.path[3].getAttribute('data-id')
   noScrollBody();
   console.log(e.path[3].getAttribute('data-id'));
   toggleModal(e);
@@ -138,4 +140,10 @@ document.addEventListener('keydown', e => {
 
 function noScrollBody() {
   body.classList.toggle('no-scroll')
+}
+
+export function qwe(user) {
+  const data = firebase.getMovieToLibraryById(emailCuter(user.email))
+  console.log(data)
+  console.log(cardID)
 }
