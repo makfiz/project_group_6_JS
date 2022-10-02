@@ -1,8 +1,8 @@
 import { refs } from './refs';
 import { FirebaseService } from './firebaseservice';
-
+import { makeGallaryLibrary } from './templates/renderMoviesLibrary';
 import { changeHeaderBg } from './load-header-bg-img';
-
+import { emailCuter } from './authorization';
 import { onTrendMovies } from './myLibrary';
 const {
   search,
@@ -31,7 +31,7 @@ changeHeaderBg(null, 'home-bg-img');
 //   libraryFilter.classList.remove('visually-hidden');
 // }
 
-function openLibrary() {
+export async function openLibrary(user) {
   changeHeaderBg('home-bg-img', 'library-bg-img');
   if (gallerySection__gallery.childNodes[3].nodeName == 'UL') {
     gallerySection__gallery.removeChild(galleryMain);
@@ -50,7 +50,10 @@ function openLibrary() {
   refs.switchColorCheckbox.parentNode.parentNode.parentNode.classList.add(
     'is-library-open'
   );
-  // onTrendMovies()
+
+    const data = await firebase.GetUserQueue(emailCuter(user.email))
+    makeGallaryLibrary(data)
+  
 }
 
 function openHome() {
@@ -62,6 +65,6 @@ function openHome() {
   // libraryFilter.classList.add('visually-hidden');
   //TODO: замінити релоад сторінки на перерендер карток
 }
-libraryBtn.addEventListener('click', openLibrary);
+
 logo.addEventListener('click', openHome);
 homeBtn.removeEventListener;
