@@ -194,8 +194,8 @@ export async function compareID(movieId, user) {
     refs.wached.dataset.action = addWatched.act;
   }
   if (wachedData !== null) {
-    refs.wached.textContent = removeQueue.text;
-    refs.wached.dataset.action = removeQueue.act;
+    refs.wached.textContent = removeWatched.text;
+    refs.wached.dataset.action = removeWatched.act;
   }
 
   if (queueyData == null) {
