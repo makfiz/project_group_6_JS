@@ -14,7 +14,7 @@ export function makeGallaryLibrary(movies) {
   }
 
   let temp = [];
-  for (key in movies) {
+  for (let key in movies) {
     // console.log(movies[key])
     const { id, poster_path, title, release_date, ganre, vote_average } = movies[key]
     
