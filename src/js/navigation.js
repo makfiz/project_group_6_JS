@@ -1,8 +1,6 @@
 import { refs } from './refs';
 import { FirebaseService } from './firebaseservice';
 
-import { switchColorGalleryTitle } from './colorSwitcher';
-
 import { changeHeaderBg } from './load-header-bg-img';
 
 import { onTrendMovies } from './myLibrary';
@@ -49,7 +47,9 @@ function openLibrary() {
 
   galleryLibrary.classList.remove('visually-hidden');
   galleryLibrary.classList.add('library');
-
+  refs.switchColorCheckbox.parentNode.parentNode.parentNode.classList.add(
+    'is-library-open'
+  );
   // onTrendMovies()
 }
 
