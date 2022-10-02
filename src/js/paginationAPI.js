@@ -206,7 +206,7 @@ export function hideSecondDotsInPagination() {
 }
 
 //Додати активне посилання (кнопку) для широкого екрана
-function addActiveLinkToWideScreen() {
+export function addActiveLinkToWideScreen() {
   document
     .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
     .querySelector('.pagination__link')
@@ -222,13 +222,13 @@ export function addActiveLinkToNarrowScreen() {
 }
 
 //Стеження за зміною ширини в'юпорта
-window.addEventListener('resize', function () {
-  //   if (window.matchMedia('(min-width: 768px)').matches) {
-  //     return;
-  //   } else if (window.matchMedia('(max-width: 300px)').matches) {
-  //     return;
-  //   } else {
-  //   this.location.reload();
-  //   }
-  this.location.reload();
-});
+// window.addEventListener('resize', function () {
+//   //   if (window.matchMedia('(min-width: 768px)').matches) {
+//   //     return;
+//   //   } else if (window.matchMedia('(max-width: 300px)').matches) {
+//   //     return;
+//   //   } else {
+//   //   this.location.reload();
+//   //   }
+//   this.location.reload();
+// });

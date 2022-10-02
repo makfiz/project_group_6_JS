@@ -7,11 +7,11 @@ import { switchColorGalleryTitle } from './colorSwitcher';
 import * as pagRender from './templates/renderPaginationPages';
 import * as pagAPI from './paginationAPI';
 
-
 const { createAndRenderPagination, removePages } = pagRender;
 const { smoothScroll, preventDefaultForLinks, buttonsPagination } = pagAPI;
 
 export async function pagination(instance) {
+  console.log('apiServise.mode', apiServise.mode);
   if (document.querySelectorAll('.js-pages').length === 0) {
     createAndRenderPagination(instance);
     refs.pagination.addEventListener('click', onPaginationBlockClick);
@@ -52,6 +52,7 @@ async function onPaginationBlockClick(e) {
   //Кнопки із цифрами
   if (itemValue !== 'previous' && itemValue !== 'next') {
     apiServise.pages = Number(itemValue);
+
     buttonsPagination();
     contentLoader();
   }
@@ -62,10 +63,6 @@ export function setSearchMode(apiServise) {
   removePages();
   apiServise.mode = 'search';
   pagination(apiServise);
-  document
-    .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
-    .querySelector('.pagination__link')
-    .classList.add('pagination__link-active');
 }
 
 //Перемикання сторінок за жанрами
@@ -73,10 +70,6 @@ export function setGenresMode(apiServise) {
   removePages();
   apiServise.mode = 'genres';
   pagination(apiServise);
-  document
-    .querySelector(`.pagination__item[data-page="${apiServise.pages}"]`)
-    .querySelector('.pagination__link')
-    .classList.add('pagination__link-active');
 }
 
 // Завантаження контенту по умові
@@ -114,3 +107,7 @@ async function contentLoader() {
 }
 
 window.onload = () => refs.pagEl.classList.remove('visually-hidden');
+window.addEventListener('resize', e => {
+  document.querySelectorAll('.js-render').forEach(link => link.remove());
+  pagination(apiServise);
+});
