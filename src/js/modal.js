@@ -31,14 +31,38 @@ const details = {
 const closeModalBtn = document.querySelector('.close-btn');
 const body = document.querySelector('body');
 
-details.toCloseModal.addEventListener('click', toggleModal);
+details.toCloseModal.addEventListener('click', toggleModalAndScroll);
 // refs.movieList.addEventListener('click', clickOnFilm);
 refs.galleryLibrary.addEventListener('click', clickOnFilm);
 const API_KEY = 'e4c439da3c1d90110fb4595b6236c9fe';
-closeModalBtn.addEventListener('click', noScrollBody);
+// closeModalBtn.addEventListener('click', noScrollBody);
 
-function toggleModal() {
+function toggleModalAndScroll() {
   details.toHide.classList.toggle('is-hidden');
+  noScrollBody();
+  buttonListenerOnModal();
+}
+function noScrollBody() {
+  body.classList.toggle('no-scroll');
+}
+
+function buttonListenerOnModal() {
+  if (!details.toHide.classList.contains('is-hidden')) {
+    details.modalWindow.addEventListener('click', onBackDropClick);
+    window.addEventListener('keydown', closeModalOnEscape);
+  } else {
+    details.modalWindow.removeEventListener('click', onBackDropClick);
+    window.removeEventListener('keydown', closeModalOnEscape);
+  }
+}
+
+function closeModalOnEscape(e) {
+  if (e.code !== 'Escape') return;
+  toggleModalAndScroll();
+}
+function onBackDropClick(e) {
+  if (e.target !== e.currentTarget) return;
+  toggleModalAndScroll();
 }
 
 const apiId = new ApiServise();
@@ -50,9 +74,8 @@ export function clickOnFilm(e) {
   // console.log(e.path)
   cardID = e.path[3].getAttribute('data-id');
 
-  noScrollBody();
   console.log(e.path[3].getAttribute('data-id'));
-  toggleModal(e);
+  toggleModalAndScroll(e);
   let movieID = e.path[3].getAttribute('data-id');
 
   fetch(
@@ -152,19 +175,6 @@ async function createVideo() {
       window.addEventListener('keydown', closeTrailer);
     }
   }
-}
-
-document.addEventListener('keydown', e => {
-  if (
-    // e.key === 'Escape' &&
-    !details.modalWindow.classList.contains('is-hidden')
-  ) {
-    details.modalWindow.classList.add('is-hidden');
-  }
-});
-
-function noScrollBody() {
-  body.classList.toggle('no-scroll');
 }
 
 export async function compareID(movieId, user) {
