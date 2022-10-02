@@ -28,12 +28,6 @@ async function onSearchMovie(e) {
 
   apiServise.query = e.currentTarget.elements.filmName.value.trim();
 
-  movieList.innerHTML = '';
-  apiServise
-    .fetchSearchMovie()
-    .then(data => makeGallary(data))
-    .then(() => switchColorGalleryTitle(refs));
-
   e.currentTarget.reset();
   apiServise.resetPage();
   movieList.innerHTML = '';

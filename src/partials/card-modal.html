@@ -1,4 +1,5 @@
 <div class="backdrop is-hidden" data-modal>
+
     <div class="modal">
            <button type="button" class="close-btn">
               <svg class="close-btn__icon">
@@ -9,7 +10,36 @@
              <div class="poster">
                 <picture>
 
-                    <img src="#" alt="moviesPoster"/>
+                    <img class="fff" src="#" alt="moviesPoster"/>
+        </picture>
+      </div>
+      <div class="content">
+        <h2 class="film_title"></h2>
+        <div class="title-position">
+          <ul class="title_list_position">
+            <li class="title_item_id is-hidden"></li>
+            <li class="title_item">
+              <span class="title_list_value a">Vote / Votes</span
+              ><span class="contents_value"
+                ><span class="highlight vote_average"></span> /
+                <span class="highlight_all vote_count"></span
+              ></span>
+            </li>
+            <li class="title_item">
+              <span class="title_list_value b">Popularity</span
+              ><span class="contents_value popularity"></span>
+            </li>
+            <li class="title_item">
+              <span class="title_list_value c">Original Title</span
+              ><span class="contents_value original_title"></span>
+            </li>
+            <li class="title_item">
+              <span class="title_list_value d">Genre</span
+              ><span class="contents_value genres"></span>
+            </li>
+          </ul>
+          <!-- <img src="#" alt="moviesPoster"/>
+
                 </picture>
              </div>
 
@@ -29,7 +59,23 @@
                     <button class="modal_card_btn is-active wached visually-hidden">ADD TO WATCHED</button>
                     <button class="modal_card_btn queue visually-hidden">ADD TO QUEUE</button>
                     <br><span class="sign_notific">To add a movie to the library please sign in to your account</span>
-             </div>
+             </div> -->
         </div>
+        <h3 class="description_title">About</h3>
+        <p class="description"></p>
+        <div class="btn_wraper">
+          <button class="modal_card_btn is-active wached">
+            ADD TO WATCHED
+          </button>
+          <button class="modal_card_btn queue">ADD TO QUEUE</button>
+        </div>
+        <button class="open__video_bnt modal_card_btn" type="button">
+          <svg class="watch-icon" width="28" , height="28">
+            <use href="./images/sprite.svg#icon-youtube-svgrepo-com"></use>
+          </svg>
+          Watch Trailer
+        </button>
+      </div>
     </div>
+  </div>
 </div>

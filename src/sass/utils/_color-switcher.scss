@@ -1,9 +1,11 @@
 .color-switcher {
   position: absolute;
+
   bottom: 24px;
   right: 60px;
   @include tablet {
     right: 75px;
+
   }
 }
 

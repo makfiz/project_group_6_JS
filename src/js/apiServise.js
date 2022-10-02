@@ -81,6 +81,25 @@ export class ApiServise {
     }
   }
 
+  async fetchOpenMovieByPlayer() {
+    try {
+      Loading.circle({
+        svgColor: '#ff6b08',
+      });
+      const { data } = await axios(`movie/${this.id}/videos`, {
+        params: {
+          api_key: API_KEY,
+          language: this.language,
+        },
+      });
+      Loading.remove();
+
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async fetchMovieByGenre() {
     try {
       Loading.pulse({
