@@ -129,20 +129,20 @@ logout.addEventListener('click', () => {
 function modalBtnUserWatcher(user) {
   refs.wached.addEventListener('click', e => {
     if (user == null) return;
-    const id = document.querySelector('.title_item_id').innerHTML;
-    firebase.postMovieToLibraryWached(id, emailCuter(user.email));
+    const info = JSON.parse(document.querySelector('.title_item_info').innerHTML);
+    firebase.postMovieToLibraryWached(info, emailCuter(user.email));
   });
 
   refs.queue.addEventListener('click', e => {
     if (user == null) return;
-    const id = document.querySelector('.title_item_id').innerHTML;
-    firebase.postMovieToLibraryQueue(id, emailCuter(user.email));
+    const info = JSON.parse(document.querySelector('.title_item_info').innerHTML);
+    firebase.postMovieToLibraryQueue(info, emailCuter(user.email));
   });
 }
 
 function libraryBtnUserWatcher(user) {
   refs.watchedBtn.addEventListener('click', e => {
-    loadWatced(user);
+    loadWatced(user)
   });
   refs.queueBtn.addEventListener('click', e => {
     loadQueue(user);

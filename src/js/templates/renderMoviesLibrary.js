@@ -1,12 +1,24 @@
 import genresData from '../../js/genresData.json';
-const galleryLibrary = document.querySelector('.gallery__list--library')
+import { refs } from '../refs';
+
 
 export function makeGallaryLibrary(movies) {
-  const markup = movies.reduce(
-    (
-      acc,
-      { id, poster_path, title, release_date, genre_ids, vote_average }
-    ) => {
+  // console.log(movies)
+
+  if (movies == null) {
+    refs.galleryLibrary.innerHTML = `<span style=" margin-left: auto;
+       margin-right: auto;font-size: 30px;
+    line-height: 1.19; color: #ff6b08;">Your library is empty ;(</span>`;
+    
+    return
+  }
+
+  let temp = [];
+  for (key in movies) {
+    // console.log(movies[key])
+    const { id, poster_path, title, release_date, ganre, vote_average } = movies[key]
+    
+
       let releaseDate = release_date;
 
       if (releaseDate === undefined) {
@@ -14,24 +26,16 @@ export function makeGallaryLibrary(movies) {
       } else {
         releaseDate = release_date.slice(0, 4);
       }
-
-      let filmsGenres;
-
-      if (genre_ids) {
-        filmsGenres = genresData
-          .filter(({ id }) => genre_ids.includes(id))
-          .map(({ name }) => name)
-          .join(' ');
-      }
-
+     
+    let filmsGanres = ganre.replace(/,/g, ', ')
+   
       let image = `https://image.tmdb.org/t/p/w400/${poster_path}`;
       if (poster_path === null) {
         image =
           'https://dummyimage.com/400x600/7d7d7d/fff.jpg&text=image+not+found';
       }
 
-      return (
-        acc +
+      temp.push(
        ` <li class="gallery__item" data-id = ${id}>
             <div class="gallery-card">
               <div class="gallery-card__main">
@@ -48,17 +52,15 @@ export function makeGallaryLibrary(movies) {
                 <h3 class="gallery-card__title">${title}</h3>
                 <p class="gallery-card__description">
                   <span class="gallery-card__genre">
-                    ${filmsGenres || 'Action'}  |
+                    ${filmsGanres || 'Action'}  |
                     <span class="gallery-card__date">
                       ${releaseDate}</span>
                   </span>
                 </p>
               </div>
             </div>
-          </li>`
-      );
-    },
-    ''
-  );
-  galleryLibrary.innerHTML = markup;
+          </li>`)
+  
+  } 
+  refs.galleryLibrary.innerHTML = temp.join();
 }

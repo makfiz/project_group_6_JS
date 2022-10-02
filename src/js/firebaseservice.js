@@ -42,7 +42,7 @@ export class FirebaseService {
       const { data } = await axios(`${this.fbBaseUrl}users/${user}/library/queue.json`);
 
       Loading.remove();
-      console.log(data)
+      // console.log(data)
 
       return data;
     } catch (error) {
@@ -58,7 +58,7 @@ export class FirebaseService {
       const { data } = await axios(`${this.fbBaseUrl}users/${user}/library/wached.json`);
 
       Loading.remove();
-      console.log(data)
+      // console.log(data)
 
       return data;
     } catch (error) {
@@ -67,16 +67,25 @@ export class FirebaseService {
   }
 
 
-   async postMovieToLibraryWached (id, user) {
+   async postMovieToLibraryWached (info, user) {
     try {
       Loading.circle({
         svgColor: '#ff6b08',
       });
       const { data } = await axios({
                           method: 'patch',
-                          url: `${this.fbBaseUrl}users/${user}/library/wached/${id}.json`,
+                          url: `${this.fbBaseUrl}users/${user}/library/wached/${info.movieID}.json`,
                           data: {
-                            id: `${id}`,
+                            id: `${info.movieID}`,
+                            title: `${info.title}`,
+                            vote_average: `${info.vote_average}`,
+                            vote_count: `${info.vote_count}`,
+                            original_title: `${info.original_title}`,
+                            popularity: `${info.popularity}`,
+                            overview: `${info.overview}`,
+                            ganre: `${info.ganreString}`,
+                            poster_path: `${info.poster_path}`,
+                            
                               }
                             });;
                               
@@ -88,16 +97,25 @@ export class FirebaseService {
   }
 
 
- async postMovieToLibraryQueue (id, user) {
+ async postMovieToLibraryQueue (info, user) {
     try {
       Loading.circle({
         svgColor: '#ff6b08',
       });
       const { data } = await axios({
                           method: 'patch',
-                          url: `${this.fbBaseUrl}users/${user}/library/queue/${id}.json`,
+                          url: `${this.fbBaseUrl}users/${user}/library/queue/${info.movieID}.json`,
                           data: {
-                            id: `${id}`,
+                            id: `${info.movieID}`,
+                            title: `${info.title}`,
+                            vote_average: `${info.vote_average}`,
+                            vote_count: `${info.vote_count}`,
+                            original_title: `${info.original_title}`,
+                            popularity: `${info.popularity}`,
+                            overview: `${info.overview}`,
+                            ganre: `${info.ganreString}`,
+                            poster_path: `${info.poster_path}`,
+                            
                               }
                             });;
                               

@@ -20,7 +20,7 @@ const details = {
   description: document.querySelector('.description'),
   toHide: document.querySelector('[data-modal]'),
   toCloseModal: document.querySelector('.close-btn'),
-  titleId: document.querySelector('.title_item_id'),
+  titleInfo: document.querySelector('.title_item_info'),
   modalWindow: document.querySelector('.backdrop'),
 };
 const closeModalBtn = document.querySelector('.close-btn');
@@ -29,6 +29,7 @@ const body = document.querySelector('body');
 
 details.toCloseModal.addEventListener('click', toggleModal);
 refs.movieList.addEventListener('click', clickOnFilm);
+refs.galleryLibrary.addEventListener('click', clickOnFilm);
 const API_KEY = 'e4c439da3c1d90110fb4595b6236c9fe';
 closeModalBtn.addEventListener('click', noScrollBody)
 
@@ -50,26 +51,29 @@ function clickOnFilm(e) {
     `https://api.themoviedb.org/3/movie/${movieID}$?api_key=${API_KEY}&$&language=en-US`
   )
     .then(response => {
-      return response.json();
+      return response.json('');
     })
     .then(info => {
       const i = [];
       for (const genre of info.genres) {
         i.push(genre.name);
       }
-
       apiId.movieId = movieID;
+      const ganreString =i.join()
+      const {title, vote_average, vote_count, popularity, original_title, overview, poster_path} = info
+      const toLibrary = {movieID, title, vote_average, vote_count, popularity, original_title, overview, poster_path, ganreString}
+      
       // console.log(apiId.movieId);
       // console.log(info);
-      details.titleId.innerHTML = movieID;
-      details.filmTitle.textContent = info.title;
-      details.voteAverage.textContent = info.vote_average;
-      details.voteCount.textContent = info.vote_count;
-      details.popularity.textContent = info.popularity;
-      details.originalTitle.textContent = info.original_title;
+      details.titleInfo.innerHTML = JSON.stringify(toLibrary)
+      details.filmTitle.textContent = title;
+      details.voteAverage.textContent = vote_average;
+      details.voteCount.textContent = vote_count;
+      details.popularity.textContent = popularity;
+      details.originalTitle.textContent = original_title;
       details.genres.textContent = i;
-      details.description.textContent = info.overview;
-      details.poster.src = `https://image.tmdb.org/t/p/w300${info.poster_path}`;
+      details.description.textContent = overview;
+      details.poster.src = `https://image.tmdb.org/t/p/w300${poster_path}`;
       // details.largePoster.srcset = `https://image.tmdb.org/t/p/w1024${info.poster_path}`;
       // details.mediumPoster.srcset = `https://image.tmdb.org/t/p/w500${info.poster_path}`;
       // details.smallPoster.srcset = `https://image.tmdb.org/t/p/w320${info.poster_path}`;
