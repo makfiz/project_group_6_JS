@@ -3,7 +3,11 @@ import 'basiclightbox/dist/basicLightbox.min.css';
 import { ApiServise } from './apiServise';
 import { refs } from './refs';
 import { FirebaseService } from './firebaseservice';
+
 import { addModalBtn } from './modal-btn';
+
+import { async } from '@firebase/util';
+
 const firebase = new FirebaseService();
 import { modalBtnRefs } from './modal-btn';
 const details = {
@@ -38,7 +42,7 @@ function toggleModal() {
 }
 
 const apiId = new ApiServise();
-
+let cardID;
 function clickOnFilm(e) {
   console.log(e.path);
   const { addWatched, removeWatched, addQueue, removeQueue } = modalBtnRefs;
@@ -49,6 +53,9 @@ function clickOnFilm(e) {
     addQueue.action,
     addQueue.text
   );
+
+  // console.log(e.path)
+  cardID = e.path[3].getAttribute('data-id');
 
   noScrollBody();
   console.log(e.path[3].getAttribute('data-id'));
@@ -165,4 +172,10 @@ document.addEventListener('keydown', e => {
 
 function noScrollBody() {
   body.classList.toggle('no-scroll');
+}
+
+export function qwe(user) {
+  const data = firebase.getMovieToLibraryById(emailCuter(user.email));
+  console.log(data);
+  console.log(cardID);
 }

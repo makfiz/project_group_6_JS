@@ -125,4 +125,49 @@ export class FirebaseService {
       console.log(error);
     }
   }
+
+  async removeMovieToLibrary (info, user) {
+      try {
+        Loading.circle({
+          svgColor: '#ff6b08',
+        });
+        const { data } = await axios({
+                            method: 'delete',
+                            url: `${this.fbBaseUrl}users/${user}/library/wached/${info.movieID}.json`,
+                            data: {
+                              id: `${info.movieID}`,
+                              title: `${info.title}`,
+                              vote_average: `${info.vote_average}`,
+                              vote_count: `${info.vote_count}`,
+                              original_title: `${info.original_title}`,
+                              popularity: `${info.popularity}`,
+                              overview: `${info.overview}`,
+                              ganre: `${info.ganreString}`,
+                              poster_path: `${info.poster_path}`,
+                              
+                                }
+                              });;
+                                
+        Loading.remove();
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+ async getMovieToLibraryById (user) {
+    try {
+      Loading.circle({
+        svgColor: '#ff6b08',
+      });
+      const { data } = await axios(`${this.fbBaseUrl}users/${user}/library/wached/${info.movieID}.json`);
+
+      Loading.remove();
+      // console.log(data)
+
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
