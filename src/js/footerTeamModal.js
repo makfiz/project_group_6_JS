@@ -21,7 +21,7 @@ function renderTeamModal() {
     })
     .join('');
 }
-// console.log(renderTeamModal());
+console.log(renderTeamModal());
 const teamModal = `
 <div class="team-list">
 ${renderTeamModal()}
