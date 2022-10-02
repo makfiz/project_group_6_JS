@@ -1,5 +1,6 @@
 import { refs } from './refs';
 import { FirebaseService } from './firebaseservice';
+import { changeHeaderBg } from './load-header-bg-img';
 import { onTrendMovies } from './myLibrary';
 const {
   search,
@@ -12,16 +13,15 @@ const {
   filterContainer,
   galleryMain,
   galleryLibrary,
-  gallerySection__gallery
+  gallerySection__gallery,
 } = refs;
 // import { makeGallaryLibrary } from './templates/renderMoviesLibrary';
 // import { pagination } from './pagination';
-
 import { ApiServise } from './apiServise';
 export const apiServise = new ApiServise();
 
 const firebase = new FirebaseService();
-
+changeHeaderBg(null, 'home-bg-img');
 // function openLibrary() {
 //   // if
 
@@ -30,6 +30,7 @@ const firebase = new FirebaseService();
 // }
 
 function openLibrary() {
+  changeHeaderBg('home-bg-img', 'library-bg-img');
   if (gallerySection__gallery.childNodes[3].nodeName == 'UL') {
     gallerySection__gallery.removeChild(galleryMain);
   }
@@ -41,9 +42,6 @@ function openLibrary() {
   libraryBtn.classList.add('nav-list__link--selected');
   pagEl.classList.add('visually-hidden');
   filterContainer.classList.add('visually-hidden');
-
-
-
 
   galleryLibrary.classList.remove('visually-hidden');
   galleryLibrary.classList.add('library');
