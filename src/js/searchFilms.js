@@ -44,8 +44,8 @@ async function onSearchMovie(e) {
   }
 
   makeGallary(data);
-  switchColorGalleryTitle(refs);
   setSearchMode(apiServise);
+  switchColorGalleryTitle(refs);
 
   genreSelector.children[1].value = 'genres';
 }
@@ -64,7 +64,7 @@ async function onCreateGalleryByGenre(e) {
 
   const res = await apiServise.fetchMovieByGenre();
   makeGallary(res);
-  switchColorGalleryTitle(refs);
   apiServise.resetPage();
   setGenresMode(apiServise);
+  switchColorGalleryTitle(refs);
 }
