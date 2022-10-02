@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
-const API_KEY = '7254cc1ad31c69d2a534e79f9d285c60';
+const API_KEY = 'e4c439da3c1d90110fb4595b6236c9fe';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 
 export class ApiServise {

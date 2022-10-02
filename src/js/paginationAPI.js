@@ -8,12 +8,12 @@ export function buttonsPagination() {
   if (wideScreen) {
     if (apiServise.totalPage <= 9) {
       deleteActiveLinks();
+      hideFirstDotsInPagination();
+      hideSecondDotsInPagination();
       addActiveLinkToWideScreen();
     }
 
     if (apiServise.pages < 5 && apiServise.totalPage > 9) {
-      deleteActiveLinks();
-
       const pages = document.querySelectorAll('.js-pages');
       let counter = 2;
       pages.forEach(page => {
@@ -21,9 +21,10 @@ export function buttonsPagination() {
         page.querySelector('.pagination__link').textContent = counter;
         counter += 1;
       });
-      addActiveLinkToWideScreen();
+      deleteActiveLinks();
       hideFirstDotsInPagination();
       showSecondDotsInPagination();
+      addActiveLinkToWideScreen();
     }
 
     if (
@@ -31,11 +32,11 @@ export function buttonsPagination() {
       apiServise.pages <= apiServise.totalPage - 5 &&
       apiServise.totalPage > 9
     ) {
-      deleteActiveLinks();
-
       const pages = document.querySelectorAll('.js-pages');
       const currentPage = apiServise.pages;
       let counter = currentPage - 2;
+
+      deleteActiveLinks();
 
       pages.forEach(page => {
         page.dataset.page = counter;
@@ -48,6 +49,7 @@ export function buttonsPagination() {
         }
         counter += 1;
       });
+
       showFirstDotsInPagination();
       showSecondDotsInPagination();
     }
@@ -56,8 +58,6 @@ export function buttonsPagination() {
       apiServise.pages > apiServise.totalPage - 5 &&
       apiServise.totalPage > 9
     ) {
-      deleteActiveLinks();
-
       const pages = document.querySelectorAll('.js-pages');
       let counter = apiServise.totalPage - 5;
       pages.forEach(page => {
@@ -67,9 +67,10 @@ export function buttonsPagination() {
         counter += 1;
       });
 
-      addActiveLinkToWideScreen();
+      deleteActiveLinks();
       hideSecondDotsInPagination();
       showFirstDotsInPagination();
+      addActiveLinkToWideScreen();
     }
   }
 
@@ -220,15 +221,3 @@ export function addActiveLinkToNarrowScreen() {
     .querySelector('.pagination__link')
     .classList.add('pagination__link-active');
 }
-
-//Стеження за зміною ширини в'юпорта
-// window.addEventListener('resize', function () {
-//   //   if (window.matchMedia('(min-width: 768px)').matches) {
-//   //     return;
-//   //   } else if (window.matchMedia('(max-width: 300px)').matches) {
-//   //     return;
-//   //   } else {
-//   //   this.location.reload();
-//   //   }
-//   this.location.reload();
-// });

@@ -11,7 +11,6 @@ const { createAndRenderPagination, removePages } = pagRender;
 const { smoothScroll, preventDefaultForLinks, buttonsPagination } = pagAPI;
 
 export async function pagination(instance) {
-  console.log('apiServise.mode', apiServise.mode);
   if (document.querySelectorAll('.js-pages').length === 0) {
     createAndRenderPagination(instance);
     refs.pagination.addEventListener('click', onPaginationBlockClick);
@@ -108,6 +107,6 @@ async function contentLoader() {
 
 window.onload = () => refs.pagEl.classList.remove('visually-hidden');
 window.addEventListener('resize', e => {
-  document.querySelectorAll('.js-render').forEach(link => link.remove());
+  removePages();
   pagination(apiServise);
 });

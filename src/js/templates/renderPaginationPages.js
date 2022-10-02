@@ -1,12 +1,12 @@
 import { refs } from '../refs';
 import {
   deleteActiveLinks,
+  showFirstDotsInPagination,
   hideFirstDotsInPagination,
   showSecondDotsInPagination,
   hideSecondDotsInPagination,
   addActiveLinkToNarrowScreen,
   addActiveLinkToWideScreen,
-  showFirstDotsInPagination,
 } from '../paginationAPI';
 
 export function createAndRenderPagination(instance) {
@@ -14,6 +14,7 @@ export function createAndRenderPagination(instance) {
   const wideScreen = window.innerWidth > 767;
 
   //Приховуємо пагінацію якщо нічого не прийшло
+
   if (instance.totalPage === 0) {
     rootEl.classList.add('is-hidden');
     return;
@@ -24,9 +25,11 @@ export function createAndRenderPagination(instance) {
   const currentPage = instance.pages;
 
   //Створення і рендер розмітки по умові
+
   //Для екранів розміром більше 767рх
   if (wideScreen) {
     //Якщо прийшло 9 сторінок і менше і екран більше 767px
+
     if (totalPages <= 9) {
       const amount = totalPages - 1;
       let markup = '';
@@ -43,6 +46,7 @@ export function createAndRenderPagination(instance) {
 
         insertContentBeforeNextButton(rootEl, lastItem);
       }
+
       insertContentAfterFirstDotsInPagination(rootEl, markup);
 
       hideFirstDotsInPagination();
@@ -51,6 +55,7 @@ export function createAndRenderPagination(instance) {
     }
 
     //Якщо прийшло більше ніж 9 сторінок і екран більше 767px
+
     if (totalPages > 9 && currentPage < 5) {
       const amount = 6;
       let markup = '';
@@ -68,26 +73,6 @@ export function createAndRenderPagination(instance) {
 
       hideFirstDotsInPagination();
       showSecondDotsInPagination();
-      addActiveLinkToWideScreen();
-    }
-    if (totalPages > 9 && currentPage > totalPages - 5) {
-      const amount = totalPages - 1;
-      let markup = '';
-
-      for (let i = totalPages - 5; i <= amount; i += 1) {
-        markup += `<li class="pagination__item js-pages js-render" data-page="${i}">
-      <a href="" class="pagination__link">${i}</a>
-    </li>`;
-      }
-      const lastItem = ` <li class="pagination__item pagination__item-additional js-render" data-page=${totalPages}>
-      <a href="" class="pagination__link">${totalPages}</a>
-    </li>`;
-
-      insertContentAfterFirstDotsInPagination(rootEl, markup);
-      insertContentBeforeNextButton(rootEl, lastItem);
-
-      showFirstDotsInPagination();
-      hideSecondDotsInPagination();
       addActiveLinkToWideScreen();
     }
 
@@ -109,11 +94,33 @@ export function createAndRenderPagination(instance) {
       showSecondDotsInPagination();
       addActiveLinkToWideScreen();
     }
+
+    if (totalPages > 9 && currentPage > totalPages - 5) {
+      const amount = totalPages - 1;
+      let markup = '';
+
+      for (let i = totalPages - 5; i <= amount; i += 1) {
+        markup += `<li class="pagination__item js-pages js-render" data-page="${i}">
+      <a href="" class="pagination__link">${i}</a>
+    </li>`;
+      }
+      const lastItem = ` <li class="pagination__item pagination__item-additional js-render" data-page=${totalPages}>
+      <a href="" class="pagination__link">${totalPages}</a>
+    </li>`;
+
+      insertContentAfterFirstDotsInPagination(rootEl, markup);
+      insertContentBeforeNextButton(rootEl, lastItem);
+
+      showFirstDotsInPagination();
+      hideSecondDotsInPagination();
+      addActiveLinkToWideScreen();
+    }
   }
 
   //Для екранів менших = 767рх
   else {
     //Якщо прийшло більше ніж 5 сторінок і екран менше 767px
+
     //Початкові сторінки
     if (totalPages >= 5 && currentPage < 3) {
       const amount = 5;
@@ -129,6 +136,7 @@ export function createAndRenderPagination(instance) {
       deleteActiveLinks();
       addActiveLinkToNarrowScreen();
     }
+
     //Кінцеві сторінки
     if (totalPages >= 5 && currentPage > totalPages - 2) {
       const amount = totalPages;
@@ -144,6 +152,7 @@ export function createAndRenderPagination(instance) {
       deleteActiveLinks();
       addActiveLinkToNarrowScreen();
     }
+
     //Середні сторінки
     if (totalPages >= 5 && currentPage >= 3 && currentPage <= totalPages - 2) {
       const amount = currentPage + 2;
