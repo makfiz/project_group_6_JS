@@ -30,7 +30,6 @@ async function onSearchMovie(e) {
 
   e.currentTarget.reset();
   apiServise.resetPage();
-  movieList.innerHTML = '';
 
   const data = await apiServise.fetchSearchMovie();
 
@@ -39,6 +38,7 @@ async function onSearchMovie(e) {
     pagEl.classList.add('visually-hidden');
     return;
   } else {
+    movieList.innerHTML = '';
     textSearchError.classList.add('is-hidden');
     pagEl.classList.remove('visually-hidden');
   }
