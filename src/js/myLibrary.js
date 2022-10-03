@@ -22,6 +22,8 @@ export async function loadWatced(user) {
     refs.watchedBtn.classList.add('library__btn--selected');
     refs.queueBtn.classList.remove('library__btn--selected');
     galleryLibrary.innerHTML = '';
+    
+    if (user == null) return
     const data = await firebase.GetUserWached(emailCuter(user.email))
     makeGallaryLibrary(data)
     //TODO: додати рендер карток при натискані на кнопку
@@ -32,6 +34,7 @@ export  async function loadQueue(user) {
     refs.queueBtn.classList.add('library__btn--selected');
     galleryLibrary.innerHTML = '';
 
+    if (user == null) return
     const data = await firebase.GetUserQueue(emailCuter(user.email))
     makeGallaryLibrary(data)
 
