@@ -30,7 +30,7 @@ changeHeaderBg(null, 'home-bg-img');
 //   search.classList.add('visually-hidden');
 //   libraryFilter.classList.remove('visually-hidden');
 // }
-console.log(gallerySection__gallery.childNodes[7])
+
 export async function openLibrary(user) {
   changeHeaderBg('home-bg-img', 'library-bg-img');
  
