@@ -214,5 +214,5 @@ function libraryBtnUserWatcher(user) {
 }
 
 export function emailCuter(email) {
-  return email.split('@')[0].replace(/[^a-zа-яё\s]/gi, '');
+  return email.split('@')[0].replace(/^[a-zA-Z0-9]$/, '');
 }
