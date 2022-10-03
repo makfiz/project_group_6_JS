@@ -180,6 +180,7 @@ async function createVideo() {
 }
 
 export async function compareID(movieId, user) {
+  if (movieId == null) return
   const wachedData = await firebase.getMovieToWachedById(
     movieId,
     emailCuter(user.email)
