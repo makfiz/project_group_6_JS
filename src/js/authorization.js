@@ -14,6 +14,7 @@ import { compareID } from './modal';
 import { clickOnFilm } from './modal';
 import { modalBtnRefs } from './modal-btn';
 import { makeGallaryLibrary } from './templates/renderMoviesLibrary';
+import { switchGalleryTitleLibraryDarkTheme } from './colorSwitcher';
 
 const userDisplayName = document.querySelector('.display-name');
 const signIn = document.querySelector('[data-sign-in]');
@@ -174,14 +175,14 @@ function modalBtnUserWatcher(user) {
       document.querySelector('.title_item_info').innerHTML
     );
     if (refs.wached.textContent === modalBtnRefs.addWatched.text) {
-      await firebase.postMovieToLibraryWached(info, emailCuter(user.email));
-      refs.wached.textContent = modalBtnRefs.removeWatched.text;
-      refs.wached.dataset.action = modalBtnRefs.removeWatched.act;
       if (refs.queue.textContent === modalBtnRefs.removeQueue.text) {
         firebase.removeMovieFromLibraryQueue(info, emailCuter(user.email));
         refs.queue.textContent = modalBtnRefs.addQueue.text;
         refs.queue.dataset.action = modalBtnRefs.addQueue.act;
       }
+      await firebase.postMovieToLibraryWached(info, emailCuter(user.email));
+      refs.wached.textContent = modalBtnRefs.removeWatched.text;
+      refs.wached.dataset.action = modalBtnRefs.removeWatched.act;
     } else {
       await firebase.removeMovieFromLibraryWached(info, emailCuter(user.email));
       refs.wached.textContent = modalBtnRefs.addWatched.text;
@@ -196,9 +197,6 @@ function modalBtnUserWatcher(user) {
       document.querySelector('.title_item_info').innerHTML
     );
     if (refs.queue.textContent === modalBtnRefs.addQueue.text) {
-      await firebase.postMovieToLibraryQueue(info, emailCuter(user.email));
-      refs.queue.textContent = modalBtnRefs.removeQueue.text;
-      refs.queue.dataset.action = modalBtnRefs.removeQueue.act;
       if (refs.wached.textContent === modalBtnRefs.removeWatched.text) {
         await firebase.removeMovieFromLibraryWached(
           info,
@@ -207,6 +205,9 @@ function modalBtnUserWatcher(user) {
         refs.wached.textContent = modalBtnRefs.addWatched.text;
         refs.wached.dataset.action = modalBtnRefs.addWatched.act;
       }
+      await firebase.postMovieToLibraryQueue(info, emailCuter(user.email));
+      refs.queue.textContent = modalBtnRefs.removeQueue.text;
+      refs.queue.dataset.action = modalBtnRefs.removeQueue.act;
     } else {
       await firebase.removeMovieFromLibraryQueue(info, emailCuter(user.email));
       refs.queue.textContent = modalBtnRefs.addQueue.text;
@@ -222,6 +223,7 @@ async function rerenderGallery(user) {
   ) {
     const data = await firebase.GetUserQueue(emailCuter(user.email));
     makeGallaryLibrary(data);
+    switchGalleryTitleLibraryDarkTheme(refs);
   }
   if (
     refs.watchedBtn.classList.contains('library__btn--selected') &&
@@ -229,6 +231,7 @@ async function rerenderGallery(user) {
   ) {
     const data = await firebase.GetUserWached(emailCuter(user.email));
     makeGallaryLibrary(data);
+    switchGalleryTitleLibraryDarkTheme(refs);
   }
 }
 
