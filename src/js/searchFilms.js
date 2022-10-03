@@ -9,7 +9,14 @@ import genres from './genresData.json';
 
 export const apiServise = new ApiServise();
 
-const { movieList, searchForm, genreSelector, textSearchError, pagEl } = refs;
+const {
+  movieList,
+  searchForm,
+  genreSelector,
+  textSearchError,
+  pagEl,
+  smaiImage,
+} = refs;
 
 addEventListener('DOMContentLoaded', onTrendMovies);
 searchForm.addEventListener('submit', onSearchMovie);
@@ -34,12 +41,15 @@ async function onSearchMovie(e) {
   const data = await apiServise.fetchSearchMovie();
 
   if (data.length === 0) {
+    movieList.innerHTML = '';
     textSearchError.classList.remove('is-hidden');
     pagEl.classList.add('visually-hidden');
+    smaiImage.classList.remove('is-hidden');
     return;
   } else {
-    movieList.innerHTML = '';
     textSearchError.classList.add('is-hidden');
+    smaiImage.classList.add('is-hidden');
+
     pagEl.classList.remove('visually-hidden');
   }
 
