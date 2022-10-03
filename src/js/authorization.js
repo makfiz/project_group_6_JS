@@ -12,6 +12,7 @@ import { loadQueue, loadWatced } from './myLibrary';
 import { openLibrary } from './navigation';
 import { compareID } from './modal';
 import { clickOnFilm } from './modal';
+import { modalBtnRefs } from './modal-btn';
 
 const userDisplayName = document.querySelector('.display-name');
 const signIn = document.querySelector('[data-sign-in]');
@@ -114,18 +115,16 @@ onAuthStateChanged(auth, user => {
     signIn.parentNode.classList.toggle('is-hidden');
     logout.parentNode.classList.toggle('is-hidden');
 
-  
-    
-        refs.movieList.addEventListener('click', (e) => {
+    refs.movieList.addEventListener('click', e => {
       if (user == null) return;
-      const cardID = e.path[3].getAttribute('data-id')
-      console.log()
-      clickOnFilm(e)
-      compareID(cardID, user)
+      const cardID = e.path[3].getAttribute('data-id');
+      console.log();
+      clickOnFilm(e);
+      compareID(cardID, user);
     });
   }
-    modalBtnUserWatcher(user);
-    libraryBtnUserWatcher(user);
+  modalBtnUserWatcher(user);
+  libraryBtnUserWatcher(user);
 });
 
 signIn.addEventListener('click', () => {
@@ -141,27 +140,57 @@ logout.addEventListener('click', () => {
 function modalBtnUserWatcher(user) {
   refs.wached.addEventListener('click', e => {
     if (user == null) return;
-    const info = JSON.parse(document.querySelector('.title_item_info').innerHTML);
-    firebase.postMovieToLibraryWached(info, emailCuter(user.email));
+    const info = JSON.parse(
+      document.querySelector('.title_item_info').innerHTML
+    );
+    if (refs.wached.textContent === modalBtnRefs.addWatched.text) {
+      firebase.postMovieToLibraryWached(info, emailCuter(user.email));
+      refs.wached.textContent = modalBtnRefs.removeWatched.text;
+      refs.wached.dataset.action = modalBtnRefs.removeWatched.act;
+      if (refs.queue.textContent === modalBtnRefs.removeQueue.text) {
+        firebase.removeMovieFromLibraryQueue(info, emailCuter(user.email));
+        refs.queue.textContent = modalBtnRefs.addQueue.text;
+        refs.queue.dataset.action = modalBtnRefs.addQueue.act;
+      }
+    } else {
+      firebase.removeMovieFromLibraryWached(info, emailCuter(user.email));
+      refs.wached.textContent = modalBtnRefs.addWatched.text;
+      refs.wached.dataset.action = modalBtnRefs.addWatched.act;
+    }
   });
 
   refs.queue.addEventListener('click', e => {
     if (user == null) return;
-    const info = JSON.parse(document.querySelector('.title_item_info').innerHTML);
-    firebase.postMovieToLibraryQueue(info, emailCuter(user.email));
+    const info = JSON.parse(
+      document.querySelector('.title_item_info').innerHTML
+    );
+    if (refs.queue.textContent === modalBtnRefs.addQueue.text) {
+      firebase.postMovieToLibraryQueue(info, emailCuter(user.email));
+      refs.queue.textContent = modalBtnRefs.removeQueue.text;
+      refs.queue.dataset.action = modalBtnRefs.removeQueue.act;
+      if (refs.wached.textContent === modalBtnRefs.removeWatched.text) {
+        firebase.removeMovieFromLibraryWached(info, emailCuter(user.email));
+        refs.wached.textContent = modalBtnRefs.addWatched.text;
+        refs.wached.dataset.action = modalBtnRefs.addWatched.act;
+      }
+    } else {
+      firebase.removeMovieFromLibraryQueue(info, emailCuter(user.email));
+      refs.queue.textContent = modalBtnRefs.addQueue.text;
+      refs.queue.dataset.action = modalBtnRefs.addQueue.act;
+    }
   });
 }
 
 function libraryBtnUserWatcher(user) {
   refs.watchedBtn.addEventListener('click', e => {
-    loadWatced(user)
+    loadWatced(user);
   });
   refs.queueBtn.addEventListener('click', e => {
     loadQueue(user);
   });
 
   refs.libraryBtn.addEventListener('click', () => {
-    openLibrary(user)
+    openLibrary(user);
   });
 }
 
