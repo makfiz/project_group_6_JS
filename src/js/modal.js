@@ -33,7 +33,7 @@ const body = document.querySelector('body');
 
 details.toCloseModal.addEventListener('click', toggleModalAndScroll);
 // refs.movieList.addEventListener('click', clickOnFilm);
-// refs.galleryLibrary.addEventListener('click', clickOnFilm);
+refs.galleryLibrary.addEventListener('click', clickOnFilm);
 const API_KEY = 'e4c439da3c1d90110fb4595b6236c9fe';
 // closeModalBtn.addEventListener('click', noScrollBody);
 
