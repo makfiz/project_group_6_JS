@@ -33,7 +33,7 @@ const body = document.querySelector('body');
 
 details.toCloseModal.addEventListener('click', toggleModalAndScroll);
 // refs.movieList.addEventListener('click', clickOnFilm);
-refs.galleryLibrary.addEventListener('click', clickOnFilm);
+// refs.galleryLibrary.addEventListener('click', clickOnFilm);
 const API_KEY = 'e4c439da3c1d90110fb4595b6236c9fe';
 // closeModalBtn.addEventListener('click', noScrollBody);
 
@@ -68,13 +68,13 @@ function onBackDropClick(e) {
 const apiId = new ApiServise();
 let cardID;
 export function clickOnFilm(e) {
-  // console.log(e.path);
+  console.log('click');
   const { addWatched, removeWatched, addQueue, removeQueue } = modalBtnRefs;
 
   // console.log(e.path)
   cardID = e.path[3].getAttribute('data-id');
 
-  console.log(e.path[3].getAttribute('data-id'));
+  // console.log(e.path[3].getAttribute('data-id'));
   toggleModalAndScroll(e);
   let movieID = e.path[3].getAttribute('data-id');
 
@@ -189,7 +189,7 @@ export async function compareID(movieId, user) {
   const { addWatched, removeWatched, addQueue, removeQueue } = modalBtnRefs;
 
   if (wachedData == null) {
-    console.log('В wached БД нет такого фильма:(');
+    // console.log('В wached БД нет такого фильма:(');
     refs.wached.textContent = addWatched.text;
     refs.wached.dataset.action = addWatched.act;
   }
@@ -199,13 +199,13 @@ export async function compareID(movieId, user) {
   }
 
   if (queueyData == null) {
-    console.log('В queuey БД нет такого фильма:(');
+    // console.log('В queuey БД нет такого фильма:(');
     refs.queue.textContent = addQueue.text;
     refs.queue.dataset.action = addQueue.act;
   }
   if (queueyData !== null) {
-    console.log('Есть фильм в БД? ДА в queuey его id:', queueyData.id);
-    console.log('cardID', movieId);
+    // console.log('Есть фильм в БД? ДА в queuey его id:', queueyData.id);
+    // console.log('cardID', movieId);
     refs.queue.textContent = removeQueue.text;
     refs.queue.dataset.action = removeQueue.act;
   }
