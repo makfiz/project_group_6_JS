@@ -29,4 +29,5 @@ export const refs = {
   openVideoBtn: document.querySelector('.open__video_bnt'),
   smaiImage: document.querySelector('.empty__request'),
   trailerBtnWraper: document.querySelector('.trailerBtnWraper'),
+  poster: document.querySelector('.poster'),
 };

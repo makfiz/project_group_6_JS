@@ -10,6 +10,7 @@ import { async } from '@firebase/util';
 
 const firebase = new FirebaseService();
 import { modalBtnRefs } from './modal-btn';
+
 const details = {
   filmTitle: document.querySelector('.film_title'),
   largePoster: document.querySelector('source.large'),
@@ -28,16 +29,13 @@ const details = {
   modalWindow: document.querySelector('.backdrop'),
   modalBtns: document.querySelector('.btn_wraper'),
 };
+
 const closeModalBtn = document.querySelector('.close-btn');
 const body = document.querySelector('body');
 
 details.toCloseModal.addEventListener('click', toggleModalAndScroll);
 
-// refs.movieList.addEventListener('click', clickOnFilm);
-// refs.galleryLibrary.addEventListener('click', clickOnFilm);
-
 const API_KEY = 'e4c439da3c1d90110fb4595b6236c9fe';
-// closeModalBtn.addEventListener('click', noScrollBody);
 
 function toggleModalAndScroll() {
   details.toHide.classList.toggle('is-hidden');
@@ -62,6 +60,7 @@ function closeModalOnEscape(e) {
   if (e.code !== 'Escape') return;
   toggleModalAndScroll();
 }
+
 function onBackDropClick(e) {
   if (e.target !== e.currentTarget) return;
   toggleModalAndScroll();
@@ -69,6 +68,7 @@ function onBackDropClick(e) {
 
 const apiId = new ApiServise();
 let cardID;
+
 export function clickOnFilm(e) {
   if (!e.target.closest('.gallery__item')) return;
   const { addWatched, removeWatched, addQueue, removeQueue } = modalBtnRefs;
@@ -76,6 +76,7 @@ export function clickOnFilm(e) {
   cardID = e.target.closest('.gallery__item').dataset.id;
 
   toggleModalAndScroll(e);
+
   let movieID = e.target.closest('.gallery__item').dataset.id;
   fetch(
     `https://api.themoviedb.org/3/movie/${movieID}$?api_key=${API_KEY}&$&language=en-US`
@@ -119,6 +120,7 @@ export function clickOnFilm(e) {
       details.originalTitle.textContent = original_title;
       details.genres.textContent = i;
       details.description.textContent = overview;
+
       details.poster.src = `https://image.tmdb.org/t/p/w300${poster_path}`;
       // details.largePoster.srcset = `https://image.tmdb.org/t/p/w1024${info.poster_path}`;
       // details.mediumPoster.srcset = `https://image.tmdb.org/t/p/w500${info.poster_path}`;
@@ -144,7 +146,7 @@ async function createVideo() {
   title="YouTube video player"
   frameborder="0"
   autoplay = "1"
-  allow="accelerometer; allowfullscreen = false; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allow="accelerometer; allowfullscreen = false; clipboard-write; controls=1; encrypted-media; gyroscope; picture-in-picture"
   allowfullscreen
 ></iframe>
       </br>
