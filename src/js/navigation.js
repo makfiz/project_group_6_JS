@@ -16,6 +16,8 @@ const {
   galleryMain,
   galleryLibrary,
   gallerySection__gallery,
+  smaiImage,
+  textSearchError
 } = refs;
 // import { makeGallaryLibrary } from './templates/renderMoviesLibrary';
 // import { pagination } from './pagination';
@@ -48,6 +50,8 @@ export async function openLibrary(user) {
 
   if (galleryLibrary.classList.contains('library')) {
     gallerySection__gallery.removeChild(galleryMain);
+    smaiImage.classList.add('is-hidden');
+    textSearchError.classList.add('is-hidden');
   }
   refs.switchColorCheckbox.parentNode.parentNode.parentNode.classList.add('is-library-open');
   if (user !== null) {
