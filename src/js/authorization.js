@@ -115,7 +115,6 @@ onAuthStateChanged(auth, user => {
       ? e.target.closest('.gallery__item').dataset.id
       : null;
 
-    console.log();
     clickOnFilm(e);
     if (user == null) {
       refs.wached.classList.add('visually-hidden');
@@ -249,5 +248,5 @@ function libraryBtnUserWatcher(user) {
 }
 
 export function emailCuter(email) {
-  return email.split('@')[0].replace(/[\s.,%]/g, '');
+  return email.split('@')[0].toLowerCase().replace(/[\s.,-_%]/g, '');
 }
