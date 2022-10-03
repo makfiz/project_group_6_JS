@@ -17,7 +17,8 @@ export class FirebaseService {
   }
 
   async userReg(user) {
-    const emailCut = user.email.split('@')[0].replace(/^[a-zA-Z0-9]$/, '');
+    
+    const emailCut = user.email.split('@')[0].replace(/[\s.,%]/g, '');
     try {
       const { data } = await axios({
         method: 'patch',
