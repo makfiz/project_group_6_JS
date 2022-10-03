@@ -32,8 +32,10 @@ const closeModalBtn = document.querySelector('.close-btn');
 const body = document.querySelector('body');
 
 details.toCloseModal.addEventListener('click', toggleModalAndScroll);
+
 // refs.movieList.addEventListener('click', clickOnFilm);
-refs.galleryLibrary.addEventListener('click', clickOnFilm);
+// refs.galleryLibrary.addEventListener('click', clickOnFilm);
+
 const API_KEY = 'e4c439da3c1d90110fb4595b6236c9fe';
 // closeModalBtn.addEventListener('click', noScrollBody);
 
@@ -79,7 +81,6 @@ export function clickOnFilm(e) {
   toggleModalAndScroll(e);
   // let movieID = e.path[3].getAttribute('data-id');
   let movieID = e.target.closest('.gallery__item').dataset.id;
-
   fetch(
     `https://api.themoviedb.org/3/movie/${movieID}$?api_key=${API_KEY}&$&language=en-US`
   )
@@ -180,7 +181,7 @@ async function createVideo() {
 }
 
 export async function compareID(movieId, user) {
-  if (movieId == null) return
+  if (movieId == null) return;
   const wachedData = await firebase.getMovieToWachedById(
     movieId,
     emailCuter(user.email)
