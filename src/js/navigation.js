@@ -47,9 +47,7 @@ export async function openLibrary(user) {
 
   galleryLibrary.classList.remove('visually-hidden');
   galleryLibrary.classList.add('library');
-  refs.switchColorCheckbox.parentNode.parentNode.parentNode.classList.add(
-    'is-library-open'
-  );
+  refs.switchColorCheckbox.parentNode.parentNode.parentNode.classList.add('is-library-open');
   if (user !== null) {
     const data = await firebase.GetUserQueue(emailCuter(user.email))
     makeGallaryLibrary(data)

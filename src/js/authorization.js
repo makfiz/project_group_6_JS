@@ -60,10 +60,10 @@ const userAuth = () => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-
+      
       firebase.userReg(user);
       firebase.user = emailCuter(user.email);
-
+      
       // ...
     })
     .catch(error => {
@@ -75,7 +75,9 @@ const userAuth = () => {
       // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
       // ...
-    });
+    }).finally(() => {
+    window.location.reload();
+  });
 };
 
 const signOutUser = () => {
@@ -93,6 +95,13 @@ const signOutUser = () => {
 onAuthStateChanged(auth, user => {
   console.log('user', user);
 
+  // if (user == null) {
+  //   signIn.addEventListener('click', () => {
+  //     user.relo
+  //   });
+  // }
+
+
   libraryBtn.addEventListener('click', () => {
     if (user !== null) return;
     signInBaner.classList.remove('visually-hidden');
@@ -100,6 +109,21 @@ onAuthStateChanged(auth, user => {
     galleryLibrary.classList.add('visually-hidden');
   });
 
+  refs.movieList.addEventListener('click', e => {
+    const cardID = e.path[3].getAttribute('data-id');
+    console.log();
+    clickOnFilm(e);
+    if (user == null) {
+      refs.wached.classList.add('visually-hidden')
+      refs.queue.classList.add('visually-hidden')
+      document.querySelector('.btn_wraper').innerHTML = `<span style=" margin-left: auto;
+        margin-right: auto;font-size: 10px;
+        line-height: 1.19; color: red;">To add a movie to the library please login to your account! </span>`
+      return;
+    }
+    compareID(cardID, user);
+  }); 
+  
   if (user !== null) {
     signInBaner.classList.add('visually-hidden');
     galleryLibrary.classList.remove('visually-hidden');
@@ -108,21 +132,13 @@ onAuthStateChanged(auth, user => {
     refs.queueBtn.classList.add('library__btn--selected');
 
     // document.querySelector('.sign_notific').classList.add('visually-hidden')
-    refs.wached.classList.remove('visually-hidden');
-    refs.queue.classList.remove('visually-hidden');
 
     userDisplayName.innerHTML = emailCuter(user.email);
     signIn.parentNode.classList.toggle('is-hidden');
     logout.parentNode.classList.toggle('is-hidden');
 
-    refs.movieList.addEventListener('click', e => {
-      if (user == null) return;
-      const cardID = e.path[3].getAttribute('data-id');
-      console.log();
-      clickOnFilm(e);
-      compareID(cardID, user);
-    });
   }
+
   modalBtnUserWatcher(user);
   libraryBtnUserWatcher(user);
 });
