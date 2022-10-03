@@ -3,6 +3,7 @@ import { FirebaseService } from './firebaseservice';
 import { makeGallaryLibrary } from './templates/renderMoviesLibrary';
 import { changeHeaderBg } from './load-header-bg-img';
 import { emailCuter } from './authorization';
+import { switchGalleryTitleLibraryDarkTheme } from './colorSwitcher';
 import { onTrendMovies } from './myLibrary';
 const {
   search,
@@ -17,7 +18,7 @@ const {
   galleryLibrary,
   gallerySection__gallery,
   smaiImage,
-  textSearchError
+  textSearchError,
 } = refs;
 // import { makeGallaryLibrary } from './templates/renderMoviesLibrary';
 // import { pagination } from './pagination';
@@ -35,7 +36,7 @@ changeHeaderBg(null, 'home-bg-img');
 
 export async function openLibrary(user) {
   changeHeaderBg('home-bg-img', 'library-bg-img');
- 
+
   // gallery.innerHTML = '';
   homeBtn.addEventListener('click', openHome);
   search.classList.add('visually-hidden');
@@ -49,15 +50,24 @@ export async function openLibrary(user) {
   galleryLibrary.classList.add('library');
 
   if (galleryLibrary.classList.contains('library')) {
-    gallerySection__gallery.removeChild(galleryMain);
+    if (gallerySection__gallery.children[3] == galleryMain) {
+      gallerySection__gallery.removeChild(galleryMain);
+    }
+    if (refs.watchedBtn.classList.contains('library__btn--selected')) {
+      refs.watchedBtn.classList.remove('library__btn--selected');
+      refs.queueBtn.classList.add('library__btn--selected');
+    }
     smaiImage.classList.add('is-hidden');
     textSearchError.classList.add('is-hidden');
   }
-  refs.switchColorCheckbox.parentNode.parentNode.parentNode.classList.add('is-library-open');
+  refs.switchColorCheckbox.parentNode.parentNode.parentNode.classList.add(
+    'is-library-open'
+  );
   if (user !== null) {
-    const data = await firebase.GetUserQueue(emailCuter(user.email))
-    makeGallaryLibrary(data)
-      }
+    const data = await firebase.GetUserQueue(emailCuter(user.email));
+    makeGallaryLibrary(data);
+    switchGalleryTitleLibraryDarkTheme(refs);
+  }
 }
 
 function openHome() {

@@ -5,7 +5,8 @@
   "homepage": "https://makfiz.github.io/project_group_6_JS",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /project_group_6_JS/"
+    "build": "parcel build src/*.html --public-url /project_group_6_JS/",
+    "server": "npx parcel src/*.html --open chrome --port 5000"
   },
   "repository": {
     "type": "git",
