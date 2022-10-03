@@ -5,37 +5,29 @@ refs.switchColorCheckbox.addEventListener('change', onColorSwitcherEl);
 function onColorSwitcherEl(e) {
   e.preventDefault();
 
-  if (refs.switchColorCheckbox.checked) {
-    refs.switchColorCheckbox.ariaChecked = 'true';
-    save('dark', 'on');
-  } else {
-    refs.switchColorCheckbox.ariaChecked = 'false';
-    remove('dark');
-  }
+  refs.switchColorCheckbox.checked ? save('dark', 'on') : remove('dark');
 
-  const switchRefs = getRefs();
-  switchThemeMaker(switchRefs);
+  switchThemeMaker(refs);
 }
 
-function getRefs() {
+function getDynamicRefs() {
   return {
-    galleryContainer: document.querySelector('.gallery-section'),
     galleryTitle: document.querySelectorAll('.gallery-card__title'),
-    btnToTop: document.querySelector('.btn-to-top__link'),
-    footerContainer: document.querySelector('.footer'),
-    footerBtn: document.querySelector('.footer__button'),
     paginationEl: document.querySelector('.pagination'),
   };
 }
 
-function switchThemeMaker(switchRefs) {
-  switchRefs.galleryContainer.classList.toggle('dark');
-  switchRefs.btnToTop.classList.toggle('dark');
-  switchRefs.footerContainer.classList.toggle('dark');
-  switchRefs.footerContainer.firstElementChild.classList.toggle('dark');
-  switchRefs.footerBtn.classList.toggle('dark');
-  switchRefs.paginationEl.classList.toggle('dark');
-  for (const el of switchRefs.paginationEl.children) {
+function switchThemeMaker(refs) {
+  refs.gallery.classList.toggle('dark');
+  refs.btnToTop.classList.toggle('dark');
+  refs.footerContainer.classList.toggle('dark');
+  refs.footerContainer.firstElementChild.classList.toggle('dark');
+  refs.footerBtn.classList.toggle('dark');
+
+  const dynamicRefs = getDynamicRefs();
+  dynamicRefs.paginationEl.classList.toggle('dark');
+
+  for (const el of dynamicRefs.paginationEl.children) {
     el.firstElementChild.classList.toggle('dark');
 
     if (el.dataset.page === 'next') {
@@ -45,19 +37,22 @@ function switchThemeMaker(switchRefs) {
       el.classList.toggle('dark');
     }
   }
-  switchRefs.galleryTitle.forEach(el => {
+  dynamicRefs.galleryTitle.forEach(el => {
     return el.classList.toggle('dark');
   });
 }
 
-function switchThemeRenderMaker(switchRefs) {
-  switchRefs.galleryContainer.classList.toggle('dark');
-  switchRefs.btnToTop.classList.toggle('dark');
-  switchRefs.footerContainer.classList.toggle('dark');
-  switchRefs.footerContainer.firstElementChild.classList.toggle('dark');
-  switchRefs.footerBtn.classList.toggle('dark');
-  switchRefs.paginationEl.classList.toggle('dark');
-  for (const el of switchRefs.paginationEl.children) {
+function switchThemeRenderMaker(refs) {
+  refs.gallery.classList.toggle('dark');
+  refs.btnToTop.classList.toggle('dark');
+  refs.footerContainer.classList.toggle('dark');
+  refs.footerContainer.firstElementChild.classList.toggle('dark');
+  refs.footerBtn.classList.toggle('dark');
+
+  const dynamicRefs = getDynamicRefs();
+  dynamicRefs.paginationEl.classList.toggle('dark');
+
+  for (const el of dynamicRefs.paginationEl.children) {
     if (!el.firstElementChild.classList.contains('dark')) {
       el.firstElementChild.classList.toggle('dark');
     }
@@ -68,36 +63,34 @@ function switchThemeRenderMaker(switchRefs) {
       el.classList.toggle('dark');
     }
   }
-  switchRefs.galleryTitle.forEach(el => {
+  dynamicRefs.galleryTitle.forEach(el => {
     if (!el.classList.contains('dark')) {
       return el.classList.toggle('dark');
     }
   });
 }
 
+function onStartCheckDarkThemeStatus() {
+  if (load('dark') === 'on') {
+    refs.switchColorCheckbox.checked = true;
+    switchThemeRenderMaker(refs);
+  }
+}
+
 export function switchColorGalleryTitle(refs) {
-  const galleryTitle = document.querySelectorAll('.gallery-card__title');
-  const paginationEl = document.querySelector('.pagination');
+  const dynamicRefs = getDynamicRefs();
+
   if (refs.switchColorCheckbox.checked) {
-    galleryTitle.forEach(el => {
+    dynamicRefs.galleryTitle.forEach(el => {
       if (!el.classList.contains('dark')) {
         return el.classList.toggle('dark');
       }
     });
-    for (const el of paginationEl.children) {
+    for (const el of dynamicRefs.paginationEl.children) {
       if (!el.firstElementChild.classList.contains('dark')) {
         el.firstElementChild.classList.toggle('dark');
       }
     }
-  }
-}
-
-function onStartCheckDarkThemeStatus() {
-  if (load('dark') === 'on') {
-    refs.switchColorCheckbox.checked = true;
-    refs.switchColorCheckbox.ariaChecked = 'true';
-    const switchRefs = getRefs();
-    switchThemeRenderMaker(switchRefs);
   }
 }
 
