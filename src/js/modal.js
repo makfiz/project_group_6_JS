@@ -68,15 +68,17 @@ function onBackDropClick(e) {
 const apiId = new ApiServise();
 let cardID;
 export function clickOnFilm(e) {
-  console.log('click');
+  if (!e.target.closest('.gallery__item')) return;
   const { addWatched, removeWatched, addQueue, removeQueue } = modalBtnRefs;
 
   // console.log(e.path)
-  cardID = e.path[3].getAttribute('data-id');
+  // cardID = e.path[3].getAttribute('data-id');
+  cardID = e.target.closest('.gallery__item').dataset.id;
 
   // console.log(e.path[3].getAttribute('data-id'));
   toggleModalAndScroll(e);
-  let movieID = e.path[3].getAttribute('data-id');
+  // let movieID = e.path[3].getAttribute('data-id');
+  let movieID = e.target.closest('.gallery__item').dataset.id;
 
   fetch(
     `https://api.themoviedb.org/3/movie/${movieID}$?api_key=${API_KEY}&$&language=en-US`
