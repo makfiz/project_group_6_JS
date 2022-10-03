@@ -109,4 +109,5 @@ window.onload = () => refs.pagEl.classList.remove('visually-hidden');
 window.addEventListener('resize', e => {
   removePages();
   pagination(apiServise);
+  switchColorGalleryTitle(refs);
 });

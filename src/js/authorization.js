@@ -122,7 +122,7 @@ onAuthStateChanged(auth, user => {
       document.querySelector(
         '.btn_wraper'
       ).innerHTML = `<span style=" margin-left: auto;
-        margin-right: auto;font-size: 10px;
+        margin-right: auto;font-size: 18px;
         line-height: 1.19; color: red;">To add a movie to the library please login to your account! </span>`;
       return;
     }
