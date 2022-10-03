@@ -109,7 +109,9 @@ onAuthStateChanged(auth, user => {
 
   refs.movieList.addEventListener('click', e => {
     // const cardID = e.path[3].getAttribute('data-id');
-    const cardID = e.target.closest('.gallery__item').dataset.id;
+    const cardID = e.target.closest('.gallery__item')
+      ? e.target.closest('.gallery__item').dataset.id
+      : null;
 
     console.log();
     clickOnFilm(e);
