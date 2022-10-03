@@ -73,13 +73,9 @@ export function clickOnFilm(e) {
   if (!e.target.closest('.gallery__item')) return;
   const { addWatched, removeWatched, addQueue, removeQueue } = modalBtnRefs;
 
-  // console.log(e.path)
-  // cardID = e.path[3].getAttribute('data-id');
   cardID = e.target.closest('.gallery__item').dataset.id;
 
-  // console.log(e.path[3].getAttribute('data-id'));
   toggleModalAndScroll(e);
-  // let movieID = e.path[3].getAttribute('data-id');
   let movieID = e.target.closest('.gallery__item').dataset.id;
   fetch(
     `https://api.themoviedb.org/3/movie/${movieID}$?api_key=${API_KEY}&$&language=en-US`
@@ -115,8 +111,6 @@ export function clickOnFilm(e) {
         ganreString,
       };
 
-      // console.log(apiId.movieId);
-      // console.log(info);
       details.titleInfo.innerHTML = JSON.stringify(toLibrary);
       details.filmTitle.textContent = title;
       details.voteAverage.textContent = vote_average;
@@ -178,6 +172,21 @@ async function createVideo() {
       window.addEventListener('keydown', closeTrailer);
     }
   }
+}
+
+refs.trailerBtnWraper.addEventListener('mouseenter', changeOpenVideoText);
+
+function changeOpenVideoText() {
+  const title = details.originalTitle.textContent;
+  refs.openVideoBtn.textContent = title;
+  refs.openVideoBtn.style.color = '#ff6b08';
+}
+
+refs.trailerBtnWraper.addEventListener('mouseleave', onCangeTextVideoBtn);
+
+function onCangeTextVideoBtn() {
+  refs.openVideoBtn.textContent = 'Watch Trailer';
+  refs.openVideoBtn.style.color = '#000000';
 }
 
 export async function compareID(movieId, user) {
