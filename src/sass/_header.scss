@@ -37,12 +37,24 @@
 }
 
 .hero__search-error {
-  position: absolute;
-  bottom: 0;
-  color: $warning-text-color;
+  margin-bottom: 20px;
+  text-align: left;
+  color: $accent-color;
   @media screen and (min-width: 768px) {
+    @include font(24px, 1.4, 700, normal);
+    font-size: 24px;
+    line-height: 1.4;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
   }
 }
+
+.empty__request {
+  display: flex;
+  justify-content: center;
+}
+
 .is-hidden {
   visibility: hidden;
   pointer-events: none;

@@ -148,10 +148,10 @@
   color: #8c8c8c;
 }
 
-  .no-scroll {
-    overflow: hidden;
-  }
-  
+.no-scroll {
+  overflow: hidden;
+}
+
 .title_item {
   display: grid;
   grid-template-areas: 'a a';
@@ -247,15 +247,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   margin-left: auto;
   margin-right: auto;
+  padding-left: 8px;
 
-  @media screen and (max-width: 1279px) {
-    padding-left: 8px;
-  }
-  @media screen and (min-width: 768px) {
-    margin-left: 0;
-    margin-right: 0;
+  @media screen and (min-width: 1280px) {
+    margin-right: 150px;
   }
 }
 
@@ -298,5 +296,11 @@ ul {
 
 .btn_wraper {
   display: flex;
+  @media screen and (min-width: 1280px) {
+    margin-left: 8px;
+  }
+}
+
+.trailerBtnWraper {
   margin-bottom: 20px;
 }
