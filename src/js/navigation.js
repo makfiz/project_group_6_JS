@@ -30,12 +30,10 @@ changeHeaderBg(null, 'home-bg-img');
 //   search.classList.add('visually-hidden');
 //   libraryFilter.classList.remove('visually-hidden');
 // }
-
+console.log(gallerySection__gallery.childNodes[7])
 export async function openLibrary(user) {
   changeHeaderBg('home-bg-img', 'library-bg-img');
-  if (gallerySection__gallery.childNodes[3].nodeName == 'UL') {
-    gallerySection__gallery.removeChild(galleryMain);
-  }
+ 
   // gallery.innerHTML = '';
   homeBtn.addEventListener('click', openHome);
   search.classList.add('visually-hidden');
@@ -47,6 +45,10 @@ export async function openLibrary(user) {
 
   galleryLibrary.classList.remove('visually-hidden');
   galleryLibrary.classList.add('library');
+
+  if (galleryLibrary.classList.contains('library')) {
+    gallerySection__gallery.removeChild(galleryMain);
+  }
   refs.switchColorCheckbox.parentNode.parentNode.parentNode.classList.add('is-library-open');
   if (user !== null) {
     const data = await firebase.GetUserQueue(emailCuter(user.email))
