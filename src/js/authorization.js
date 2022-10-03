@@ -60,10 +60,8 @@ const userAuth = () => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      
       firebase.userReg(user);
       firebase.user = emailCuter(user.email);
-      
       // ...
     })
     .catch(error => {
@@ -75,9 +73,10 @@ const userAuth = () => {
       // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
       // ...
-    }).finally(() => {
-    window.location.reload();
-  });
+    })
+    .finally(() => {
+      window.location.reload();
+    });
 };
 
 const signOutUser = () => {
@@ -101,7 +100,6 @@ onAuthStateChanged(auth, user => {
   //   });
   // }
 
-
   libraryBtn.addEventListener('click', () => {
     if (user !== null) return;
     signInBaner.classList.remove('visually-hidden');
@@ -110,20 +108,26 @@ onAuthStateChanged(auth, user => {
   });
 
   refs.movieList.addEventListener('click', e => {
-    const cardID = e.path[3].getAttribute('data-id');
+    // const cardID = e.path[3].getAttribute('data-id');
+    const cardID = e.target.closest('.gallery__item')
+      ? e.target.closest('.gallery__item').dataset.id
+      : null;
+
     console.log();
     clickOnFilm(e);
     if (user == null) {
-      refs.wached.classList.add('visually-hidden')
-      refs.queue.classList.add('visually-hidden')
-      document.querySelector('.btn_wraper').innerHTML = `<span style=" margin-left: auto;
+      refs.wached.classList.add('visually-hidden');
+      refs.queue.classList.add('visually-hidden');
+      document.querySelector(
+        '.btn_wraper'
+      ).innerHTML = `<span style=" margin-left: auto;
         margin-right: auto;font-size: 10px;
-        line-height: 1.19; color: red;">To add a movie to the library please login to your account! </span>`
+        line-height: 1.19; color: red;">To add a movie to the library please login to your account! </span>`;
       return;
     }
     compareID(cardID, user);
-  }); 
-  
+  });
+
   if (user !== null) {
     signInBaner.classList.add('visually-hidden');
     galleryLibrary.classList.remove('visually-hidden');
@@ -136,7 +140,6 @@ onAuthStateChanged(auth, user => {
     userDisplayName.innerHTML = emailCuter(user.email);
     signIn.parentNode.classList.toggle('is-hidden');
     logout.parentNode.classList.toggle('is-hidden');
-
   }
 
   modalBtnUserWatcher(user);
