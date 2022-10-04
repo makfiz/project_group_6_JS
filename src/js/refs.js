@@ -30,4 +30,7 @@ export const refs = {
   smaiImage: document.querySelector('.empty__request'),
   trailerBtnWraper: document.querySelector('.trailerBtnWraper'),
   poster: document.querySelector('.poster'),
+  btnToTop: document.querySelector('.btn-to-top__link'),
+  footerContainer: document.querySelector('.footer'),
+  footerBtn: document.querySelector('.footer__button'),
 };
