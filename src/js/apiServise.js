@@ -27,12 +27,10 @@ export class ApiServise {
           page: this.page,
         },
       });
-
       Loading.remove();
-
       return data;
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      throw new Error(e.message);
     }
   }
 
@@ -57,8 +55,8 @@ export class ApiServise {
       this.total_pages = data.total_pages;
 
       return data.results;
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      throw new Error(e.message);
     }
   }
 
@@ -76,8 +74,8 @@ export class ApiServise {
       Loading.remove();
 
       return data;
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      throw new Error(e.message);
     }
   }
 
@@ -95,8 +93,8 @@ export class ApiServise {
       Loading.remove();
 
       return data;
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      throw new Error(e.message);
     }
   }
 
@@ -117,8 +115,8 @@ export class ApiServise {
 
       this.total_pages = data.total_pages > 500 ? 500 : data.total_pages;
       return data.results;
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      throw new Error(e.message);
     }
   }
 
