@@ -4,6 +4,8 @@ import { Loading } from 'notiflix/build/notiflix-loading-aio';
 const API_KEY = 'e4c439da3c1d90110fb4595b6236c9fe';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 
+const params = { api_key: API_KEY };
+
 export class ApiServise {
   constructor() {
     this.searchQuery = '';
@@ -20,19 +22,11 @@ export class ApiServise {
       Loading.circle({
         svgColor: '#ff6b08',
       });
-      const { data } = await axios('trending/movie/day', {
-        params: {
-          api_key: API_KEY,
-          language: this.language,
-          page: this.page,
-        },
-      });
-
+      const { data } = await axios('trending/movie/day', { params });
       Loading.remove();
-
       return data;
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      throw new Error(e.message);
     }
   }
 
@@ -57,8 +51,8 @@ export class ApiServise {
       this.total_pages = data.total_pages;
 
       return data.results;
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      throw new Error(e.message);
     }
   }
 
@@ -76,8 +70,8 @@ export class ApiServise {
       Loading.remove();
 
       return data;
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      throw new Error(e.message);
     }
   }
 
@@ -95,8 +89,8 @@ export class ApiServise {
       Loading.remove();
 
       return data;
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      throw new Error(e.message);
     }
   }
 
@@ -117,8 +111,8 @@ export class ApiServise {
 
       this.total_pages = data.total_pages > 500 ? 500 : data.total_pages;
       return data.results;
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      throw new Error(e.message);
     }
   }
 
