@@ -42,7 +42,7 @@ function toggleModalAndScroll() {
   details.toHide.classList.toggle('is-hidden');
   noScrollBody();
   buttonListenerOnModal();
-  details.poster.src = defPoster;
+  details.poster.src = '';
 }
 function noScrollBody() {
   body.classList.toggle('no-scroll');
