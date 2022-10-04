@@ -3,11 +3,10 @@ import './js/refs';
 import './js/searchFilms';
 import './js/templates/renderMovieGallary';
 import './js/templates/renderMoviesLibrary';
-
+import './js/mob-menu';
 import './js/pagination';
 import './js/navigation';
 import './js/myLibrary';
-
 
 import './js/firebaseservice';
 import './js/authorization.js';
