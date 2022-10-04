@@ -41,6 +41,7 @@ function toggleModalAndScroll() {
   details.toHide.classList.toggle('is-hidden');
   noScrollBody();
   buttonListenerOnModal();
+  details.poster.src = null;
 }
 function noScrollBody() {
   body.classList.toggle('no-scroll');
