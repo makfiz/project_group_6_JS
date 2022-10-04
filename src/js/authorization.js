@@ -94,7 +94,7 @@ const signOutUser = () => {
 };
 
 onAuthStateChanged(auth, user => {
-  console.log('user', user);
+  // console.log('user', user);
 
   // if (user == null) {
   //   signIn.addEventListener('click', () => {
